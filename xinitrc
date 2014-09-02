@@ -18,5 +18,5 @@ exec i3
 #exec startlxde
 # exec startxfce4
 # ...or the Window Manager of your choice
+sh ~/.fehbg &
 
-./monitor
