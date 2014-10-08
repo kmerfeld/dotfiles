@@ -13,7 +13,9 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 #exec plasma
+#exec /usr/bin/howm
 exec i3
+exec mate-session
 #exec spectrwm 
 #exec startlxde
 # exec startxfce4
