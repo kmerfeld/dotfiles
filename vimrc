@@ -17,14 +17,17 @@ colorscheme jellybeans
 
 
 
-let CoVim_default_port = "21"
-let CoVim_default_name = "kyle"
+:set wrap
+:set linebreak
+:set nolist  " list disables linebreak
+
+map <C-n> :NERDTreeToggle<CR>
 
 
 
 "  this makes it easy to only code to 80 lines
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%80v', 100)
+"highlight ColorColumn ctermbg=magenta
+"call matchadd('ColorColumn', '\%80v', 100)
   
 
 set showmatch                       " Set show matching parenthesis

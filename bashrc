@@ -11,13 +11,6 @@ if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" == "xfce4-termi
 	    export TERM=xterm-256color
     fi
 
-alias ;s="sl"
-alias l="sl"
-
-alias sanic="./sanic/Sanicball_v0.6_linux/sanicball_v0.6.x86"
-
-alias wsteam="wine .wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe"
-
-alias connect2smerf='ssh -o reconnect -R 8008:localhost:22 kyle@208.123.36.77'
+#alias toxic= '/home/kyle/toxic/run_toxic.sh'
 alias ls='ls --color=auto'
 export PS1='\[\033[01;32m\]\u@\h \[\033[00;31m\]\W \$ \[\033[00m\]'
