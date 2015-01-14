@@ -1,0 +1,21 @@
+URxvt*transparent: true
+URxvt*tintColor: Blue
+URxvt*saveLines: 12000
+URxvt*foreground: White
+URxvt*background: Black
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true
+URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=12:antialias=true:hinting=true
+URxvt*color4: RoyalBlue
+URxvt*color12: RoyalBlue
+URxvt*scrollBar: false
+
+rofi.background: #333
+rofi.foreground: #1aa
+rofi.highlightbg: #1aa
+rofi.highlightfg: #111
+rofi.bordercolor: #277
+rofi.font: times 10
+rofi.padding: 3
+rofi.lines: 5
+rofi.borderwidth: 3
+
