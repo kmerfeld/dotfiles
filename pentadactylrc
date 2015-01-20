@@ -1,0 +1,13 @@
+set hintkeys=asdf
+hi -a Hint font-size: 9pt !important;
+
+ 
+map D :tabdetach<CR>
+map c :tabduplicate<CR>
+ 
+noremap j 8j
+noremap k 8k
+ 
+set editor="vim" 
+
+set incfind

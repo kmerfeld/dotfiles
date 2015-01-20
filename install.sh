@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="i3 bashrc vimrc vim tmux.conf xinitrc rofi.sh Xresources"     # list of files/folders to symlink in homedir
+files="pentadactylrc i3 bashrc vimrc vim tmux.conf xinitrc rofi.sh Xresources"     # list of files/folders to symlink in homedir
 
 ##########
 
