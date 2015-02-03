@@ -35,4 +35,8 @@ set ignorecase                      " Ignore case when searching
 set autoread                        " Reload the file when it has been chaged outside of vim
 
 
+"vim-expand=region settings
+"this maps it so i can use multiple 'v's to add to visuall mode
 
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
