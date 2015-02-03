@@ -30,6 +30,7 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
+
 #install vim plugins from git
 git clone https://github.com/nanotech/jellybeans.vim.git ~/dotfiles/vim/bundle/jellybeans.vim
 git clone https://github.com/scrooloose/nerdtree.git ~/dotfiles/vim/bundle/nerdtree
@@ -37,4 +38,5 @@ git clone https://github.com/ervandew/supertab.git ~/dotfiles/vim/bundle/superta
 git clone https://github.com/terryma/vim-expand-region.git ~/dotfiles/vim/bundle/vim-expand-region
 
 
-
+#changes the shell to zsh. need to clean this up
+chsh -s $(which zsh)
