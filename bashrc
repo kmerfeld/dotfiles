@@ -14,3 +14,5 @@ if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" == "xfce4-termi
 #alias toxic= '/home/kyle/toxic/run_toxic.sh'
 alias ls='ls --color=auto -a'
 export PS1='\[\033[01;32m\]\u@\h \[\033[00;31m\]\W \$ \[\033[00m\]'
+
+
