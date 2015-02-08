@@ -42,6 +42,6 @@ git clone https://github.com/tpope/vim-fugitive.git ~/dotfiles/vim/bundle/fugiti
 
 
 #install CoVim dependancies
-pip install twisted argparse
+sudo pip install twisted argparse
 
 

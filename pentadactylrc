@@ -5,8 +5,6 @@ hi -a Hint font-size: 9pt !important;
 map D :tabdetach<CR>
 map c :tabduplicate<CR>
  
-map j 8j
-map k 8k
  
 set editor="vim" 
 
