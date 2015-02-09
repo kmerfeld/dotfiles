@@ -36,7 +36,12 @@ git clone https://github.com/nanotech/jellybeans.vim.git ~/dotfiles/vim/bundle/j
 git clone https://github.com/scrooloose/nerdtree.git ~/dotfiles/vim/bundle/nerdtree
 git clone https://github.com/ervandew/supertab.git ~/dotfiles/vim/bundle/supertab
 git clone https://github.com/terryma/vim-expand-region.git ~/dotfiles/vim/bundle/vim-expand-region
+git clone git://github.com/FredKSchott/CoVim.git ~/dotfiles/vim/bundle/CoVim
+git clone https://github.com/tpope/vim-fugitive.git ~/dotfiles/vim/bundle/fugitive
 
 
-#changes the shell to zsh. need to clean this up
-chsh -s $(which zsh)
+
+#install CoVim dependancies
+pip install twisted argparse
+
+

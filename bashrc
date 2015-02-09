@@ -12,7 +12,8 @@ if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" == "xfce4-termi
     fi
 
 #alias toxic= '/home/kyle/toxic/run_toxic.sh'
-alias ls='ls --color=auto -a'
+alias ls='ls --color=auto'
+alias w3m='w3m duckduckgo.com'
 export PS1='\[\033[01;32m\]\u@\h \[\033[00;31m\]\W \$ \[\033[00m\]'
 
-
+set -o vi

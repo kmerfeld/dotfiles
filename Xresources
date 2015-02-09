@@ -8,6 +8,7 @@ URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=18:antialias=true:hinting=tr
 URxvt*color4: RoyalBlue
 URxvt*color12: RoyalBlue
 URxvt*scrollBar: false
+URxvt.perl-ext-common: default,clipboard
 
 rofi.background: #333
 rofi.foreground: #1aa
@@ -19,4 +20,4 @@ rofi.padding: 3
 rofi.lines: 5
 rofi.borderwidth: 3
 
-URxvt.perl-ext-common: default,clipboard
+
