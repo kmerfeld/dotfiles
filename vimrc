@@ -1,7 +1,7 @@
 filetype plugin indent on
 set encoding=utf-8
- inoremap jk <ESC>       
- set number		"this just makes number lines apear
+inoremap jk <ESC>       
+set number		"this just makes number lines apear
 
 execute pathogen#infect()
 set t_Co=256
