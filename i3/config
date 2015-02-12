@@ -29,7 +29,6 @@ exec --no-startup-id xmodmap ~/.Xmodmap
 exec --no-startup-id xrandr --output VGA1 --auto --left-of HDMI1
 exec --no-startup-id owncloud
 exec --no-startup-id nm-applet
-exec --no-startup-id xflux -z 56470
 
 
 set $mod Mod1
@@ -47,7 +46,7 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt 
+bindsym $mod+Return exec xfce4-terminal 
 
 # kill focused window
 bindsym $mod+q kill
