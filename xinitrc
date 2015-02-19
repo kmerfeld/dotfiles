@@ -23,7 +23,7 @@ fi
 exec i3
 #exec mate-session
 #exec spectrwm 
-#exec startlxde
+exec startlxde
 # exec startxfce4
 # ...or the Window Manager of your choice
 sh ~/.fehbg &

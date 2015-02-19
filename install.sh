@@ -38,7 +38,7 @@ git clone https://github.com/ervandew/supertab.git ~/dotfiles/vim/bundle/superta
 git clone https://github.com/terryma/vim-expand-region.git ~/dotfiles/vim/bundle/vim-expand-region
 git clone git://github.com/FredKSchott/CoVim.git ~/dotfiles/vim/bundle/CoVim
 git clone https://github.com/tpope/vim-fugitive.git ~/dotfiles/vim/bundle/fugitive
-
+git clone https://github.com/tpope/vim-vividchalk.git ~/dotfiles/vim/bundle/vividchalk
 
 
 #install CoVim dependancies

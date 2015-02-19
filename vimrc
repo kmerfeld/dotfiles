@@ -1,14 +1,14 @@
 filetype plugin indent on
 set encoding=utf-8
+execute pathogen#infect()
 inoremap jk <ESC>       
 set number		"this just makes number lines apear
 
-execute pathogen#infect()
 set t_Co=256
 set term=xterm-256color
 syntax enable
 set background=dark
-colorscheme jellybeans
+colorscheme vividchalk 
 :set wrap
 :set linebreak
 :set nolist  " list disables linebreak

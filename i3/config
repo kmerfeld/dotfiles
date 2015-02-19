@@ -29,7 +29,7 @@ exec --no-startup-id xmodmap ~/.Xmodmap
 exec --no-startup-id xrandr --output VGA1 --auto --left-of HDMI1
 exec --no-startup-id owncloud
 exec --no-startup-id nm-applet
-
+exec --no-startup-id auto-xflux
 
 set $mod Mod1
 
