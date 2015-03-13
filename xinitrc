@@ -21,7 +21,7 @@ fi
 #exec plasma
 #exec howm
 exec i3
-#exec mate-session
+exec mate-session
 #exec spectrwm 
 exec startlxde
 # exec startxfce4
