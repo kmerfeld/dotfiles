@@ -1,8 +1,38 @@
 filetype plugin indent on
 set encoding=utf-8
 execute pathogen#infect()
-inoremap jk <ESC>       
+inoremap jk <ESC>
 set number		"this just makes number lines apear
+
+"this is for tabs
+"Vertical Split : Ctrl+w + v
+"horizontal split: Ctrl+w + s
+"Close current windows: Ctrl+w + q
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+"za to open or close fold
+set foldmethod=indent
+set foldlevel=99
+
+
+"syntastic
+
+set statusline+=%#warnings#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open =1
+let g:syntastic_check_on_wq = 1
+
+"python autocomplete
+"au FileType python set omnifunc=pythoncomplete#Complete
+"let g:SuperTabDefaultCompletionType = "context"
+"set completeopt=menuone,longest,preview
 
 set t_Co=256
 set term=xterm-256color
@@ -27,7 +57,8 @@ set autoread                        " Reload the file when it has been chaged ou
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 
 "CoVim settings. This will complain if you dont have CoVim working.
 let CoVim_default_name = "kmerfeld1"

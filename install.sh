@@ -39,10 +39,6 @@ git clone https://github.com/terryma/vim-expand-region.git ~/dotfiles/vim/bundle
 git clone git://github.com/FredKSchott/CoVim.git ~/dotfiles/vim/bundle/CoVim
 git clone https://github.com/tpope/vim-fugitive.git ~/dotfiles/vim/bundle/fugitive
 git clone https://github.com/tpope/vim-vividchalk.git ~/dotfiles/vim/bundle/vividchalk
-
+git clone https://guthib.com/scrooloose/syntastic.git
 git clone https://github.com/morhetz/gruvbox.git ~/dotfiles/vim/bundle/gruvbox
-
-#install CoVim dependancies
-sudo pip install twisted argparse
-
 
