@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 export EDITOR=vim
-
+export TERM="xterm-256color"
 #this makes it run with 256 colors
 if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" == "xfce4-terminal" ]; then
 	    export TERM=xterm-256color
