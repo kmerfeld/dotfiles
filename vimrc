@@ -69,10 +69,6 @@ if has("autocmd")
 	autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
-"opens .vimrc with 
-let mapleader = ","
-nmap <leader>v :tabedit $MYVIMRC<CR>
-
 " Insert into your .vimrc after quick-scope is loaded.
 " Obviously depends on <https://github.com/unblevable/quick-scope> being installed.
 
