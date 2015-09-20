@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="pentadactylrc i3 bashrc zshrc vimrc vim tmux.conf xinitrc rofi.sh Xresources"     # list of files/folders to symlink in homedir
+files="i3 bashrc vimrc vim tmux.conf xinitrc Xresources"     # list of files/folders to symlink in homedir
 
 ##########
 
@@ -41,3 +41,4 @@ git clone https://github.com/tpope/vim-vividchalk.git ~/dotfiles/vim/bundle/vivi
 git clone https://githib.com/scrooloose/syntastic.git ~/dotfiles/vim/bundle/syntastic
 git clone https://github.com/morhetz/gruvbox.git ~/dotfiles/vim/bundle/gruvbox
 git clone https://github.com/unblevable/quick-scope.git ~/dotfiles/vim/bundle/quick-scope
+git clone https://github.com/t9md/vim-choosewin.git ~/dotfiles/vim/bundle/vim-choosewin
