@@ -64,5 +64,5 @@ let g:choosewin_overlay_enable = 1
  map <leader>bd :bd
 
 "make updating aur packages a little nicer
-map <leader>u :%s/^arch.*/arch=('x86_64')/gc
+map <leader>u :%s/^arch.*/arch=('x86_64')/g
 

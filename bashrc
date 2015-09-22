@@ -20,3 +20,4 @@ export PATH=/home/kyle/anaconda/bin/:$PATH
 export PYTHONPATH=$PYTHONPATH:/home/kyle/anaconda/bin/chemlab
 export PYTHONPATH=$PYTHONPATH:/home/kyle/chemlab/chemlab
 set -o vi
+PATH=/home/kyle/.gem/ruby/2.2.0/bin:/home/kyle/.gem/ruby/2.2.0/bin:/home/kyle/anaconda/bin/:/home/kyle/anaconda/bin/:/home/kyle/anaconda/bin/:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl

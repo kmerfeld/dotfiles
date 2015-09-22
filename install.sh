@@ -40,5 +40,4 @@ git clone https://github.com/tpope/vim-fugitive.git ~/dotfiles/vim/bundle/fugiti
 git clone https://github.com/tpope/vim-vividchalk.git ~/dotfiles/vim/bundle/vividchalk
 git clone https://githib.com/scrooloose/syntastic.git ~/dotfiles/vim/bundle/syntastic
 git clone https://github.com/morhetz/gruvbox.git ~/dotfiles/vim/bundle/gruvbox
-git clone https://github.com/unblevable/quick-scope.git ~/dotfiles/vim/bundle/quick-scope
 git clone https://github.com/t9md/vim-choosewin.git ~/dotfiles/vim/bundle/vim-choosewin
