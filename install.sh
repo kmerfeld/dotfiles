@@ -34,10 +34,7 @@ done
 #install vim plugins from git
 git clone https://github.com/nanotech/jellybeans.vim.git ~/dotfiles/vim/bundle/jellybeans.vim
 git clone https://github.com/scrooloose/nerdtree.git ~/dotfiles/vim/bundle/nerdtree
-git clone https://github.com/ervandew/supertab.git ~/dotfiles/vim/bundle/supertab
 git clone https://github.com/terryma/vim-expand-region.git ~/dotfiles/vim/bundle/vim-expand-region
 git clone https://github.com/tpope/vim-fugitive.git ~/dotfiles/vim/bundle/fugitive
-git clone https://github.com/tpope/vim-vividchalk.git ~/dotfiles/vim/bundle/vividchalk
-git clone https://githib.com/scrooloose/syntastic.git ~/dotfiles/vim/bundle/syntastic
 git clone https://github.com/morhetz/gruvbox.git ~/dotfiles/vim/bundle/gruvbox
 git clone https://github.com/t9md/vim-choosewin.git ~/dotfiles/vim/bundle/vim-choosewin
