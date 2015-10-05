@@ -43,6 +43,9 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+#i3lock
+bindsym $mod+i exec i3lock -c 000000 
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down

@@ -12,6 +12,8 @@ files="i3 bashrc vimrc vim tmux.conf xinitrc Xresources"     # list of files/fol
 
 ##########
 
+
+
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
 mkdir -p $olddir
@@ -30,6 +32,33 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
+
+#check if distro is arch
+if [[ -f /etc/pacman.conf ]] 
+then
+     	#Run things only done if arch is installed
+
+	
+	#install pacaur
+	if [[ -f /usr/bin/pacaur ]] 
+	then 
+		#install cower (a dependancy of pacaur)
+		echo "installing cower"
+		sudo pacman -S wget --needed base-devel 
+		cd /tmp
+		wget https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
+		tar -xvf cower.tar.gz
+		cd cower 
+		makepkg -sri --skippgpcheck #i should probably fix this to not just skip
+
+		#install pacaur
+		echo "installing pacuar"
+		wget https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
+		tar -xvf pacaur.tar.gz
+		cd pacaur
+		makepkg -sri
+	fi
+fi
 
 #install vim plugins from git
 git clone https://github.com/nanotech/jellybeans.vim.git ~/dotfiles/vim/bundle/jellybeans.vim
