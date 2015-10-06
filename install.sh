@@ -36,7 +36,7 @@ done
 #check if distro is arch
 if [[ -f /etc/pacman.conf ]] 
 then
-     	#Run things only done if arch is installed
+
 
 	
 	#install pacaur
@@ -58,6 +58,9 @@ then
 		cd pacaur
 		makepkg -sri
 	fi
+
+     	#Run things only done if arch is installed
+	pacaur -S vim-youcompleteme-git
 fi
 
 #install vim plugins from git
