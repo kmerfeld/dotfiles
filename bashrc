@@ -14,10 +14,9 @@ if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" == "xfce4-termi
 alias ls='ls --color=auto'
 alias w3m='w3m duckduckgo.com'
 alias netbeans="~/netbeans-8.0.2/bin/netbeans  --jdkhome ~/netbeans-8.0.2/jdk1.8.0_45/"
+alias pacuar="pacaur"
+
+
 export PS2='\[\033[01;32m\]\u@\h \[\033[00;31m\]\W \$ \[\033[00m\]'
 export PS1='\[\033[01;32m\]\u@\h \[\033[00;31m\]\W \$ \[\033[00m\]'
-export PATH=/home/kyle/anaconda/bin/:$PATH
-export PYTHONPATH=$PYTHONPATH:/home/kyle/anaconda/bin/chemlab
-export PYTHONPATH=$PYTHONPATH:/home/kyle/chemlab/chemlab
 set -o vi
-PATH=/home/kyle/.gem/ruby/2.2.0/bin:/home/kyle/.gem/ruby/2.2.0/bin:/home/kyle/anaconda/bin/:/home/kyle/anaconda/bin/:/home/kyle/anaconda/bin/:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
