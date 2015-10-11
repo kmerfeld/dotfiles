@@ -26,21 +26,24 @@ echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/dotfiles_old/
-    echo "Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/.$file
+	echo "Moving any existing dotfiles from ~ to $olddir"
+	mv ~/.$file ~/dotfiles_old/
+	echo "Creating symlink to $file in home directory."
+	ln -s $dir/$file ~/.$file
 done
 
 
 #check if distro is arch
+#not sure if this part works
 if [[ -f /etc/pacman.conf ]] 
 then
 
 
-	
+
 	#install pacaur
-	if [[ -f /usr/bin/pacaur ]] 
+	w="$(which pacaur)"
+	if [[ $w != /usr/bin/pacaur  ]]  
+
 	then 
 		#install cower (a dependancy of pacaur)
 		echo "installing cower"
@@ -53,13 +56,14 @@ then
 
 		#install pacaur
 		echo "installing pacuar"
+		cd /tmp
 		wget https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
 		tar -xvf pacaur.tar.gz
 		cd pacaur
 		makepkg -sri
 	fi
 
-     	#Run things only done if arch is installed
+	#Run things only done if arch is installed
 	pacaur -S vim-youcompleteme-git
 fi
 
