@@ -34,12 +34,8 @@ done
 
 
 #check if distro is arch
-#not sure if this part works
 if [[ -f /etc/pacman.conf ]] 
 then
-
-
-
 	#install pacaur
 	w="$(which pacaur)"
 	if [[ $w != /usr/bin/pacaur  ]]  
