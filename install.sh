@@ -61,6 +61,7 @@ then
 
 	#Run things only done if arch is installed
 	pacaur -S vim-youcompleteme-git
+	pacman -S dmenu vim i3 
 fi
 
 #install vim plugins from git
