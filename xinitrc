@@ -17,14 +17,11 @@ fi
  
 
 
-[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
-#exec plasma
-#exec howm
 exec i3
-exec mate-session
+#exec mate-session
 #exec spectrwm 
-exec startlxde
+#exec startlxde
 # exec startxfce4
 # ...or the Window Manager of your choice
-sh ~/.fehbg &
+#sh ~/.fehbg &
 
