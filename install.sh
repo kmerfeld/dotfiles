@@ -5,7 +5,7 @@
 ############################
 
 ########## Variables
-
+addedstuff=$1
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 files="i3 bashrc vimrc vim tmux.conf xinitrc Xresources"     # list of files/folders to symlink in homedir
@@ -60,8 +60,14 @@ then
 	fi
 
 	#Run things only done if arch is installed
-	pacaur -S vim-youcompleteme-git
+	pacaur -S vim-youcompleteme-git png++
 	pacman -S dmenu vim i3 
+	git clone git@github.com:berock212/Maze-background.git
+	cd Maze-background
+	make
+	chmod +x setbackground.sh
+	sed -i 's|prog=~/documents/cpp/maze/png/mazepng|prog=~/dotfiles/Maze-background/mazepng|g' setbackground.sh
+	cd
 fi
 
 #install vim plugins from git
