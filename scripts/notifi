@@ -26,17 +26,17 @@ elif (length> 1):
 
 
 #Create file if it doesnt exist
-if not os.path.exists("/home/kyle/dotfiles/notifi-pass"):
+if not os.path.exists("notifi-pass"):
     open("/home/kyle/dotfiles/notifi-pass", 'w').close() 
 
 # Credentials
-f = open("/home/kyle/dotfiles/notifi-pass","r+")
+f = open("notifi-pass","r+")
 username = 'merfeldalertbot@gmail.com'
 password = f.readline()
 f.close
 #Reads in password
 if password == "":
-    f = open("/home/kyle/dotfiles/notifi-pass","w+")
+    f = open("notifi-pass","w+")
     password = input("Enter MerfAlertBot password: ")
     f.write(password)
     f.close
