@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+
+#This program is a notification system.
+#run this as 
+#"commandToRun; notifi Subject Message"
+#or
+#"commandToRun; notifi Subject"
+#after the command is run this will send a email to me
+#If you are not me, please change the email "toaddrs". 
+
+
+import smtplib
+import sys
+
+fromaddr = 'merfeldalertbot@gmail.com'
+toaddrs  = 'kmerfeld1@gmail.com'
+msg = "Subject: This is a notice.\nsomething happened"
+
+#check if an argument is given
+length = (len(sys.argv))
+if length > 2:
+    msg = ("Subject: " + sys.argv[1] +"\n" + sys.argv[2])
+elif (length> 1):
+    msg = "Subject: " + sys.argv[1]
+
+# Credentials 
+f = open("/home/kyle/dotfiles/notifi-pass","w+")
+username = 'merfeldalertbot@gmail.com'
+password = f.readline()
+f.close
+
+#Reads in password
+if password == "":
+    f = open("/home/kyle/dotfiles/notifi-pass","w+")
+    password = input("Enter MerfAlertBot password: ")
+    f.write(password)
+    f.close
+
+# The actual mail send
+server = smtplib.SMTP('smtp.gmail.com:587')
+server.starttls()
+server.login(username,password)
+server.sendmail(fromaddr, toaddrs, msg)
+server.quit()
+server.sendmail
