@@ -11,6 +11,7 @@
 
 import smtplib
 import sys
+import os
 
 fromaddr = 'merfeldalertbot@gmail.com'
 toaddrs  = 'kmerfeld1@gmail.com'
@@ -23,12 +24,16 @@ if length > 2:
 elif (length> 1):
     msg = "Subject: " + sys.argv[1]
 
-# Credentials 
-f = open("/home/kyle/dotfiles/notifi-pass","w+")
+
+#Create file if it doesnt exist
+if not os.path.exists("/home/kyle/dotfiles/notifi-pass"):
+    open("/home/kyle/dotfiles/notifi-pass", 'w').close() 
+
+# Credentials
+f = open("/home/kyle/dotfiles/notifi-pass","r+")
 username = 'merfeldalertbot@gmail.com'
 password = f.readline()
 f.close
-
 #Reads in password
 if password == "":
     f = open("/home/kyle/dotfiles/notifi-pass","w+")
