@@ -1,0 +1,22 @@
+## Receive optionse
+set imap_user=kyle.merfeld@ndsu.edu
+set imap_pass= ''
+set folder = imaps://kyle.merfeld@ndsu.edu@smtp.office365.com:993/
+set spoolfile = +INBOX
+set postponed = +Drafts
+set record = +Sent
+
+## Send options.
+set smtp_url=smtps://kyle.merfeld@ndsu.edu@smtp.office365.com:587/
+set realname='Kyle Merfeld'
+set from=kyle.merfeld@ndu.edu
+set hostname="ndsu.edu"
+set signature=""
+# Connection options
+set ssl_force_tls = yes
+unset ssl_starttls
+
+set imap_check_subscribed
+## Hook -- IMPORTANT!
+account-hook $folder "set imap_user=kyle.merfeld@ndsu.edu@smtp.office365.com:587/ imap_pass=`pass mutt\/ndsu` "
+

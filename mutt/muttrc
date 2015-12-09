@@ -1,0 +1,191 @@
+## General options
+set header_cache = "~/.cache/mutt"
+set imap_check_subscribed
+set imap_keepalive = 300
+unset imap_passive
+set mail_check = 60
+set mbox_type=Maildir
+
+## ACCOUNT1
+source "~/.mutt/kmerfeld1@gmail.com"
+# Here we use the $folder variable that has just been set in the sourced file.
+# We must set it right now otherwise the 'folder' variable will change in the next sourced file.
+folder-hook $folder 'source ~/.mutt/kmerfeld1@gmail.com'
+
+## ACCOUNT2
+#source "~/.mutt/jordan.goetze@gmail.com"
+#folder-hook $folder 'source ~/.mutt/jordan.goetze@gmail.com'
+
+## ACCOUNT3
+source "~/.mutt/ndsu"
+folder-hook $folder 'source ~/.mutt/ndsu'
+
+
+## shortcuts 
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.mutt/kmerfeld1@gmail.com<enter><change-folder>!<enter>'
+#macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.mutt/jordan.goetze@gmail.com<enter><change-folder>!<enter>'
+macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.mutt/ndsu<enter><change-folder>!<enter>'
+
+macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
+
+#set sidebar_visible = no
+set sleep_time = 0
+
+# helps allow nice viewing of html messages
+set mailcap_path    = ~/.mutt/mailcap
+auto_view text/html
+alternative_order text/plain text/html
+
+set sort=threads
+set sort_browser=date
+set sort_aux=reverse-last-date-received
+
+
+##### BEGIN mutt keybindings
+
+### Key Bindings
+
+bind editor <Esc>t complete-query
+
+bind index <Up> previous-entry
+bind pager <Up> previous-line
+bind index <Down> next-entry
+bind pager <Down> next-line
+
+bind index j next-entry
+#bind pager j next-line
+bind index k previous-entry
+#bind pager k previous-line
+
+# a bit more like slrn...
+bind index X exit
+bind pager X exit
+bind index x sync-mailbox
+bind pager x sync-mailbox
+
+bind generic b previous-page
+bind generic 1G first-entry
+bind generic 1g first-entry
+bind generic <Home> first-entry
+bind generic G last-entry
+bind generic <End> last-entry
+bind pager i noop
+bind pager \eD delete-thread
+bind pager \eU undelete-thread
+bind pager <Home> top
+bind pager <End> bottom
+bind pager G bottom
+bind pager q exit
+bind pager B bounce-message
+bind pager b previous-page
+bind pager <Insert> previous-entry
+bind pager <Delete> next-entry
+#bind index i fetch-mail
+bind index \eD delete-thread
+bind index \eU undelete-thread
+bind index B bounce-message
+bind index b previous-page
+bind index <Home> first-entry
+bind index <End> last-entry
+bind index G last-entry
+bind index <Right> display-message
+bind pager <Left> exit
+bind pager <Right> view-attachments
+bind attach <Left> exit
+bind attach <Right> view-attach
+bind pager b previous-page
+bind pager - noop
+bind pager <Space> next-page
+bind alias <Tab> next-entry
+
+##### END mutt keybindings
+
+
+
+## Theme kindly inspired from
+## http://nongeekshandbook.blogspot.ie/2009/03/mutt-color-configuration.html
+
+## Colours for items in the index
+color index brightcyan black ~N
+color index brightred black ~O
+color index brightyellow black ~F
+color index black green ~T
+color index brightred black ~D
+mono index bold ~N
+mono index bold ~F
+mono index bold ~T
+mono index bold ~D
+
+## Highlights inside the body of a message.
+
+## URLs
+color body brightgreen black "(http|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+color body brightgreen black "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+mono body bold "(http|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+mono body bold "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+
+## Email addresses.
+color body brightgreen black "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+
+## Header
+color header green black "^from:"
+color header green black "^to:"
+color header green black "^cc:"
+color header green black "^date:"
+color header yellow black "^newsgroups:"
+color header yellow black "^reply-to:"
+color header brightcyan black "^subject:"
+color header red black "^x-spam-rule:"
+color header green black "^x-mailer:"
+color header yellow black "^message-id:"
+color header yellow black "^Organization:"
+color header yellow black "^Organisation:"
+color header yellow black "^User-Agent:"
+color header yellow black "^message-id: .*pine"
+color header yellow black "^X-Fnord:"
+color header yellow black "^X-WebTV-Stationery:"
+
+color header red black "^x-spam-rule:"
+color header green black "^x-mailer:"
+color header yellow black "^message-id:"
+color header yellow black "^Organization:"
+color header yellow black "^Organisation:"
+color header yellow black "^User-Agent:"
+color header yellow black "^message-id: .*pine"
+color header yellow black "^X-Fnord:"
+color header yellow black "^X-WebTV-Stationery:"
+color header yellow black "^X-Message-Flag:"
+color header yellow black "^X-Spam-Status:"
+color header yellow black "^X-SpamProbe:"
+color header red black "^X-SpamProbe: SPAM"
+
+## Coloring quoted text - coloring the first 7 levels:
+color quoted cyan black
+color quoted1 yellow black
+color quoted2 red black
+color quoted3 green black
+color quoted4 cyan black
+color quoted5 yellow black
+color quoted6 red black
+color quoted7 green black
+
+## Default color definitions
+#color hdrdefault white green
+color signature brightmagenta black
+color indicator black cyan
+color attachment black green
+color error red black
+color message white black
+color search brightwhite magenta
+color status brightyellow blue
+color tree brightblue black
+color normal white black
+color tilde green black
+color bold brightyellow black
+#color underline magenta black
+color markers brightcyan black
+
+## Colour definitions when on a mono screen
+mono bold bold
+mono underline underline
+mono indicator reverse
