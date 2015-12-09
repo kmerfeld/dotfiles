@@ -1,3 +1,4 @@
 *.sw*
 scripts/notifi-pass
 vim/bundle/*
+certs/*

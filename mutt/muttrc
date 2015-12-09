@@ -28,7 +28,9 @@ macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.mutt/ndsu<enter><
 
 macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
 
-#set sidebar_visible = no
+set sidebar_visible = yes
+macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
+macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
 set sleep_time = 0
 
 # helps allow nice viewing of html messages
@@ -39,6 +41,7 @@ alternative_order text/plain text/html
 set sort=threads
 set sort_browser=date
 set sort_aux=reverse-last-date-received
+
 
 
 ##### BEGIN mutt keybindings
@@ -98,6 +101,11 @@ bind pager - noop
 bind pager <Space> next-page
 bind alias <Tab> next-entry
 
+# Ctrl-n, Ctrl-p to select next, previous folder.
+# Ctrl-o to open selected folder.
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open
 ##### END mutt keybindings
 
 

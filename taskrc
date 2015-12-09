@@ -1,0 +1,6 @@
+taskd.certificate=/path/to/private.certificate.pem
+taskd.key=/path/to/private.key.pem
+taskd.ca=/path/to/ca.cert.pem
+taskd.server=taskwarrior.inthe.am:53589
+taskd.credentials=inthe_am/kmerfeld1/fc108f95-ef48-4c97-9fb4-ce61a2ac072d
+taskd.trust=ignore hostname

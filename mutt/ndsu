@@ -1,6 +1,6 @@
 ## Receive optionse
 set imap_user=kyle.merfeld@ndsu.edu
-set imap_pass= ''
+set imap_pass="`pass mutt\/ndsu`"
 set folder = imaps://kyle.merfeld@ndsu.edu@smtp.office365.com:993/
 set spoolfile = +INBOX
 set postponed = +Drafts
