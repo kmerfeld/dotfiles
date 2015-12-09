@@ -7,15 +7,21 @@
 #"commandToRun; notifi Subject"
 #after the command is run this will send a email to me
 #If you are not me, please change the email "toaddrs". 
-
-
 import smtplib
 import sys
 import os
+import socket
 
+
+#thos sets the working directory to ~/dotfiles/scripts
+#or wherever "notifi" exists in the filesystem
+os.chdir(os.path.dirname(__file__))
+print(os.getcwd())
+
+hostname = socket.gethostname()
 fromaddr = 'merfeldalertbot@gmail.com'
 toaddrs  = 'kmerfeld1@gmail.com'
-msg = "Subject: This is a notice.\nsomething happened"
+msg = "Subject: This is a notice.\nThis came from " + hostname
 
 #check if an argument is given
 length = (len(sys.argv))
@@ -27,13 +33,14 @@ elif (length> 1):
 
 #Create file if it doesnt exist
 if not os.path.exists("notifi-pass"):
-    open("/home/kyle/dotfiles/notifi-pass", 'w').close() 
+    open("notifi-pass", 'w').close() 
 
 # Credentials
 f = open("notifi-pass","r+")
 username = 'merfeldalertbot@gmail.com'
 password = f.readline()
 f.close
+
 #Reads in password
 if password == "":
     f = open("notifi-pass","w+")
