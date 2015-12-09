@@ -33,6 +33,13 @@ for file in $files; do
 done
 
 
+###################
+#unencrypting and extracting task sync items
+gpg -o certs/inthe.am.tar.gz -d certs/inthe.am.tar.gz.gpg 
+tar -xvf inthe.am.tar.gz
+
+
+###################
 #check if distro is arch
 if [[ -f /etc/pacman.conf ]] 
 then
@@ -61,7 +68,7 @@ then
 
 	#Run things only done if arch is installed
 	pacaur -S vim-youcompleteme-git png++
-	pacman -S dmenu vim i3 
+	pacman -S dmenu vim i3 mutt task
 
 	if [[ -z addedstuff ]]
 	then
