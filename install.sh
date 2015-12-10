@@ -36,7 +36,7 @@ done
 ###################
 #unencrypting and extracting task sync items
 gpg -o certs/inthe.am.tar.gz -d certs/inthe.am.tar.gz.gpg 
-tar -xvf inthe.am.tar.gz
+tar -xvf certs/inthe.am.tar.gz
 
 
 ###################
