@@ -1,4 +1,4 @@
 *.sw*
-scripts/notifi-pass
+scripts/note/notifi-pass
 vim/bundle/*
 certs/*

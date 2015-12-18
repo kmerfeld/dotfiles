@@ -1,0 +1,4 @@
+#!/bin/bash
+task sync
+var="$(task)"
+python ~/dotfiles/scripts/notifi/notifi "Todo list" "$var"
