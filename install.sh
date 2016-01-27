@@ -36,7 +36,9 @@ done
 ###################
 #unencrypting and extracting task sync items
 gpg -o certs/inthe.am.tar.gz -d certs/inthe.am.tar.gz.gpg 
-tar -xvf certs/inthe.am.tar.gz
+cd ~/dotfiles/certs
+tar -xvf inthe.am.tar.gz
+cd ..
 
 
 ###################
@@ -67,18 +69,7 @@ then
 	fi
 
 	#Run things only done if arch is installed
-	pacaur -S vim-youcompleteme-git png++
 	pacman -S dmenu vim i3 mutt task
-
-	if [[ -z addedstuff ]]
-	then
-		git clone git@github.com:berock212/Maze-background.git
-		cd Maze-background
-		make
-		chmod +x setbackground.sh
-		sed -i 's|prog=~/documents/cpp/maze/png/mazepng|prog=~/dotfiles/Maze-background/mazepng|g' setbackground.sh
-		cd
-	fi
 fi
 
 #install vim plugins from git
@@ -88,3 +79,8 @@ git clone https://github.com/terryma/vim-expand-region.git ~/dotfiles/vim/bundle
 git clone https://github.com/tpope/vim-fugitive.git ~/dotfiles/vim/bundle/fugitive
 git clone https://github.com/morhetz/gruvbox.git ~/dotfiles/vim/bundle/gruvbox
 git clone https://github.com/t9md/vim-choosewin.git ~/dotfiles/vim/bundle/vim-choosewin
+
+
+mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+ln -s ~/.vim $XDG_CONFIG_HOME/nvim
+ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
