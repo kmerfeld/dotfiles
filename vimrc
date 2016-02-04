@@ -6,7 +6,6 @@ set number		"this just makes number lines apear
 set foldmethod=indent
 set foldlevel=99
 set t_Co=256
-set term=xterm-256color
 syntax enable
 set background=dark
 colorscheme gruvbox
@@ -26,12 +25,9 @@ set tm=500
 set showcmd 				"show when leader is pressed
 
 "vim-expand=region settings
-
 "this maps it so i can use multiple 'v's to add to visuall mode
 vmap v <Plug>(expand_region_expand)
 "vmap <C-v> <Plug>(expand_region_shrink)
-"
-
 
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
@@ -44,7 +40,7 @@ let g:choosewin_overlay_enable = 1
 
 
 
-" Return to last edit position when opening files (You want this!)
+" Return to last edit position when opening files
 " autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
@@ -53,16 +49,37 @@ let g:choosewin_overlay_enable = 1
 
 
 " Smart way to move between windows
- map <C-j> <C-W>j
- map <C-k> <C-W>k
- map <C-h> <C-W>h
- map <C-l> <C-W>l
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+"this is a hack to fix <C-h> in neovim
+if has('nvim')
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  " Hack to get C-h working in neovim
+  nmap <BS> <C-W>h
+  tnoremap <Esc> <C-\><C-n>
+endif
 
  " " Useful mappings for managing tabs
  map <leader>v :vnew<cr>
  map <leader>h :new<cr>
- map <leader>bd :bd
-
+ map <leader>x :bd<cr>
+ map <leader>t :terminal<cr>
 "make updating aur packages a little nicer
 map <leader>u :%s/^arch.*/arch=('x86_64')/g
+
+
+"Terminal stuff
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 
