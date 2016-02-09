@@ -72,15 +72,8 @@ then
 	pacman -S dmenu vim i3 mutt task
 fi
 
-#install vim plugins from git
-git clone https://github.com/nanotech/jellybeans.vim.git ~/dotfiles/vim/bundle/jellybeans.vim
-git clone https://github.com/scrooloose/nerdtree.git ~/dotfiles/vim/bundle/nerdtree
-git clone https://github.com/terryma/vim-expand-region.git ~/dotfiles/vim/bundle/vim-expand-region
-git clone https://github.com/tpope/vim-fugitive.git ~/dotfiles/vim/bundle/fugitive
-git clone https://github.com/morhetz/gruvbox.git ~/dotfiles/vim/bundle/gruvbox
-git clone https://github.com/t9md/vim-choosewin.git ~/dotfiles/vim/bundle/vim-choosewin
 
-
+#link neovim config files to vim ones
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 ln -s ~/.vim $XDG_CONFIG_HOME/nvim
 ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
