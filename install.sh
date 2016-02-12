@@ -72,6 +72,13 @@ then
 	pacman -S dmenu vim i3 mutt task
 fi
 
+#install st
+git clone https://github.com/kmerfeld/st
+cd st
+make
+make install
+cd ..
+
 
 #link neovim config files to vim ones
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
