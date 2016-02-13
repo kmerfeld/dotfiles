@@ -11,6 +11,8 @@ Plug 'morhetz/gruvbox'
 Plug 't9md/vim-choosewin'
 Plug 'tpope/vim-sensible'
 Plug 'Shougo/deoplete.nvim'
+Plug 'vim-airline/vim-airline'
+Plug 'chrisbra/csv.vim'
 call plug#end()
 
 
@@ -61,6 +63,8 @@ autocmd BufReadPost *
 """""""""""""""""""
 "     plugins     "
 """""""""""""""""""
+
+
 
 ""nerdtree
 map <C-n> :NERDTreeToggle<CR>
