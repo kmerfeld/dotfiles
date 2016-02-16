@@ -6,6 +6,22 @@ unset imap_passive
 set mail_check = 60
 set mbox_type=Maildir
 
+set beep_new
+set sidebar_width = 30
+set sidebar_visible = yes
+
+mailboxes "+----kmerfeld1------------" \
+          "+kmerfeld1@gmail.com/INBOX" \
+          "+kmerfeld1@gmail.com/\[Gmail\].Important" \
+          "+kmerfeld1@gmail.com/\[Gmail\].Drafts" \
+          "+kmerfeld1@gmail.com/\[Gmail\].Sent Mail" \
+          "+----ndsu---------------------" \
+          "+ndsu/INBOX" \
+          "+ndsu/Drafts" \
+          "+ndsu/Sent Items" \
+          "+ndsu/Needs Reply"
+
+
 ## ACCOUNT1
 source "~/.mutt/kmerfeld1@gmail.com"
 # Here we use the $folder variable that has just been set in the sourced file.
