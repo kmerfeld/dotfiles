@@ -7,20 +7,6 @@ set mail_check = 60
 set mbox_type=Maildir
 
 set beep_new
-set sidebar_width = 30
-set sidebar_visible = yes
-
-mailboxes "+----kmerfeld1------------" \
-          "+kmerfeld1@gmail.com/INBOX" \
-          "+kmerfeld1@gmail.com/\[Gmail\].Important" \
-          "+kmerfeld1@gmail.com/\[Gmail\].Drafts" \
-          "+kmerfeld1@gmail.com/\[Gmail\].Sent Mail" \
-          "+----ndsu---------------------" \
-          "+ndsu/INBOX" \
-          "+ndsu/Drafts" \
-          "+ndsu/Sent Items" \
-          "+ndsu/Needs Reply"
-
 
 ## ACCOUNT1
 source "~/.mutt/kmerfeld1@gmail.com"
@@ -29,10 +15,6 @@ source "~/.mutt/kmerfeld1@gmail.com"
 folder-hook $folder 'source ~/.mutt/kmerfeld1@gmail.com'
 
 ## ACCOUNT2
-#source "~/.mutt/jordan.goetze@gmail.com"
-#folder-hook $folder 'source ~/.mutt/jordan.goetze@gmail.com'
-
-## ACCOUNT3
 source "~/.mutt/ndsu"
 folder-hook $folder 'source ~/.mutt/ndsu'
 
@@ -44,7 +26,6 @@ macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.mutt/ndsu<enter><
 
 macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
 
-set sidebar_visible = yes
 macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
 macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
 set sleep_time = 0
@@ -116,15 +97,7 @@ bind pager b previous-page
 bind pager - noop
 bind pager <Space> next-page
 bind alias <Tab> next-entry
-
-# Ctrl-n, Ctrl-p to select next, previous folder.
-# Ctrl-o to open selected folder.
-bind index,pager \CP sidebar-prev
-bind index,pager \CN sidebar-next
-bind index,pager \CO sidebar-open
 ##### END mutt keybindings
-
-
 
 ## Theme kindly inspired from
 ## http://nongeekshandbook.blogspot.ie/2009/03/mutt-color-configuration.html

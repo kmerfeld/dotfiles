@@ -13,6 +13,7 @@ Plug 'tpope/vim-sensible'
 Plug 'Shougo/deoplete.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/csv.vim'
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 
@@ -65,6 +66,8 @@ autocmd BufReadPost *
 """""""""""""""""""
 
 
+"easymotion
+map <Leader> <Plug>(easymotion-prefix)
 
 ""nerdtree
 map <C-n> :NERDTreeToggle<CR>
