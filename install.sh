@@ -73,11 +73,11 @@ then
 fi
 
 #install st
-git clone https://github.com/kmerfeld/st
-cd st
+git clone https://github.com/kmerfeld/st ~/st
+cd ~/st
 make
-make install
-cd ..
+sudo make install
+cd dotfiles
 
 
 #link neovim config files to vim ones
