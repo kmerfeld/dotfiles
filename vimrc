@@ -14,6 +14,8 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/csv.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 
@@ -85,13 +87,22 @@ let g:choosewin_overlay_enable = 1
 
 "deoplete.
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 0
+let g:deoplete#auto_completion_start_length = 1
+set completeopt+=noinsert
 
+"ultisnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 "set colorscheme stuff
 set background=dark
 colorscheme gruvbox
-
-
 
 """""""""""""""""""
 "      Tabs	  "
