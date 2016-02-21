@@ -16,6 +16,8 @@ Plug 'chrisbra/csv.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'wting/rust.vim'
+Plug 'racer-rust/vim-racer'
 call plug#end()
 
 
@@ -66,6 +68,15 @@ autocmd BufReadPost *
 """""""""""""""""""
 "     plugins     "
 """""""""""""""""""
+
+"Rust autoformat
+let g:rustfmt_autosave = 1
+
+"rust-racer
+set hidden
+let g:racer_cmd = "~/.cargo/bin/racer"
+let $RUST_SRC_PATH="/home/kyle/.rust"
+
 
 
 "easymotion
