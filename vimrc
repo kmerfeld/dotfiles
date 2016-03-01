@@ -25,6 +25,21 @@ call plug#end()
 """""""""""""""""""
 "    Settings	  "
 """""""""""""""""""
+map <leader>g: 'i'
+function! Graph()
+
+			\'	  5|'
+			\'	   |'
+			\'	   |'
+			\' 	   |'
+			\' 	   |'
+			\' - - - - - + - - - - -'
+			\'-5	   |	     5'
+			\'	   |'
+			\'	   |'
+			\'	   |'
+			\'	   |-5'
+endfunction	
 
 filetype plugin indent on
 

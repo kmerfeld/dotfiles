@@ -8,7 +8,7 @@
 addedstuff=$1
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="taskrc mutt i3 bashrc vimrc vim tmux.conf xinitrc Xresources"     # list of files/folders to symlink in homedir
+files="i3blocks taskrc mutt i3 bashrc vimrc vim tmux.conf xinitrc Xresources"     # list of files/folders to symlink in homedir
 
 ##########
 
@@ -69,7 +69,8 @@ then
 	fi
 
 	#Run things only done if arch is installed
-	pacman -S dmenu vim i3 mutt task
+	pacaur -S dmenu vim i3 mutt task i3blocks
+
 fi
 
 #install st

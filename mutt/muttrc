@@ -15,14 +15,9 @@ source "~/.mutt/kmerfeld1@gmail.com"
 folder-hook $folder 'source ~/.mutt/kmerfeld1@gmail.com'
 
 ## ACCOUNT2
-source "~/.mutt/ndsu"
-folder-hook $folder 'source ~/.mutt/ndsu'
-
 
 ## shortcuts 
 macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.mutt/kmerfeld1@gmail.com<enter><change-folder>!<enter>'
-#macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.mutt/jordan.goetze@gmail.com<enter><change-folder>!<enter>'
-macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.mutt/ndsu<enter><change-folder>!<enter>'
 
 macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
 
