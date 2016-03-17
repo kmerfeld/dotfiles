@@ -53,7 +53,7 @@ done
 
 if [ -f ~/.config/nvim ]
 then
-	ln -s ~/.vim ~/.config//nvim
+	ln -s ~/.vim ~/.config/nvim
 fi
 
 #################
