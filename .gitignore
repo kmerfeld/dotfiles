@@ -3,3 +3,4 @@ scripts/note/notifi-pass
 vim/bundle/*
 certs/*
 vim/plugged/*
+fish/fish_history

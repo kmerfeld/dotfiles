@@ -53,8 +53,7 @@ done
 
 if [ -f ~/.config/nvim ]
 then
-	mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-	ln -s ~/.vim $XDG_CONFIG_HOME/nvim
+	ln -s ~/.vim ~/.config//nvim
 fi
 
 #################
