@@ -25,25 +25,9 @@ call plug#end()
 """""""""""""""""""
 "    Settings	  "
 """""""""""""""""""
-map <leader>g: 'i'
-function! Graph()
-
-			\'	  5|'
-			\'	   |'
-			\'	   |'
-			\' 	   |'
-			\' 	   |'
-			\' - - - - - + - - - - -'
-			\'-5	   |	     5'
-			\'	   |'
-			\'	   |'
-			\'	   |'
-			\'	   |-5'
-endfunction	
-
 filetype plugin indent on
 
-set encoding=utf-8
+"set encoding=utf-8
 
 "bind 'jk' to escape
 inoremap jk <ESC>
