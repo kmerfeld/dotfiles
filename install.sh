@@ -1,9 +1,7 @@
 #!/bin/bash
-############################
+
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
-############################
-
-
+# Kyle Merfeld's dotfiles setup
 
 ###################
 # Setup Variables #
@@ -13,13 +11,10 @@ dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 
 #these files will be copied to the home directory
-files="i3blocks taskrc i3 bashrc vimrc vim tmux.conf xinitrc Xresources"     # list of files/folders to symlink in homedir
-
-#these files are copied to ~/.config
-configFiles="fish"
+files="taskrc i3 bashrc vimrc vim tmux.conf xinitrc Xdefaults Xresources"     # list of files/folders to symlink in homedir
 
 #These will be installed if you are running arch (with AUR support)
-toInstall="tmux dmenu vim neovim i3 task fish lxtask"
+toInstall="tmux dmenu vim neovim i3 task rxvt-unicode urxvt-perls"
 
 
 
@@ -45,15 +40,13 @@ for file in $files; do
 	echo "Creating symlink to $file in home directory."
 	ln -s $dir/$file ~/.$file
 done
-for file in $configFiles; do
-	mv ~/.config/$file ~/dotfiles_old/config/
-	echo "Creating symlink to $file in ~/.config directory."
-	ln -s $dir/$file ~/.config/$file
-done
 
+#map nvim files to vim's
 if [ -f ~/.config/nvim ]
 then
-	ln -s ~/.vim ~/.config/nvim
+	 bash mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+	 bash ln -s ~/.vim $XDG_CONFIG_HOME/nvim
+	 bash ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 fi
 
 #################
@@ -74,7 +67,6 @@ fi
 #######################
 # arch specific stuff #
 #######################
-
 if [[ -f /etc/pacman.conf ]] 
 then
 	#install pacaur
@@ -101,8 +93,4 @@ then
 
 	#installing files
 	pacaur -S $toInstall
-
-	#setting fish to default
-	chsh -s /usr/bin/fish
-
 fi

@@ -1,1 +1,1 @@
-/home/kyle/dotfiles/vimrc
+/home/kyle/.vimrc

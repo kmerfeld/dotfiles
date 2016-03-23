@@ -4,8 +4,8 @@ urxvt.scrollBar: false
 urxvt.background: black
 urxvt.foreground: gray
 !! Font prefferenes
-urxvt.font: xft:DejaVu Sans Mono:pixelsize=13
-urxvt.boldFont: xft:DejaVu Sans Mono:pixelsize=13:weight=bold
+urxvt.font: xft:DejaVu Sans Mono:pixelsize=16
+urxvt.boldFont: xft:DejaVu Sans Mono:pixelsize=16:weight=bold
 urxvt.letterSpace: -1
 !! Larger history limit
 urxvt.saveLines: 1000000
@@ -46,6 +46,7 @@ URxvt.color13: rgb:AD/7F/A8
 URxvt.color14: rgb:34/E2/E2
 URxvt.color15: rgb:EE/EE/EC
 URxvt.colorBD: rgb:ff/ff/ff
+
 URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
 URxvt.url-select.launcher:  firefox
 URxvt.url-select.underline: true
