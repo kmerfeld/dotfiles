@@ -42,7 +42,7 @@ for file in $files; do
 done
 
 #map nvim files to vim's
-if [ -f ~/.config/nvim ]
+if [ -f ~/.config/nvim/init.vim ]
 then
 	 bash mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 	 bash ln -s ~/.vim $XDG_CONFIG_HOME/nvim
