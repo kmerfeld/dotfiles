@@ -44,6 +44,7 @@ done
 #map nvim files to vim's
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 ln -s ~/.vim $XDG_CONFIG_HOME/nvim
+rm $XDG_CONFIG_HOME/nvim/init.vim
 ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 
 #################
