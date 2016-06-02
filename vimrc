@@ -64,6 +64,10 @@ autocmd BufReadPost *
 			\   exe "normal! g`\"" |
 			\ endif"
 
+" Set 81st column to be magenta
+highlight ColorColumn ctermbg=magenta
+    call matchadd('ColorColumn', '\%81v', 100)
+
 """""""""""""""""""
 "     plugins     "
 """""""""""""""""""
@@ -96,10 +100,9 @@ nmap  -  <Plug>(choosewin)
 let g:choosewin_overlay_enable = 1
 
 "deoplete.
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 0
-let g:deoplete#auto_completion_start_length = 1
-set completeopt+=noinsert
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#disable_auto_complete = 0
+"let g:deoplete#auto_completion_start_length = 1"sdfset completeopt+=noinsert
 
 "ultisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.

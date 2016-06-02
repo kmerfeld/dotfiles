@@ -15,7 +15,7 @@ alias w3m='w3m duckduckgo.com'
 alias pacuar="pacaur"
 alias notifi="python ~/dotfiles/scripts/note/notifi"
 alias vim="nvim"
-
+alias pacman-clean=" sudo  pacman -Rns $(pacman -Qtdq); sudo pacman -Sc"
 export PS2="\[\033[01;32m\]\u@\h \[\033[00;31m\]\W \$ \[\033[00m\]"
 export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u@\h\[$(tput setaf 6)\] \W \$ \[$(tput sgr0)\]"
 set -o vi
