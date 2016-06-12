@@ -14,7 +14,7 @@ olddir=~/dotfiles_old             # old dotfiles backup directory
 files="taskrc i3 bashrc vimrc vim tmux.conf xinitrc Xdefaults Xresources"     # list of files/folders to symlink in homedir
 
 #These will be installed if you are running arch (with AUR support)
-toInstall="tmux dmenu vim neovim i3 task rxvt-unicode urxvt-perls"
+toInstall="pass tmux dmenu vim neovim i3 task rxvt-unicode urxvt-perls"
 
 
 
@@ -42,18 +42,20 @@ for file in $files; do
 done
 
 #map nvim files to vim's
-if [ -f ~/.config/nvim/init.vim ]
-then
-	 bash mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-	 bash ln -s ~/.vim $XDG_CONFIG_HOME/nvim
-	 bash ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
-fi
+mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+ln -s ~/.vim $XDG_CONFIG_HOME/nvim
+rm $XDG_CONFIG_HOME/nvim/init.vim
+ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 
 #################
 # task certs	# 
 #################
 
 #unencrypting and extracting task sync items
+#This doesnt work well because of the lack of gpg key, but this will still get me the certs
+#I want. just not usable ones
+
+#I can just rerun this program once i have the certs
 if [[ -f certs/*.pem ]]
 then
 	gpg -o certs/inthe.am.tar.gz -d certs/inthe.am.tar.gz.gpg 
