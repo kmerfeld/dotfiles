@@ -18,6 +18,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
 Plug 'wting/rust.vim'
 Plug 'racer-rust/vim-racer'
+Plug 'yuratomo/w3m.vim'
 call plug#end()
 
 
@@ -114,6 +115,11 @@ set completeopt+=noinsert
 set background=dark
 colorscheme gruvbox
 
+
+"w3m.vim
+let g:w3m#homepage = "https://duckduckgo.com"
+let g:w3m#hit_a_hint_key = 'f'
+let g:w3m#search_engine = "https://duckduckgo.com/?q="
 """""""""""""""""""
 "      Tabs	  "
 """""""""""""""""""
