@@ -16,7 +16,6 @@ fi
 #syndaemon -t -k -i 2 &
  
 
-
 exec i3
 #exec mate-session
 #exec spectrwm 

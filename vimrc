@@ -19,6 +19,8 @@ Plug 'honza/vim-snippets'
 Plug 'wting/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'yuratomo/w3m.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'kablamo/vim-git-log'
 call plug#end()
 
 
@@ -67,7 +69,7 @@ autocmd BufReadPost *
 
 " Set 81st column to be magenta
 highlight ColorColumn ctermbg=magenta
-    call matchadd('ColorColumn', '\%81v', 100)
+call matchadd('ColorColumn', '\%81v', 100)
 
 """""""""""""""""""
 "     plugins     "

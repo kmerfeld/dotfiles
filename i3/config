@@ -11,7 +11,7 @@
 exec --no-startup-id owncloud
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift
-exec --no-startup-id /home/kyle/networkRefresh/networkRefresh
+#exec --no-startup-id /home/kyle/networkRefresh/networkRefresh
 set $mod Mod1
 
 

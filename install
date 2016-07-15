@@ -56,7 +56,7 @@ ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 #I want. just not usable ones
 
 #I can just rerun this program once i have the certs
-if [[ -f certs/*.pem ]]
+if [[ -f ~/dotfiles/certs/*.pem ]]
 then
 	gpg -o certs/inthe.am.tar.gz -d certs/inthe.am.tar.gz.gpg 
 	cd ~/dotfiles/certs
