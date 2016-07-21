@@ -20,6 +20,7 @@ Plug 'wting/rust.vim'
 Plug 'racer-rust/vim-racer'
 "Plug 'yuratomo/w3m.vim'
 Plug 'kablamo/vim-git-log'
+Plug 'blindFS/vim-taskwarrior'
 call plug#end()
 
 
