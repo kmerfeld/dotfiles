@@ -94,5 +94,5 @@ then
 	fi
 
 	#installing files
-	pacaur -S $toInstall
+	pacaur -S $toInstall --needed
 fi
