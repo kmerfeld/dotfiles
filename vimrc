@@ -12,7 +12,7 @@ Plug 't9md/vim-choosewin'
 Plug 'tpope/vim-sensible'
 Plug 'Shougo/deoplete.nvim'
 Plug 'vim-airline/vim-airline'
-"Plug 'chrisbra/csv.vim'
+Plug 'chrisbra/csv.vim'
 Plug 'easymotion/vim-easymotion'
 "Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -71,6 +71,13 @@ autocmd BufReadPost *
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
+
+"CSV
+"highlight selected column
+let g:csv_highlight_column = 'y'
+
+    hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
+    hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
 """""""""""""""""""
 "     plugins     "
 """""""""""""""""""
