@@ -18,7 +18,7 @@ set -o vi
 export PATH="$HOME/.cargo/bin:$PATH"
 
 tempvarignore="$(cat /etc/*-release | grep ID_LIKE)"
-if [ $tempvarignore == "ID_LIKE=\"arch\"" ]
+if [[ $tempvarignore == "ID_LIKE=\"arch\"" ]]
 then
 	alias pacuar="pacaur"
 	alias pacman-clean=" sudo  pacman -Rns $(pacman -Qtdq); sudo pacman -Sc"
