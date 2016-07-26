@@ -21,6 +21,7 @@ Plug 'racer-rust/vim-racer'
 "Plug 'yuratomo/w3m.vim'
 Plug 'kablamo/vim-git-log'
 Plug 'blindFS/vim-taskwarrior'
+Plug 'scrooloose/syntastic'
 call plug#end()
 
 
@@ -72,15 +73,31 @@ highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
 
+"""""""""""""""""""
+"     plugins     "
+"""""""""""""""""""
+
+"syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_perl_checker = 1
+
+
+
 "CSV
 "highlight selected column
 let g:csv_highlight_column = 'y'
 
-    hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
-    hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
-"""""""""""""""""""
-"     plugins     "
-"""""""""""""""""""
+hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
+hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
+
+
 
 "Rust autoformat
 let g:rustfmt_autosave = 1
