@@ -22,6 +22,7 @@ Plug 'racer-rust/vim-racer'
 Plug 'kablamo/vim-git-log'
 Plug 'blindFS/vim-taskwarrior'
 Plug 'scrooloose/syntastic'
+Plug 'ervandew/supertab'
 call plug#end()
 
 
@@ -88,7 +89,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_perl_checker = 1
 
-
+let g:syntastic_perl_checkers = ['perl']
 
 "CSV
 "highlight selected column
@@ -113,7 +114,7 @@ let $RUST_SRC_PATH="/home/kyle/.rust"
 map <Leader> <Plug>(easymotion-prefix)
 
 ""nerdtree
-map <C-n> :NERDTreeToggle<CR>
+"map <C-n> :NERDTreeToggle<CR>
 "vim-expand=region settings
 "this maps it so i can use multiple 'v's to add to visuall mode
 vmap v <Plug>(expand_region_expand)
