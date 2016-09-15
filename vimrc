@@ -10,7 +10,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
 Plug 't9md/vim-choosewin'
 Plug 'tpope/vim-sensible'
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/csv.vim'
 Plug 'easymotion/vim-easymotion'
@@ -23,6 +23,8 @@ Plug 'kablamo/vim-git-log'
 Plug 'blindFS/vim-taskwarrior'
 Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
+Plug 'davidhalter/jedi-vim'
+Plug 'zchee/deoplete-jedi'
 call plug#end()
 
 
@@ -127,12 +129,6 @@ nmap  -  <Plug>(choosewin)
 " if you want to use overlay feature
 let g:choosewin_overlay_enable = 1
 
-"deoplete.
-"let g:deoplete#enable_at_startup = 1
-"let g:deoplete#disable_auto_complete = 0
-"let g:deoplete#auto_completion_start_length = 1"sdfset completeopt+=noinsert
-
-"ultisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 "let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -145,6 +141,12 @@ let g:choosewin_overlay_enable = 1
 set background=dark
 colorscheme gruvbox
 
+if has ('nvim')
+	"deoplete.
+	let g:deoplete#enable_at_startup = 1
+	autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
+	autocmd CompleteDone * pclose " To close preview window of deoplete automagically
+endif
 
 "w3m.vim
 let g:w3m#homepage = "https://duckduckgo.com"
