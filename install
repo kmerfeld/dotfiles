@@ -6,15 +6,14 @@
 ###################
 # Setup Variables #
 ###################
-addedstuff=$1
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 
 #these files will be copied to the home directory
 files="taskrc i3 bashrc vimrc vim tmux.conf xinitrc Xdefaults Xresources"     # list of files/folders to symlink in homedir
-
+config_folder="termite"
 #These will be installed if you are running arch (with AUR support)
-toInstall="pass tmux dmenu vim neovim i3 task rxvt-unicode urxvt-perls"
+toInstall="termite pass tmux dmenu vim neovim i3 task"
 
 
 
@@ -40,6 +39,15 @@ for file in $files; do
 	echo "Creating symlink to $file in home directory."
 	ln -s $dir/$file ~/.$file
 done
+
+# do the same as the previous block, but for .config folder
+for folder in $config_folder; do
+	mv ~/.config/$folder ~/dotfiles_old/
+	echo "Creating symlink to $folder in .config directory."
+	ln -s $dir/config/$folder ~/.config/$folder
+
+done
+
 
 #map nvim files to vim's
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
@@ -71,6 +79,8 @@ fi
 #######################
 if [[ -f /etc/pacman.conf ]] 
 then
+	# install neovim python interface
+	 sudo pip3 install neovim
 	#install pacaur
 	w="$(which pacaur)"
 	if [[ $w != /usr/bin/pacaur  ]]  
@@ -95,4 +105,5 @@ then
 
 	#installing files
 	pacaur -S $toInstall --needed
+
 fi
