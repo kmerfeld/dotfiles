@@ -11,7 +11,7 @@
 exec --no-startup-id owncloud
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift
-#exec --no-startup-id /home/kyle/networkRefresh/networkRefresh
+exec --no-startup-id /home/kyle/networkRefresh/networkRefresh
 set $mod Mod1
 
 
@@ -45,7 +45,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+q kill
