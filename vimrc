@@ -10,21 +10,24 @@ Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
 Plug 't9md/vim-choosewin'
 Plug 'tpope/vim-sensible'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/csv.vim'
 Plug 'easymotion/vim-easymotion'
-"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'wting/rust.vim'
 Plug 'racer-rust/vim-racer'
-"Plug 'yuratomo/w3m.vim'
 Plug 'kablamo/vim-git-log'
-Plug 'blindFS/vim-taskwarrior'
 Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
-Plug 'davidhalter/jedi-vim'
-Plug 'zchee/deoplete-jedi'
+"The following block is for NeoVim plugins
+"or ones that have dependencies i cannot assume every machine
+"will have
+if has ('nvim')
+	Plug 'davidhalter/jedi-vim'
+	Plug 'zchee/deoplete-jedi'
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'blindFS/vim-taskwarrior'
+endif
 call plug#end()
 
 
