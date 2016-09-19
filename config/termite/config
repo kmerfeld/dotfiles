@@ -42,7 +42,7 @@ background = #282828
 #background = rgba(63, 63, 63, 0.8)
 
 # if unset, will reverse foreground and background
-highlight = #2f2f2f
+highlight = #bb1df4
 
 # colors from color0 to color254 can be set
 #color0 = #3f3f3f
