@@ -13,7 +13,8 @@ olddir=~/dotfiles_old             # old dotfiles backup directory
 files="taskrc i3 bashrc vimrc vim tmux.conf xinitrc Xdefaults Xresources"     # list of files/folders to symlink in homedir
 config_folder="termite"
 #These will be installed if you are running arch (with AUR support)
-toInstall="ttf-hack termite pass tmux dmenu vim neovim i3 task"
+toInstall="python-pip ttf-hack termite pass tmux dmenu vim neovim i3 task"
+pipInstall="pytest"
 
 
 
@@ -105,5 +106,6 @@ then
 
 	#installing files
 	pacaur -S $toInstall --needed
+	pip3 install $pipInstall
 
 fi
