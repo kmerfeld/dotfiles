@@ -8,7 +8,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
-Plug 't9md/vim-choosewin'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/csv.vim'
@@ -21,10 +20,8 @@ Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
-
-"The following block is for NeoVim plugins
-"or ones that have dependencies i cannot assume every machine
-"will have
+"The following block is for NeoVim plugins or ones that have dependencies 
+"that i cannot assume every machine will have
 if has ('nvim')
 	Plug 'davidhalter/jedi-vim'
 	Plug 'zchee/deoplete-jedi'
@@ -39,37 +36,55 @@ call plug#end()
 "    Settings	  "
 """""""""""""""""""
 filetype plugin indent on
-
-"set encoding=utf-8
+set encoding=utf-8
 
 "bind 'jk' to escape
 inoremap jk <ESC>
 
 "this makes number lines apear
 set number
+
+"allows folding based on indent
 set foldmethod=indent
 set foldlevel=99
+
+"Set vim to 256 color mode
 set t_Co=256
 
 "set syntax highlighting
 syntax enable
+
+"Turns on autoComplete
+set omnifunc=syntaxcomplete#Complete
 
 "Line wrap type stuff
 set wrap
 set linebreak
 set nolist  " list disables linebreak
 
-"sets <leader> to space
+"sets <leader> to space 
 let mapleader = "\<Space>"
 
-set showmatch                       	" Set show matching parenthesis
-set ignorecase                      	" Ignore case when searching
-set autoread                        	" Reload the file when it has been chaged outside of vim
-set hlsearch 			   	"Highlight search results
-set noerrorbells 			"No annoying sound on errors
+" Set show matching parenthesis
+set showmatch                       	
+
+" Ignore case when searching
+set ignorecase                      	
+
+" Reload the file when it has been chaged outside of vim
+set autoread                        	
+
+"Highlight search results
+set hlsearch 			   	
+
+"No annoying sound on errors
+set noerrorbells 			
 set novisualbell
+
 set tm=500
-set showcmd 				"show when leader is pressed
+
+"show when leader is pressed
+set showcmd 				
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
@@ -77,9 +92,17 @@ autocmd BufReadPost *
 			\   exe "normal! g`\"" |
 			\ endif"
 
-" Set 81st column to be magenta
+" Set 81st column to be highlighted
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
+
+"Tabs
+" Smart way to move between windows
+map <C-j> <C-W>j a
+map <C-k> <C-W>k a 
+map <C-h> <C-W>h a
+map <C-l> <C-W>l a
+
 
 
 """""""""""""""""""
@@ -90,19 +113,16 @@ call matchadd('ColorColumn', '\%81v', 100)
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_perl_checker = 1
-
 let g:syntastic_perl_checkers = ['perl']
 
 "CSV
 "highlight selected column
 let g:csv_highlight_column = 'y'
-
 hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
 hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
 
@@ -124,28 +144,15 @@ let $RUST_SRC_PATH="/home/kyle/.rust"
 map <Leader> <Plug>(easymotion-prefix)
 
 ""nerdtree
-"map <C-n> :NERDTreeToggle<CR>
-"vim-expand=region settings
+map <C-n> :NERDTreeToggle<CR>
+
+
 "this maps it so i can use multiple 'v's to add to visuall mode
 vmap v <Plug>(expand_region_expand)
 "vmap <C-v> <Plug>(expand_region_shrink)
 
-set omnifunc=syntaxcomplete#Complete
 
-" invoke with '-'
-nmap  -  <Plug>(choosewin)
-" if you want to use overlay feature
-let g:choosewin_overlay_enable = 1
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-"let g:UltiSnipsEditSplit="vertical"
-
-"set colorscheme stuff
+"set colorscheme
 set background=dark
 colorscheme gruvbox
 
@@ -160,16 +167,6 @@ endif
 let g:w3m#homepage = "https://duckduckgo.com"
 let g:w3m#hit_a_hint_key = 'f'
 let g:w3m#search_engine = "https://duckduckgo.com/?q="
-"""""""""""""""""""
-"      Tabs	  "
-"""""""""""""""""""
-
-" Smart way to move between windows
-map <C-j> <C-W>j a
-map <C-k> <C-W>k a 
-map <C-h> <C-W>h a
-map <C-l> <C-W>l a
-
 
 """""""""""""""""""""""""
 "	NeoVim		"
