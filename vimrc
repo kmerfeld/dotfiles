@@ -19,6 +19,9 @@ Plug 'racer-rust/vim-racer'
 Plug 'kablamo/vim-git-log'
 Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+
 "The following block is for NeoVim plugins
 "or ones that have dependencies i cannot assume every machine
 "will have
@@ -104,6 +107,8 @@ hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
 hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
 
 
+"vim-notes
+let g:notes_directories = ['~/ownCloud/homework/notes']
 
 "Rust autoformat
 let g:rustfmt_autosave = 1
@@ -165,18 +170,20 @@ map <C-k> <C-W>k a
 map <C-h> <C-W>h a
 map <C-l> <C-W>l a
 
-" Useful mappings for managing tabs
+
+"""""""""""""""""""""""""
+"	NeoVim		"
+"""""""""""""""""""""""""
+
 if has('nvim')
 	map <leader>v :vnew<cr>
 	map <leader>h :new<cr>
 	map <leader>x :bd<cr>
 	map <leader>t :terminal<cr>
+	tnoremap <Esc> <C-\><C-n>
+
 endif
 
-
-"""""""""""""""""""""""""
-"	NeoVim		"
-"""""""""""""""""""""""""
 
 "https://medium.com/@garoth/neovim-terminal-usecases-tricks-8961e5ac19b9#.ph8fxpnhk
 " Window split settings
