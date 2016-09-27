@@ -128,7 +128,10 @@ hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
 
 
 "vim-notes
+"sets note location
 let g:notes_directories = ['~/ownCloud/homework/notes']
+"disables tab indent
+let g:notes_tab_indents = 0
 
 "Rust autoformat
 let g:rustfmt_autosave = 1
