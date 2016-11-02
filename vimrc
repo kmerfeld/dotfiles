@@ -3,6 +3,8 @@
 """""""""""""""""""
 "   Plug plugins  "
 """""""""""""""""""
+
+:so /home/kyle/.vim/unicodemacros_0.1/unicodemacros.vim
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-expand-region'
@@ -20,6 +22,12 @@ Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'wikitopian/hardmode'
+Plug 'vimwiki/vimwiki'
+Plug 'mattn/calendar-vim'
+Plug 'chrisbra/unicode.vim'
 "The following block is for NeoVim plugins or ones that have dependencies 
 "that i cannot assume every machine will have
 if has ('nvim')
@@ -38,6 +46,7 @@ call plug#end()
 filetype plugin indent on
 set encoding=utf-8
 
+
 "bind 'jk' to escape
 inoremap jk <ESC>
 
@@ -51,11 +60,14 @@ set foldlevel=99
 "Set vim to 256 color mode
 set t_Co=256
 
+"set tab space to 4 
+set ts=4
+
 "set syntax highlighting
 syntax enable
 
 "Turns on autoComplete
-set omnifunc=syntaxcomplete#Complete
+"set omnifunc=syntaxcomplete#Complete
 
 "Line wrap type stuff
 set wrap
@@ -91,7 +103,6 @@ autocmd BufReadPost *
 			\ if line("'\"") > 0 && line("'\"") <= line("$") |
 			\   exe "normal! g`\"" |
 			\ endif"
-
 " Set 81st column to be highlighted
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
@@ -108,6 +119,17 @@ map <C-l> <C-W>l a
 """""""""""""""""""
 "     plugins     "
 """""""""""""""""""
+
+"vim-hardmode
+"enable by default
+"autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+"toggle hardmode with <leader>h
+nnoremap <leader>m <Esc>:call ToggleHardMode()<CR>
+
+"vimwiki
+let g:vimwiki_folding='expr'
+let g:vimwiki_list = [{'path':'$HOME/ownCloud/wiki', 'path_html':'$HOME/ownCloud/wiki/html/'}]
+
 
 "syntastic
 set statusline+=%#warningmsg#
@@ -159,17 +181,22 @@ vmap v <Plug>(expand_region_expand)
 set background=dark
 colorscheme gruvbox
 
-if has ('nvim')
-	"deoplete.
-	let g:deoplete#enable_at_startup = 1
-	autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
-	autocmd CompleteDone * pclose " To close preview window of deoplete automagically
-endif
+"if has ('nvim')
+"	"deoplete.
+"	let g:deoplete#enable_at_startup = 1
+"		autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
+"	autocmd CompleteDone * pclose " To close preview window of deoplete automagically
+"endif
 
-"w3m.vim
-let g:w3m#homepage = "https://duckduckgo.com"
-let g:w3m#hit_a_hint_key = 'f'
-let g:w3m#search_engine = "https://duckduckgo.com/?q="
+
+"Utilisnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
 
 """""""""""""""""""""""""
 "	NeoVim		"
