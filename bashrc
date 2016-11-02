@@ -23,6 +23,7 @@ set -o vi
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
+
 tempvarignore="$(cat /etc/*-release | grep ID_LIKE)"
 if [[ $tempvarignore == "ID_LIKE=\"arch\"" ]]
 then
