@@ -14,7 +14,7 @@ files="taskrc i3 bashrc vimrc vim tmux.conf xinitrc Xdefaults Xresources"     # 
 config_folder="termite"
 #These will be installed if you are running arch (with AUR support)
 toInstall="python-pip ttf-hack termite pass tmux dmenu vim neovim i3 task"
-pipInstall="pytest"
+pipInstall="pytest neovim"
 
 
 

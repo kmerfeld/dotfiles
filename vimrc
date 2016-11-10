@@ -28,6 +28,7 @@ Plug 'wikitopian/hardmode'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/calendar-vim'
 Plug 'chrisbra/unicode.vim'
+Plug 'floobits/floobits-neovim'
 "The following block is for NeoVim plugins or ones that have dependencies 
 "that i cannot assume every machine will have
 if has ('nvim')
@@ -59,9 +60,6 @@ set foldlevel=99
 
 "Set vim to 256 color mode
 set t_Co=256
-
-"set tab space to 4 
-set ts=4
 
 "set syntax highlighting
 syntax enable
