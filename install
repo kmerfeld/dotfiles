@@ -17,8 +17,6 @@ toInstall="python-pip ttf-hack termite pass tmux dmenu vim neovim i3 task"
 pipInstall="pytest neovim"
 
 
-
-
 ##########################
 # linking config scripts #
 ##########################
@@ -113,3 +111,19 @@ then
 	pip3 install $pipInstall
 
 fi
+
+#######################
+# arch specific stuff #
+#######################
+
+#if the rust flag is enabled
+if [[ $1 == "rust" ]]
+then
+	sudo pacman -S rustup
+	cargo install racer
+	rustup update stable
+	rustup defualt stable
+	rustup component add rust-src
+
+fi
+
