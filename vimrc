@@ -4,7 +4,11 @@
 "   Plug plugins  "
 """""""""""""""""""
 
+
+"This pluggin didnt have a git repo, and probably doesn need updates. So i
+"just keep it in my dotfiles folder and load it here
 :so /home/kyle/.vim/unicodemacros_0.1/unicodemacros.vim
+
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-expand-region'
@@ -15,20 +19,19 @@ Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/csv.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
-Plug 'wting/rust.vim'
-Plug 'racer-rust/vim-racer'
+Plug 'rust-lang/rust.vim'
+"Plug 'racer-rust/vim-racer'
 Plug 'kablamo/vim-git-log'
 Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'wikitopian/hardmode'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/calendar-vim'
 Plug 'chrisbra/unicode.vim'
-Plug 'floobits/floobits-neovim'
+Plug 'kien/ctrlp.vim'
+"Plug 'floobits/floobits-neovim'
 "The following block is for NeoVim plugins or ones that have dependencies 
 "that i cannot assume every machine will have
 if has ('nvim')
@@ -44,6 +47,12 @@ call plug#end()
 """""""""""""""""""
 "    Settings	  "
 """""""""""""""""""
+
+"make swap files less anoying
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+
 filetype plugin indent on
 set encoding=utf-8
 
@@ -139,6 +148,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl']
+let g:systastic_rust_checkers = 1
 
 "CSV
 "highlight selected column
@@ -147,19 +157,14 @@ hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
 hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
 
 
-"vim-notes
-"sets note location
-let g:notes_directories = ['~/ownCloud/homework/notes']
-"disables tab indent
-let g:notes_tab_indents = 0
 
 "Rust autoformat
 let g:rustfmt_autosave = 1
 
 "rust-racer
 set hidden
-let g:racer_cmd = "~/.cargo/bin/racer"
-let $RUST_SRC_PATH="/home/kyle/.rust"
+"let g:racer_cmd ="~/dotiles/vim/plugged/vim-racer"
+"let $RUST_SRC_PATH="/usr/share/doc/rust/html/src"
 
 
 
