@@ -7,7 +7,7 @@
 
 "This pluggin didnt have a git repo, and probably doesn need updates. So i
 "just keep it in my dotfiles folder and load it here
-:so /home/kyle/.vim/unicodemacros_0.1/unicodemacros.vim
+:so ~/.vim/unicodemacros_0.1/unicodemacros.vim
 
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
