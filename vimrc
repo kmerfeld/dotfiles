@@ -4,11 +4,11 @@
 "   Plug plugins  "
 """""""""""""""""""
 
-
 "This pluggin didnt have a git repo, and probably doesn need updates. So i
 "just keep it in my dotfiles folder and load it here
 :so ~/.vim/unicodemacros_0.1/unicodemacros.vim
 
+"Here are the bulk of my pluggins
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-expand-region'
@@ -41,6 +41,89 @@ if has ('nvim')
 	Plug 'blindFS/vim-taskwarrior'
 endif
 call plug#end()
+
+
+"""""""""""""""""""
+"     plugins     "
+"""""""""""""""""""
+
+"vim-hardmode
+"enable by default
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+"toggle hardmode with <leader>h
+nnoremap <leader>m <Esc>:call ToggleHardMode()<CR>
+
+"vimwiki
+let g:vimwiki_folding='expr'
+let g:vimwiki_list = [{'path':'$HOME/ownCloud/wiki', 'path_html':'$HOME/ownCloud/wiki/html/'}]
+
+
+"syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_perl_checker = 1
+let g:syntastic_perl_checkers = ['perl']
+let g:systastic_rust_checkers = 1
+
+"CSV
+"highlight selected column
+let g:csv_highlight_column = 'y'
+hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
+hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
+
+
+
+"Rust autoformat
+let g:rustfmt_autosave = 1
+
+"rust-racer
+set hidden
+"let g:racer_cmd ="~/dotiles/vim/plugged/vim-racer"
+"let $RUST_SRC_PATH="/usr/share/doc/rust/html/src"
+
+
+
+"easymotion
+"<Leader> s pulls up hints
+"<Leader> w pulls up hints for words
+map <Leader> <Plug>(easymotion-prefix)
+
+""nerdtree
+map <C-n> :NERDTreeToggle<CR>
+
+
+"this maps it so i can use multiple 'v's to add to visuall mode
+vmap v <Plug>(expand_region_expand)
+"vmap <C-v> <Plug>(expand_region_shrink)
+
+
+"set colorscheme
+set background=dark
+colorscheme gruvbox
+
+
+"This stuff is disabled because it is too slow on my chromebook
+"if has ('nvim')
+"	"deoplete.
+"	let g:deoplete#enable_at_startup = 1
+"		autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
+"	autocmd CompleteDone * pclose " To close preview window of deoplete automagically
+"endif
+
+
+"Utilisnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
 
 
 
@@ -138,89 +221,6 @@ map <C-k> <C-W>k a
 map <C-h> <C-W>h a
 map <C-l> <C-W>l a
 
-
-
-"""""""""""""""""""
-"     plugins     "
-"""""""""""""""""""
-
-"vim-hardmode
-"enable by default
-"autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-"toggle hardmode with <leader>h
-nnoremap <leader>m <Esc>:call ToggleHardMode()<CR>
-
-"vimwiki
-let g:vimwiki_folding='expr'
-let g:vimwiki_list = [{'path':'$HOME/ownCloud/wiki', 'path_html':'$HOME/ownCloud/wiki/html/'}]
-
-
-"syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_perl_checker = 1
-let g:syntastic_perl_checkers = ['perl']
-let g:systastic_rust_checkers = 1
-
-"CSV
-"highlight selected column
-let g:csv_highlight_column = 'y'
-hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
-hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
-
-
-
-"Rust autoformat
-let g:rustfmt_autosave = 1
-
-"rust-racer
-set hidden
-"let g:racer_cmd ="~/dotiles/vim/plugged/vim-racer"
-"let $RUST_SRC_PATH="/usr/share/doc/rust/html/src"
-
-
-
-"easymotion
-"<Leader> s pulls up hints
-"<Leader> w pulls up hints for words
-map <Leader> <Plug>(easymotion-prefix)
-
-""nerdtree
-map <C-n> :NERDTreeToggle<CR>
-
-
-"this maps it so i can use multiple 'v's to add to visuall mode
-vmap v <Plug>(expand_region_expand)
-"vmap <C-v> <Plug>(expand_region_shrink)
-
-
-"set colorscheme
-set background=dark
-colorscheme gruvbox
-
-
-"This stuff is disabled because it is too slow on my chromebook
-"if has ('nvim')
-"	"deoplete.
-"	let g:deoplete#enable_at_startup = 1
-"		autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
-"	autocmd CompleteDone * pclose " To close preview window of deoplete automagically
-"endif
-
-
-"Utilisnips
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-"let g:UltiSnipsEditSplit="vertical"
 
 """""""""""""""""""""""""
 "	NeoVim		"
