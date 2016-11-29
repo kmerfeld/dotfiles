@@ -48,6 +48,21 @@ call plug#end()
 "    Settings	  "
 """""""""""""""""""
 
+" For regular expressions turn magic on
+set magic
+
+set smarttab
+
+set ai "Auto indent
+set si "Smart indent
+
+
+let g:airline#extensions#tabline#enabled = 1 
+
+
+" Useful mappings for managing tabs
+map tn :tabnew<cr>
+
 "make swap files less anoying
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
@@ -169,6 +184,8 @@ set hidden
 
 
 "easymotion
+"<Leader> s pulls up hints
+"<Leader> w pulls up hints for words
 map <Leader> <Plug>(easymotion-prefix)
 
 ""nerdtree
@@ -184,6 +201,8 @@ vmap v <Plug>(expand_region_expand)
 set background=dark
 colorscheme gruvbox
 
+
+"This stuff is disabled because it is too slow on my chromebook
 "if has ('nvim')
 "	"deoplete.
 "	let g:deoplete#enable_at_startup = 1

@@ -1,1 +1,1 @@
-/home/kmerfeld/.vimrc
+/home/kyle/.vimrc
