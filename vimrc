@@ -56,6 +56,8 @@ set smarttab
 set ai "Auto indent
 set si "Smart indent
 
+"disable tmux bar when in vim
+autocmd VimEnter,VimLeave * silent !tmux set status
 
 let g:airline#extensions#tabline#enabled = 1 
 
