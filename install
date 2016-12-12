@@ -81,7 +81,6 @@ sudo pip install --upgrade git+git://github.com/tbabej/tasklib@develop
 if [[ -f /etc/pacman.conf ]] 
 then
 	# install neovim python interface
-	 sudo pip3 install neovim
 	#install pacaur
 	w="$(which pacaur)"
 	if [[ $w != /usr/bin/pacaur  ]]  

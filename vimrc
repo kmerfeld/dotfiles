@@ -38,9 +38,12 @@ if has ('nvim')
 	Plug 'davidhalter/jedi-vim'
 	Plug 'floobits/floobits-neovim'
 	Plug 'zchee/deoplete-jedi'
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'blindFS/vim-taskwarrior'
 	Plug 'tbabej/taskwiki'
+
+
+	"This one updates plugins, keep it last
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 call plug#end()
 
@@ -59,7 +62,7 @@ nnoremap <leader>m <Esc>:call ToggleHardMode()<CR>
 let g:vimwiki_folding='expr'
 let g:vimwiki_list = [{'path':'$HOME/ownCloud/wiki', 'path_html':'$HOME/ownCloud/wiki/html/'}]
 let g:vimwiki_hl_headers = 1
-let g:vimwiki_listsyms = ' ○◐●✓'
+"let g:vimwiki_listsyms = ' ○◐●✓'
 
 "syntastic
 set statusline=%#warningmsg#
