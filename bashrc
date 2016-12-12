@@ -25,10 +25,12 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 
 tempvarignore="$(cat /etc/*-release | grep ID_LIKE)"
-if [[ $tempvarignore == "ID_LIKE=\"arch\"" ]]
+tempvarignore2="$(cat /etc/*-release | grep DISTRIB_ID)"
+if [[ $tempvarignore == "ID_LIKE=\"arch\"" ]] || [[ $tempvarignore2 -eq "DISTRUB_ID=Arch" ]]
 then
 	alias pacuar="pacaur"
 	alias pacman-clean=" sudo  pacman -Rns $(pacman -Qtdq); sudo pacman -Sc"
 	alias vim="nvim"
 	alias vi="/usr/bin/vim"
+	alias git-shove="git add .;git commit . -m notes; git push"
 fi
