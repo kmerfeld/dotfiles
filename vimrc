@@ -39,6 +39,7 @@ if has ('nvim')
 	Plug 'zchee/deoplete-jedi'
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'blindFS/vim-taskwarrior'
+	Plug 'tbabej/taskwiki'
 endif
 call plug#end()
 
