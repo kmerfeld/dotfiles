@@ -92,11 +92,19 @@ set hidden
 
 
 "easymotion
-"<Leader> s pulls up hints
-"<Leader> w pulls up hints for words
+let g:EasyMotion_leader_key = '<Leader>' 
 map <Leader> <Plug>(easymotion-prefix)
 
-""nerdtree
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+
+
+"nerdtree
 map <C-n> :NERDTreeToggle<CR>
 
 
@@ -114,7 +122,7 @@ colorscheme gruvbox
 if has ('nvim')
 	"deoplete.
 	let g:deoplete#enable_at_startup = 1
-		autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
+	autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
 	autocmd CompleteDone * pclose " To close preview window of deoplete automagically
 endif
 
@@ -239,11 +247,11 @@ map <leader>h :new<cr>
 map <leader>x :bd<cr>
 "Note: this one only will work with neovim
 map <leader>g :terminal<cr> 
- 
- 
- """""""""""""""""""""""""
- "	NeoVim		"
- """""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""
+"	NeoVim		"
+"""""""""""""""""""""""""
 
 if has('nvim')
 	map <leader>v :vnew<cr>
@@ -255,6 +263,6 @@ if has('nvim')
 endif
 
 
- "https://medium.com/@garoth/neovim-terminal-usecases-tricks-8961e5ac19b9#.ph8fxpnhk
- " Window split settings
- highlight TermCursor ctermfg=red guifg=red
+"https://medium.com/@garoth/neovim-terminal-usecases-tricks-8961e5ac19b9#.ph8fxpnhk
+" Window split settings
+highlight TermCursor ctermfg=red guifg=red
