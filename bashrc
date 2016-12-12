@@ -32,4 +32,5 @@ then
 	alias pacman-clean=" sudo  pacman -Rns $(pacman -Qtdq); sudo pacman -Sc"
 	alias vim="nvim"
 	alias vi="/usr/bin/vim"
+	alias git-shove="git add .;git commit . -m notes; git push"
 fi

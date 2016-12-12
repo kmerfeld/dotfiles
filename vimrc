@@ -31,11 +31,12 @@ Plug 'vimwiki/vimwiki'
 Plug 'mattn/calendar-vim'
 Plug 'chrisbra/unicode.vim'
 Plug 'kien/ctrlp.vim'
-"Plug 'floobits/floobits-neovim'
+
 "The following block is for NeoVim plugins or ones that have dependencies 
 "that i cannot assume every machine will have
 if has ('nvim')
 	Plug 'davidhalter/jedi-vim'
+	Plug 'floobits/floobits-neovim'
 	Plug 'zchee/deoplete-jedi'
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'blindFS/vim-taskwarrior'
@@ -56,7 +57,8 @@ nnoremap <leader>m <Esc>:call ToggleHardMode()<CR>
 "vimwiki
 let g:vimwiki_folding='expr'
 let g:vimwiki_list = [{'path':'$HOME/ownCloud/wiki', 'path_html':'$HOME/ownCloud/wiki/html/'}]
-
+let g:vimwiki_hl_headers = 1
+let g:vimwiki_listsyms = ' ○◐●✓'
 
 "syntastic
 set statusline=%#warningmsg#
@@ -108,22 +110,22 @@ colorscheme gruvbox
 
 
 "This stuff is disabled because it is too slow on my chromebook
-"if has ('nvim')
-"	"deoplete.
-"	let g:deoplete#enable_at_startup = 1
-"		autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
-"	autocmd CompleteDone * pclose " To close preview window of deoplete automagically
-"endif
+if has ('nvim')
+	"deoplete.
+	let g:deoplete#enable_at_startup = 1
+		autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
+	autocmd CompleteDone * pclose " To close preview window of deoplete automagically
+endif
 
 
-"Utilisnips
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"utilisnips
+"Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
-"let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEditSplit="vertical"
 
 
 
