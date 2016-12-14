@@ -28,9 +28,9 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'wikitopian/hardmode'
 Plug 'vimwiki/vimwiki'
-Plug 'mattn/calendar-vim'
 Plug 'chrisbra/unicode.vim'
 Plug 'kien/ctrlp.vim'
+Plug 'itchyny/calendar.vim'
 
 "The following block is for NeoVim plugins or ones that have dependencies 
 "that i cannot assume every machine will have
@@ -57,9 +57,13 @@ nnoremap <leader>m <Esc>:call ToggleHardMode()<CR>
 
 "vimwiki
 let g:vimwiki_folding='expr'
-let g:vimwiki_list = [{'path':'$HOME/ownCloud/wiki', 'path_html':'$HOME/ownCloud/wiki/html/'}]
+let g:vimwiki_list = [{
+	\ 'path': '$HOME/ownCloud/wiki',
+	\ 'path_html': '$HOME/ownCloud/wiki/html/',
+	\ 'template_path': '$HOME/dotfiles/vimwiki/templates/',
+  	\ 'template_default': 'default',
+  	\ 'template_ext': '.html'}]
 let g:vimwiki_hl_headers = 1
-let g:vimwiki_listsyms = ' ○◐●✓'
 
 "syntastic
 set statusline=%#warningmsg#
@@ -72,6 +76,10 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl']
 let g:systastic_rust_checkers = 1
+
+"Calender
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
 
 "CSV
 "highlight selected column
