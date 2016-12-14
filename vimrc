@@ -38,9 +38,12 @@ if has ('nvim')
 	Plug 'davidhalter/jedi-vim'
 	Plug 'floobits/floobits-neovim'
 	Plug 'zchee/deoplete-jedi'
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'blindFS/vim-taskwarrior'
 	Plug 'tbabej/taskwiki'
+
+
+	"This one updates plugins, keep it last
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 call plug#end()
 
