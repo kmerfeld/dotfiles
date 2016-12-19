@@ -6,7 +6,7 @@
 
 "This pluggin didnt have a git repo, and probably doesn need updates. So i
 "just keep it in my dotfiles folder and load it here
-:so ~/.vim/unicodemacros_0.1/unicodemacros.vim
+":so ~/.vim/unicodemacros_0.1/unicodemacros.vim
 
 "Here are the bulk of my pluggins
 call plug#begin('~/.vim/plugged')
@@ -35,15 +35,15 @@ Plug 'itchyny/calendar.vim'
 "The following block is for NeoVim plugins or ones that have dependencies 
 "that i cannot assume every machine will have
 if has ('nvim')
-	Plug 'davidhalter/jedi-vim'
-	Plug 'floobits/floobits-neovim'
-	Plug 'zchee/deoplete-jedi'
-	Plug 'blindFS/vim-taskwarrior'
-	Plug 'tbabej/taskwiki'
+    Plug 'davidhalter/jedi-vim'
+    Plug 'floobits/floobits-neovim'
+    Plug 'zchee/deoplete-jedi'
+    Plug 'blindFS/vim-taskwarrior'
+    "Plug 'tbabej/taskwiki'
 
 
-	"This one updates plugins, keep it last
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    "This one updates plugins, keep it last
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 call plug#end()
 
@@ -61,12 +61,19 @@ nnoremap <leader>m <Esc>:call ToggleHardMode()<CR>
 "vimwiki
 let g:vimwiki_folding='expr'
 let g:vimwiki_list = [{
-	\ 'path': '$HOME/ownCloud/wiki',
-	\ 'path_html': '$HOME/ownCloud/wiki/html/',
-	\ 'template_path': '$HOME/dotfiles/vimwiki/templates/',
-  	\ 'template_default': 'default',
-  	\ 'template_ext': '.html'}]
+            \ 'path': '$HOME/ownCloud/wiki',
+            \ 'path_html': '$HOME/ownCloud/wiki/html/',
+            \ 'template_path': '$HOME/dotfiles/vimwiki/templates/',
+            \ 'template_default': 'default',
+            \ 'template_ext': '.html'}]
 let g:vimwiki_hl_headers = 1
+let g:vimwiki_auto_tags = 1
+let g:vimwiki_auto_toc = 1
+let g:vimwiki_auto_export = 0
+let g:vimwiki_hl_cb_checked = 1
+"will place a timestamp with f3
+"https://box.matto.nl/systemnotesvimwiki.html
+map <F3> :r! date +"\%Y-\%m-\%d \%H:\%M:\%S"<ESC>0=j    
 
 "syntastic
 set statusline=%#warningmsg#
@@ -131,10 +138,10 @@ colorscheme gruvbox
 
 "This stuff is disabled because it is too slow on my chromebook
 if has ('nvim')
-	"deoplete.
-	let g:deoplete#enable_at_startup = 1
-	autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
-	autocmd CompleteDone * pclose " To close preview window of deoplete automagically
+    "deoplete.
+    let g:deoplete#enable_at_startup = 1
+    autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
+    autocmd CompleteDone * pclose " To close preview window of deoplete automagically
 endif
 
 
@@ -153,22 +160,27 @@ let g:UltiSnipsEditSplit="vertical"
 "    Settings	  "
 """""""""""""""""""
 
+"Tab stuff
 " For regular expressions turn magic on
 set magic
-
 set smarttab
-
-set ai "Auto indent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+set cindent
+set scrolloff=2
+set list lcs=trail:·,tab:»·
 set si "Smart indent
 
-"disable tmux bar when in vim
+"toggle tmux bar when entering vim
 autocmd VimEnter,VimLeave * silent !tmux set status
 
+"tab bar along top
 let g:airline#extensions#tabline#enabled = 1 
 
 
-" Useful mappings for managing tabs
-map tn :tabnew<cr>
 
 "make swap files less anoying
 set backupdir=~/.vim/backup//
@@ -177,7 +189,6 @@ set undodir=~/.vim/undo//
 
 filetype plugin indent on
 set encoding=utf-8
-
 
 "bind 'jk' to escape
 inoremap jk <ESC>
@@ -196,7 +207,7 @@ set t_Co=256
 syntax enable
 
 "Turns on autoComplete
-"set omnifunc=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 
 "Line wrap type stuff
 set wrap
@@ -229,9 +240,10 @@ set showcmd
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
-			\ if line("'\"") > 0 && line("'\"") <= line("$") |
-			\   exe "normal! g`\"" |
-			\ endif"
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif"
+
 " Set 81st column to be highlighted
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
@@ -265,15 +277,15 @@ map <leader>g :terminal<cr>
 """""""""""""""""""""""""
 
 if has('nvim')
-	map <leader>v :vnew<cr>
-	map <leader>h :new<cr>
-	map <leader>x :bd<cr>
-	map <leader>t :terminal<cr>
-	tnoremap <Esc> <C-\><C-n>
+    map <leader>v :vnew<cr>
+    map <leader>h :new<cr>
+    map <leader>x :bd<cr>
+    map <leader>t :terminal<cr>
+    tnoremap <Esc> <C-\><C-n>
 
 endif
 
-
+    
 "https://medium.com/@garoth/neovim-terminal-usecases-tricks-8961e5ac19b9#.ph8fxpnhk
 " Window split settings
 highlight TermCursor ctermfg=red guifg=red
