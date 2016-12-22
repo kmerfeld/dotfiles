@@ -1,5 +1,10 @@
 "Kyle Merfeld's vimrc
 
+
+"sets <leader> to space 
+let mapleader = "\<Space>"
+
+
 """""""""""""""""""
 "   Plug plugins  "
 """""""""""""""""""
@@ -31,6 +36,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'chrisbra/unicode.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'itchyny/calendar.vim'
+Plug 'powerline/powerline'
 
 "The following block is for NeoVim plugins or ones that have dependencies 
 "that i cannot assume every machine will have
@@ -160,6 +166,10 @@ let g:UltiSnipsEditSplit="vertical"
 "    Settings	  "
 """""""""""""""""""
 
+"give me another option to go to the beginning and end of a line
+nmap <leader>a ^
+nmap <leader>; $
+
 "Tab stuff
 " For regular expressions turn magic on
 set magic
@@ -205,7 +215,7 @@ set t_Co=256
 
 "set syntax highlighting
 syntax enable
-
+ 
 "Turns on autoComplete
 set omnifunc=syntaxcomplete#Complete
 
@@ -213,9 +223,6 @@ set omnifunc=syntaxcomplete#Complete
 set wrap
 set linebreak
 set nolist  " list disables linebreak
-
-"sets <leader> to space 
-let mapleader = "\<Space>"
 
 " Set show matching parenthesis
 set showmatch                       	
@@ -271,6 +278,11 @@ map <leader>x :bd<cr>
 "Note: this one only will work with neovim
 map <leader>g :terminal<cr> 
 
+"Set the current line to be highlighted black
+"Black because it doesnt interfere with my colorscheme,
+"and I have this so that it is easyer to see where I am
+set cursorline
+highlight  CursorLine ctermbg=black
 
 """""""""""""""""""""""""
 "	NeoVim		"
@@ -285,7 +297,7 @@ if has('nvim')
 
 endif
 
-    
+
 "https://medium.com/@garoth/neovim-terminal-usecases-tricks-8961e5ac19b9#.ph8fxpnhk
 " Window split settings
 highlight TermCursor ctermfg=red guifg=red
