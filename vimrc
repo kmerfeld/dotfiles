@@ -61,8 +61,8 @@ nnoremap <leader>m <Esc>:call ToggleHardMode()<CR>
 "vimwiki
 let g:vimwiki_folding='expr'
 let g:vimwiki_list = [{
-            \ 'path': '$HOME/ownCloud/wiki',
-            \ 'path_html': '$HOME/ownCloud/wiki/html/',
+            \ 'path': '$HOME/Nextcloud/wiki',
+            \ 'path_html': '$HOME/Nextcloud/wiki/html/',
             \ 'template_path': '$HOME/dotfiles/vimwiki/templates/',
             \ 'template_default': 'default',
             \ 'template_ext': '.html'}]
