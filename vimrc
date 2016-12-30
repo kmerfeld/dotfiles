@@ -25,7 +25,7 @@ Plug 'chrisbra/csv.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
 Plug 'rust-lang/rust.vim'
-"Plug 'racer-rust/vim-racer'
+Plug 'racer-rust/vim-racer'
 Plug 'kablamo/vim-git-log'
 Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
@@ -66,12 +66,21 @@ nnoremap <leader>m <Esc>:call ToggleHardMode()<CR>
 
 "vimwiki
 let g:vimwiki_folding='expr'
-let g:vimwiki_list = [{
-            \ 'path': '$HOME/Nextcloud/wiki',
-            \ 'path_html': '$HOME/Nextcloud/wiki/html/',
-            \ 'template_path': '$HOME/dotfiles/vimwiki/templates/',
-            \ 'template_default': 'default',
-            \ 'template_ext': '.html'}]
+
+            let wiki = {}
+            let wiki.path ='$HOME/Nextcloud/wiki' 
+            let wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
+            let wiki.template_default = 'default'
+            let wiki.template_ext = '.html'
+ 
+            let work_wiki = {}
+            let work_wiki.path ='$HOME/Nextcloud/work_wiki' 
+            let work_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
+            let work_wiki.template_default = 'default'
+            let work_wiki.template_ext = '.html'
+                       
+let g:vimwiki_list = [wiki, work_wiki]
+
 let g:vimwiki_hl_headers = 1
 let g:vimwiki_auto_tags = 1
 let g:vimwiki_auto_toc = 1
@@ -110,8 +119,8 @@ let g:rustfmt_autosave = 1
 
 "rust-racer
 set hidden
-"let g:racer_cmd ="~/dotiles/vim/plugged/vim-racer"
-"let $RUST_SRC_PATH="/usr/share/doc/rust/html/src"
+let g:racer_cmd ="~/dotiles/vim/plugged/vim-racer"
+let $RUST_SRC_PATH="/usr/share/doc/rust/html/src"
 
 
 
