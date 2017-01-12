@@ -37,12 +37,11 @@ Plug 'chrisbra/unicode.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'itchyny/calendar.vim'
 Plug 'powerline/powerline'
-
+Plug 'ryanss/vim-hackernews'
 "The following block is for NeoVim plugins or ones that have dependencies 
 "that i cannot assume every machine will have
 if has ('nvim')
     Plug 'davidhalter/jedi-vim'
-    Plug 'floobits/floobits-neovim'
     Plug 'zchee/deoplete-jedi'
     Plug 'blindFS/vim-taskwarrior'
     "Plug 'tbabej/taskwiki'
@@ -78,8 +77,15 @@ let g:vimwiki_folding='expr'
             let work_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
             let work_wiki.template_default = 'default'
             let work_wiki.template_ext = '.html'
+  
+            let school_wiki = {}
+            let school_wiki.path ='$HOME/Nextcloud/school_wiki' 
+            let school_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
+            let school_wiki.template_default = 'default'
+            let school_wiki.template_ext = '.html'
                        
-let g:vimwiki_list = [wiki, work_wiki]
+                      
+let g:vimwiki_list = [wiki, work_wiki, school_wiki]
 
 let g:vimwiki_hl_headers = 1
 let g:vimwiki_auto_tags = 1
