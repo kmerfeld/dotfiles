@@ -84,17 +84,22 @@ let g:vimwiki_folding='expr'
             let school_wiki.template_default = 'default'
             let school_wiki.template_ext = '.html'
                        
-                      
-let g:vimwiki_list = [wiki, work_wiki, school_wiki]
+            let capstone_wiki = {}
+            let capstone_wiki.path ='$HOME/Nextcloud/capstone_wiki' 
+            let capstone_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
+            let capstone_wiki.template_default = 'default'
+            let capstone_wiki.template_ext = '.html'
+let g:vimwiki_list = [wiki, work_wiki, school_wiki, capstone_wiki]
 
 let g:vimwiki_hl_headers = 1
 let g:vimwiki_auto_tags = 1
 let g:vimwiki_auto_toc = 1
 let g:vimwiki_auto_export = 0
 let g:vimwiki_hl_cb_checked = 1
+
 "will place a timestamp with f3
 "https://box.matto.nl/systemnotesvimwiki.html
-map <F3> :r! date +"\%Y-\%m-\%d \%H:\%M:\%S"<ESC>0=j    
+map <F3> :r! date +"\%Y-\%m-\%d \%H:\%M:\%S"<ESC>0j    
 
 "syntastic
 set statusline=%#warningmsg#
