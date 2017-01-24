@@ -9,8 +9,7 @@
 export EDITOR=vim
 
 #this makes it run with 256 colors
-export TERM="xterm-256color"
-
+export TERM=screen-256color-bce
 #colorize ls
 alias ls='ls --color=auto'
 
@@ -27,7 +26,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 if [[ -f /etc/pacman.conf ]]
 then
 	alias pacuar="pacaur"
-	alias pacman-clean=" sudo  pacman -Rns $(pacman -Qtdq); sudo pacman -Sc"
+	alias pacman-clean=" sudo  pacman -Rns \$(pacman -Qtdq); sudo pacman -Sc"
 	alias vim="nvim"
 	alias vi="/usr/bin/vim"
 	alias git-shove="git add .;git commit . -m notes; git push"
