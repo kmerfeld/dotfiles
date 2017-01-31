@@ -15,7 +15,6 @@ let mapleader = "\<Space>"
 
 "Here are the bulk of my pluggins
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
@@ -30,22 +29,17 @@ Plug 'kablamo/vim-git-log'
 Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'wikitopian/hardmode'
 Plug 'vimwiki/vimwiki'
-Plug 'chrisbra/unicode.vim'
 Plug 'kien/ctrlp.vim'
-Plug 'itchyny/calendar.vim'
-Plug 'powerline/powerline'
 Plug 'ryanss/vim-hackernews'
+Plug 'nvie/vim-flake8'
 "The following block is for NeoVim plugins or ones that have dependencies 
 "that i cannot assume every machine will have
 if has ('nvim')
     Plug 'davidhalter/jedi-vim'
     Plug 'zchee/deoplete-jedi'
     Plug 'blindFS/vim-taskwarrior'
-    "Plug 'tbabej/taskwiki'
-
+    Plug 'tbabej/taskwiki'
 
     "This one updates plugins, keep it last
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -112,10 +106,6 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl']
 let g:systastic_rust_checkers = 1
-
-"Calender
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
 
 "CSV
 "highlight selected column
