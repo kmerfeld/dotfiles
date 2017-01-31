@@ -11,7 +11,9 @@
 exec --no-startup-id nextcloud
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift
-exec --no-startup-id /home/kyle/networkRefresh/networkRefresh
+exec --no-startup-id task sync
+exec --no-startup-id perl /home/kyle/networkRefresh/networkRefresh
+
 #set background
 exec --no-startup-id xsetroot -solid "#282828"
 
