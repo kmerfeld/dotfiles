@@ -39,7 +39,7 @@ if has ('nvim')
     Plug 'davidhalter/jedi-vim'
     Plug 'zchee/deoplete-jedi'
     Plug 'blindFS/vim-taskwarrior'
-    Plug 'tbabej/taskwiki'
+    "Plug 'tbabej/taskwiki'
 
     "This one updates plugins, keep it last
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
