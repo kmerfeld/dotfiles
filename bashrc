@@ -22,9 +22,11 @@ set -o vi
 
 export PATH="$HOME/dotfiles/scripts:$HOME/.cargo/bin:$PATH"
 
+
 # if we are running on arch
 if [[ -f /etc/pacman.conf ]]
 then
+    alias irc="mosh home -- tmux a -t IRC"
 	alias pacuar="pacaur"
 	alias pacman-clean=" sudo  pacman -Rns \$(pacman -Qtdq); sudo pacman -Sc"
 	alias vim="nvim"

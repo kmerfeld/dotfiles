@@ -16,7 +16,7 @@ fi
 #syndaemon -t -k -i 2 &
  
 #this will hide the cursor wihen not in use
-unclutter -idle 1 -jitter 2 -root &
+unclutter -idle 5 -jitter 2 -root &
 
 exec i3
 #exec mate-session

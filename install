@@ -15,6 +15,8 @@ config_folder="termite"
 #These will be installed if you are running arch (with AUR support)
 toInstall="unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3 task"
 
+pip="twisted argparse service_identity"
+
 
 ##########################
 # linking config scripts #
@@ -56,6 +58,8 @@ ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 
 # run vim first basic configs
 vim +PlugInstall +qa
+#https://github.com/tpope/vim-obsession
+vim -u NONE -c "helptags vim-obsession/doc" -c q
 
 #################
 # task certs	# 
@@ -105,6 +109,7 @@ then
 
 	#installing files
 	pacaur -S $toInstall --needed
+    sudo pip install $pip
 
 fi
 
@@ -122,4 +127,9 @@ then
 	rustup component add rust-src
 
 fi
+
+#######################
+#  get some git stuff #
+#######################
+git clone https://github.com/tmux-plugins/tmux-resurrect ~/dotfiles/git/tmux-resurrect
 

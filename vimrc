@@ -33,13 +33,14 @@ Plug 'vimwiki/vimwiki'
 Plug 'kien/ctrlp.vim'
 Plug 'ryanss/vim-hackernews'
 Plug 'nvie/vim-flake8'
+Plug 'tpope/vim-obsession'
 "The following block is for NeoVim plugins or ones that have dependencies 
 "that i cannot assume every machine will have
 if has ('nvim')
     Plug 'davidhalter/jedi-vim'
     Plug 'zchee/deoplete-jedi'
     Plug 'blindFS/vim-taskwarrior'
-    "Plug 'tbabej/taskwiki'
+"    Plug 'tbabej/taskwiki'
 
     "This one updates plugins, keep it last
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -50,13 +51,6 @@ call plug#end()
 """""""""""""""""""
 "     plugins     "
 """""""""""""""""""
-
-"vim-hardmode
-"enable by default
-"autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-"toggle hardmode with <leader>h
-nnoremap <leader>m <Esc>:call ToggleHardMode()<CR>
-
 "vimwiki
 let g:vimwiki_folding='expr'
 
