@@ -30,15 +30,17 @@ Plug 'ryanss/vim-hackernews'
 Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-obsession'
 Plug 'vim-latex/vim-latex'
+Plug 'dodie/vim-disapprove-deep-indentation'
+
 
 " The following block is for NeoVim plugins or ones that have dependencies 
 " that i cannot assume every machine will have
 if has ('nvim')
     Plug 'davidhalter/jedi-vim'
-    Plug 'zchee/deoplete-jedi'
     Plug 'blindFS/vim-taskwarrior'
-    Plug 'tbabej/taskwiki'
+    "Plug 'tbabej/taskwiki'
 
+    Plug 'zchee/deoplete-jedi'
     " This one updates plugins, keep it last
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
@@ -51,29 +53,29 @@ call plug#end()
 " vimwiki
 let g:vimwiki_folding='expr'
 
-            let wiki = {}
-            let wiki.path ='$HOME/Nextcloud/wiki' 
-            let wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
-            let wiki.template_default = 'default'
-            let wiki.template_ext = '.html'
- 
-            let work_wiki = {}
-            let work_wiki.path ='$HOME/Nextcloud/work_wiki' 
-            let work_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
-            let work_wiki.template_default = 'default'
-            let work_wiki.template_ext = '.html'
-  
-            let school_wiki = {}
-            let school_wiki.path ='$HOME/Nextcloud/school_wiki' 
-            let school_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
-            let school_wiki.template_default = 'default'
-            let school_wiki.template_ext = '.html'
-                       
-            let capstone_wiki = {}
-            let capstone_wiki.path ='$HOME/Nextcloud/capstone_wiki' 
-            let capstone_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
-            let capstone_wiki.template_default = 'default'
-            let capstone_wiki.template_ext = '.html'
+let wiki = {}
+let wiki.path ='$HOME/Nextcloud/wiki' 
+let wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
+let wiki.template_default = 'default'
+let wiki.template_ext = '.html'
+
+let work_wiki = {}
+let work_wiki.path ='$HOME/Nextcloud/work_wiki' 
+let work_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
+let work_wiki.template_default = 'default'
+let work_wiki.template_ext = '.html'
+
+let school_wiki = {}
+let school_wiki.path ='$HOME/Nextcloud/school_wiki' 
+let school_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
+let school_wiki.template_default = 'default'
+let school_wiki.template_ext = '.html'
+
+let capstone_wiki = {}
+let capstone_wiki.path ='$HOME/Nextcloud/capstone_wiki' 
+let capstone_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
+let capstone_wiki.template_default = 'default'
+let capstone_wiki.template_ext = '.html'
 let g:vimwiki_list = [wiki, work_wiki, school_wiki, capstone_wiki]
 
 let g:vimwiki_hl_headers = 1
@@ -211,7 +213,7 @@ set t_Co=256
 
 " set syntax highlighting
 syntax enable
- 
+
 " Turns on autoComplete
 set omnifunc=syntaxcomplete#Complete
 
