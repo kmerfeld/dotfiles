@@ -8,14 +8,15 @@
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+#Auto start programs
 exec --no-startup-id nextcloud
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift
 exec --no-startup-id task sync
-exec --no-startup-id perl /home/kyle/networkRefresh/networkRefresh
+exec --no-startup-id perl /home/kyle/dotfiles/scripts/networkRefresh/networkRefresh
 
-
-exec --no-startup-id i3-msg 'workspace 2; exec termite -e "mosh home -- tmux a -t IRC"'
+exec --no-startup-id i3-msg 'workspace 2; exec delayed-irc'
 exec --no-startup-id i3-msg 'workspace 1; exec termite'
 #set background
 exec --no-startup-id xsetroot -solid "#282828"
