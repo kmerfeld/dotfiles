@@ -7,11 +7,11 @@
 # Setup Variables #
 ###################
 dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
+olddir=~/old_dotfiles             # old dotfiles backup directory
 
 #these files will be copied to the home directory
 files="taskrc i3 bashrc vimrc vim tmux.conf xinitrc Xdefaults Xresources"     # list of files/folders to symlink in homedir
-config_folder="termite"
+config_folder="termite fish"
 #These will be installed if you are running arch (with AUR support)
 toInstall="unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3 task"
 
@@ -91,7 +91,8 @@ then
 
 	then 
 		#install cower (a dependancy of pacaur)
-		echo "installing cower" sudo pacman -S wget --needed base-devel 
+		echo "installing cower" 
+        sudo pacman -S wget --needed base-devel --noconfirm
 		cd /tmp
 		wget https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
 		tar -xvf cower.tar.gz
@@ -108,7 +109,7 @@ then
 	fi
 
 	#installing files
-	pacaur -S $toInstall --needed
+	pacaur -S $toInstall --needed --noconfirm
     sudo pip install $pip
 
 fi
@@ -120,7 +121,7 @@ fi
 #if the rust flag is enabled
 if [[ $1 == "rust" ]]
 then
-	sudo pacman -S rustup
+	sudo pacman -S rustup --noconfirm
 	cargo install racer
 	rustup update stable
 	rustup defualt stable
