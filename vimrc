@@ -31,6 +31,7 @@ Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-obsession'
 Plug 'vim-latex/vim-latex'
 Plug 'dodie/vim-disapprove-deep-indentation'
+Plug 'ludovicchabant/vim-gutentags'
 
 
 " The following block is for NeoVim plugins or ones that have dependencies 
@@ -50,6 +51,7 @@ call plug#end()
 """""""""""""""""""
 "  plugin config  "
 """""""""""""""""""
+
 " vimwiki
 let g:vimwiki_folding='expr'
 
@@ -189,6 +191,9 @@ autocmd VimEnter,VimLeave * silent !tmux set status
 let g:airline#extensions#tabline#enabled = 1 
 
 
+" :w!! 
+" write the file when you accidentally opened it without the right (root) privileges
+cmap w!! w !sudo tee % > /dev/null
 
 " make swap files less anoying
 set backupdir=~/.vim/backup//
