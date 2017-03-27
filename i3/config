@@ -14,9 +14,11 @@ exec --no-startup-id nextcloud
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift
 exec --no-startup-id task sync
-exec --no-startup-id perl /home/kyle/dotfiles/scripts/networkRefresh/networkRefresh
+exec --no-startup-id sleep 10; perl /home/kyle/dotfiles/scripts/networkRefresh/networkRefresh
+exec --no-startup-id twmnd
 
-exec --no-startup-id i3-msg 'workspace 2; exec delayed-irc'
+
+exec --no-startup-id i3-msg 'workspace 9; exec termite -e delayed-irc'
 exec --no-startup-id i3-msg 'workspace 1; exec termite'
 #set background
 exec --no-startup-id xsetroot -solid "#282828"
@@ -24,7 +26,11 @@ exec --no-startup-id xsetroot -solid "#282828"
 
 set $mod Mod1
 
+# set u to volume up
+bind $mod+v sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%; notify-send 'Volume' 'Volume +5%' --icon=dialog-information"
 
+# set mod+U to volume down
+bind $mod+Shift+u sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%; notify-send 'Volume' 'Volume -5%' --icon=dialog-information"
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
