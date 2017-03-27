@@ -22,7 +22,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'kablamo/vim-git-log'
 Plug 'scrooloose/syntastic'
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'vimwiki/vimwiki'
 Plug 'kien/ctrlp.vim'
@@ -193,7 +193,7 @@ set si " Smart indent
 "autocmd VimEnter,VimLeave * silent !tmux set status
 
 " tab bar along top
-"let g:airline#extensions#tabline#enabled = 1 
+let g:airline#extensions#tabline#enabled = 0
 
 
 " :w!! 
