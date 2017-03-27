@@ -32,6 +32,7 @@ Plug 'tpope/vim-obsession'
 Plug 'vim-latex/vim-latex'
 Plug 'dodie/vim-disapprove-deep-indentation'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
 
 
 " The following block is for NeoVim plugins or ones that have dependencies 
@@ -109,6 +110,11 @@ hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
 hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
 
 
+"ctags
+set statusline+=%{gutentags#statusline()}
+let g:gutentags_cache_dir = "~/.tags"
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
+
 
 " Rust autoformat
 let g:rustfmt_autosave = 1
@@ -117,7 +123,6 @@ let g:rustfmt_autosave = 1
 set hidden
 let g:racer_cmd ="~/dotiles/vim/plugged/vim-racer"
 let $RUST_SRC_PATH="/usr/share/doc/rust/html/src"
-
 
 
 " easymotion
@@ -185,10 +190,10 @@ set list lcs=trail:·,tab:»·
 set si " Smart indent
 
 " toggle tmux bar when entering vim
-autocmd VimEnter,VimLeave * silent !tmux set status
+"autocmd VimEnter,VimLeave * silent !tmux set status
 
 " tab bar along top
-let g:airline#extensions#tabline#enabled = 1 
+"let g:airline#extensions#tabline#enabled = 1 
 
 
 " :w!! 
@@ -287,18 +292,6 @@ map <leader>g :terminal<cr>
 set cursorline
 highlight  CursorLine ctermbg=black
 
-"""""""""""""""""""""""""
-"	     NeoVim		    "
-"""""""""""""""""""""""""
-
-if has('nvim')
-    map <leader>v :vnew<cr>
-    map <leader>h :new<cr>
-    map <leader>x :bd<cr>
-    map <leader>t :terminal<cr>
-    tnoremap <Esc> <C-\><C-n>
-
-endif
 
 " https://medium.com/@garoth/neovim-terminal-usecases-tricks-8961e5ac19b9#.ph8fxpnhk
 " Window split settings
