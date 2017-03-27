@@ -5,10 +5,13 @@
 my $good = "0% packet loss";
 my $ping = "connect: Network is unreachable";
 print ("checking for internet\n");
-while($good =~ $ping) {
+while(!($ping =~ $good)) {
     $ping = `ping 8.8.8.8 -c 1`;
     print("$ping\n");
     sleep 1
 }
 print("connected to internet\n");
-system('termite -e "mosh home -- tmux a -t IRC"');
+system("mosh home -- tmux a -t IRC");
+
+system("notify-send 'IRC' 'Could not connect to IRC' --icon=dialog-information");
+
