@@ -1,6 +1,6 @@
-"Kyle Merfeld's vimrc
+" Kyle Merfeld's vimrc
 
-"sets <leader> to space 
+" sets <leader> to space 
 let mapleader = "\<Space>"
 
 
@@ -10,41 +10,40 @@ let mapleader = "\<Space>"
 
 " Here are the bulk of my pluggins
 call plug#begin('~/.vim/plugged')
-Plug 'terryma/vim-expand-region'
-Plug 'tpope/vim-fugitive'
-Plug 'morhetz/gruvbox'
-Plug 'tpope/vim-sensible'
-Plug 'vim-airline/vim-airline'
-Plug 'chrisbra/csv.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'honza/vim-snippets'
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'kablamo/vim-git-log'
-Plug 'scrooloose/syntastic'
-"Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-Plug 'vimwiki/vimwiki'
-Plug 'kien/ctrlp.vim'
-Plug 'ryanss/vim-hackernews'
-Plug 'nvie/vim-flake8'
-Plug 'tpope/vim-obsession'
-Plug 'vim-latex/vim-latex'
-Plug 'dodie/vim-disapprove-deep-indentation'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar'
-
+Plug 'dodie/vim-disapprove-deep-indentation' " Teaches me to avoid excessive intentation
+Plug 'terryma/vim-expand-region'            " use multiple 'v' to select with visual mode
+Plug 'morhetz/gruvbox'                      " ColorScheme of choice
+Plug 'tpope/vim-sensible'                   " Better vim defaults
+Plug 'vim-airline/vim-airline'              " Nicer bar along the bottum
+Plug 'chrisbra/csv.vim'                     " work with csv files
+Plug 'easymotion/vim-easymotion'            " move through code with less thought
+Plug 'honza/vim-snippets'                   " Sometimes press tab to write a code block
+Plug 'rust-lang/rust.vim'                   " work with rust
+Plug 'racer-rust/vim-racer'                 " work with rust
+Plug 'kablamo/vim-git-log'                  " :GitLog to see git commits
+Plug 'scrooloose/syntastic'                 " Syntax highlighting
+Plug 'ervandew/supertab'                    " Completion with tab
+Plug 'SirVer/ultisnips'                     " more snippets
+Plug 'vimwiki/vimwiki'                      " Personal wiki 
+Plug 'kien/ctrlp.vim'                       " Navigate files
+Plug 'ryanss/vim-hackernews'                " slack off and read some news
+Plug 'nvie/vim-flake8'                      " Python formatting
+Plug 'tpope/vim-obsession'                  " save layout?
+Plug 'ludovicchabant/vim-gutentags'         " ctags
+Plug 'majutsushi/tagbar'                    " <leader>b to see ctags
+Plug 'vim-scripts/DrawIt'                   " drawing graphs 
+Plug 'christoomey/vim-tmux-navigator'       " Work together with tmux
 
 " The following block is for NeoVim plugins or ones that have dependencies 
 " that i cannot assume every machine will have
 if has ('nvim')
-    Plug 'davidhalter/jedi-vim'
-    Plug 'blindFS/vim-taskwarrior'
-    "Plug 'tbabej/taskwiki'
-
-    Plug 'zchee/deoplete-jedi'
+    Plug 'davidhalter/jedi-vim'             " Python support
+    Plug 'blindFS/vim-taskwarrior'          " Taskwarrior support
+    " Plug 'tbabej/taskwiki'
+    " Plug 'zchee/deoplete-jedi'              " Python support neovim
+    " Plug 'zchee/deoplete-clang'
     " This one updates plugins, keep it last
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
 endif
 call plug#end()
 
@@ -71,16 +70,21 @@ let work_wiki.template_ext = '.html'
 let school_wiki = {}
 let school_wiki.path ='$HOME/Nextcloud/school_wiki' 
 let school_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
-let school_wiki.template_default = 'default'
+let school_wiki.template_default = 'math'
 let school_wiki.template_ext = '.html'
-
 let capstone_wiki = {}
 let capstone_wiki.path ='$HOME/Nextcloud/capstone_wiki' 
 let capstone_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
 let capstone_wiki.template_default = 'default'
 let capstone_wiki.template_ext = '.html'
-let g:vimwiki_list = [wiki, work_wiki, school_wiki, capstone_wiki]
 
+let game_wiki = {}
+let game_wiki.path ='$HOME/Nextcloud/game_wiki' 
+let game_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
+let game_wiki.template_default = 'default'
+let game_wiki.template_ext = '.html'
+
+let g:vimwiki_list = [wiki, work_wiki, school_wiki, capstone_wiki, game_wiki]
 let g:vimwiki_hl_headers = 1
 let g:vimwiki_auto_tags = 1
 let g:vimwiki_auto_toc = 1
@@ -110,7 +114,11 @@ hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
 hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
 
 
-"ctags
+" supertab
+" flips order you go over
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" ctags
 set statusline+=%{gutentags#statusline()}
 let g:gutentags_cache_dir = "~/.tags"
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
@@ -139,7 +147,7 @@ map <Leader>k <Plug>(easymotion-k)
 
 " this maps it so i can use multiple 'v's to add to visuall mode
 vmap v <Plug>(expand_region_expand)
-"vmap <C-v> <Plug>(expand_region_shrink)
+" vmap <C-v> <Plug>(expand_region_shrink)
 
 
 " set colorscheme
@@ -190,7 +198,7 @@ set list lcs=trail:·,tab:»·
 set si " Smart indent
 
 " toggle tmux bar when entering vim
-"autocmd VimEnter,VimLeave * silent !tmux set status
+" autocmd VimEnter,VimLeave * silent !tmux set status
 
 " tab bar along top
 let g:airline#extensions#tabline#enabled = 0
@@ -260,7 +268,7 @@ autocmd BufReadPost *
             \ endif"
 
 " Set 81st column to be highlighted
-highlight ColorColumn ctermbg=magenta
+highlight ColorColumn ctermbg=magenta ctermfg=black
 call matchadd('ColorColumn', '\%81v', 100)
 
 " http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
@@ -274,16 +282,37 @@ vmap <Leader>P "+P
 
 
 " Tabs
-" Smart way to move between windows
-map <C-j> <C-W>j a
-map <C-k> <C-W>k a 
-map <C-h> <C-W>h a
-map <C-l> <C-W>l a
+" Default navigation between windows
+" Ctrl+j moves down
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" These next two are workarounds to make it all work better
+"
+" This next line is to make sure <C-H> works in tmux
+nnoremap <silent> <BS> :TmuxNavigateLeft<cr>       
+
+" http://stackoverflow.com/questions/9092982/mapping-c-j-to-something-in-vim
+" This make ctrl-j work 
+augroup vimrc
+    au!
+    au VimEnter * unmap <C-j>
+    au VimEnter * noremap <C-j> <C-w>j
+augroup END
+
+
+" https://robots.thoughtbot.com/vim-splits-move-faster-and-more-naturally#easier-split-navigations
+set splitbelow
+set splitright
+
+
 map <leader>t :tabnew<cr>
 map <leader>v :vnew<cr>
 map <leader>h :new<cr>
 map <leader>x :bd<cr>
-"Note: this one only will work with neovim
+" Note: this one only will work with neovim
 map <leader>g :terminal<cr> 
 
 " Set the current line to be highlighted black
