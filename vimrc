@@ -91,6 +91,9 @@ let g:vimwiki_auto_toc = 1
 let g:vimwiki_auto_export = 0
 let g:vimwiki_hl_cb_checked = 1
 
+" tmux_navigator
+let g:tmux_navigator_no_mappings = 1
+
 " will place a timestamp with f3
 " https://box.matto.nl/systemnotesvimwiki.html
 map <F3> :r! date +"\%Y-\%m-\%d \%H:\%M:\%S"<ESC>0j    
@@ -280,17 +283,51 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
+" some nice bindings
+map <leader>t :terminal<cr>
+map <leader>v :vnew<cr>
+map <leader>h :new<cr>
+map <leader>x :bd<cr>
 
-" Tabs
-" Default navigation between windows
-" Ctrl+j moves down
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" Set the current line to be highlighted black
+" Black because it doesnt interfere with my colorscheme,
+" and I have this so that it is easyer to see where I am
+set cursorline
+highlight  CursorLine ctermbg=black
+
+
+" Changes terminal cursor to red. makes sure I know where I am
+highlight TermCursor ctermfg=red guifg=red
+
+
+"""""""""""""""""""""""""""
+"    navigating splits	  "
+"""""""""""""""""""""""""""
+
+" let you leave terminal insert mode with escape
+tnoremap <Esc> <C-\><C-n>
+
+" auto use insert mode when moving to a terminal split
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
+"bindings for moveing between splits. terminal mode or normal
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" lets you use ctl+hjlk for navigation in tmux
+nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
 " These next two are workarounds to make it all work better
-"
 " This next line is to make sure <C-H> works in tmux
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>       
 
@@ -306,22 +343,3 @@ augroup END
 " https://robots.thoughtbot.com/vim-splits-move-faster-and-more-naturally#easier-split-navigations
 set splitbelow
 set splitright
-
-
-map <leader>t :tabnew<cr>
-map <leader>v :vnew<cr>
-map <leader>h :new<cr>
-map <leader>x :bd<cr>
-" Note: this one only will work with neovim
-map <leader>g :terminal<cr> 
-
-" Set the current line to be highlighted black
-" Black because it doesnt interfere with my colorscheme,
-" and I have this so that it is easyer to see where I am
-set cursorline
-highlight  CursorLine ctermbg=black
-
-
-" https://medium.com/@garoth/neovim-terminal-usecases-tricks-8961e5ac19b9#.ph8fxpnhk
-" Window split settings
-highlight TermCursor ctermfg=red guifg=red
