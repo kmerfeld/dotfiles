@@ -18,8 +18,8 @@ exec --no-startup-id sleep 10; perl /home/kyle/dotfiles/scripts/networkRefresh/n
 exec --no-startup-id twmnd
 
 
-exec --no-startup-id i3-msg 'workspace 9; exec termite -e delayed-irc'
-exec --no-startup-id i3-msg 'workspace 1; exec termite'
+exec --no-startup-id i3-msg 'workspace 9; exec delay "mosh home -- tmux a -t IRC"'
+exec --no-startup-id i3-msg 'workspace 1; exec delay tiny-care-terminal'
 #set background
 exec --no-startup-id xsetroot -solid "#282828"
 
