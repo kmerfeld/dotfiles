@@ -1,0 +1,21 @@
+#!/usr/bin/env perl
+
+#This waits untill I have a network connection,
+#Then opens it in a terminal.
+
+my $good = "0% packet loss";
+my $ping = "connect: Network is unreachable";
+print ("checking for internet\n");
+# wait untill we can ping out
+while(!($ping =~ $good)) { $ping = `ping 8.8.8.8 -c 1`; }
+print("connected to internet\n");
+
+my $program = $ARGV[0];
+$program = '"'.$program.'"';
+
+print("$program\n");
+
+system("termite -e $program");
+
+system("notify-send '$program' 'Program closed' --icon=dialog-information");
+
