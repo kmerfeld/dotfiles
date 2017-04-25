@@ -14,4 +14,4 @@ set -gx key value
 set -gx TTC_WEATHER Fargo
 set -gx TTC_CELSIUS false
 set -gx TTC_APIKEYS false
-set -gx TTC_REPOS dotfiles
+set -gx TTC_REPOS $HOME,ndsu-ibm-capstone
