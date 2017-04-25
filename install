@@ -71,7 +71,7 @@ vim -u NONE -c "helptags vim-obsession/doc" -c q
 #I want. just not usable ones
 
 #I can just rerun this program once i have the certs
-if [[ -f ~/dotfiles/certs/*.pem ]]
+if [[ ! -f ~/dotfiles/certs/*.pem ]]
 then
 	gpg -o ~/dotfiles/certs/inthe.am.tar.gz -d ~/dotfiles/certs/inthe.am.tar.gz.gpg 
 	tar -xvf ~/dotfiles/certs/inthe.am.tar.gz
