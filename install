@@ -11,9 +11,9 @@ olddir=~/old_dotfiles             # old dotfiles backup directory
 
 #these files will be copied to the home directory
 files="taskrc i3 bashrc vimrc vim tmux.conf xinitrc Xdefaults Xresources"     # list of files/folders to symlink in homedir
-config_folder="termite fish"
+config_folder="termite fish ranger"
 #These will be installed if you are running arch (with AUR support)
-toInstall="unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3 task"
+toInstall="ctags ranger npm fish unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3 task"
 
 pip="twisted argparse service_identity"
 
@@ -42,9 +42,10 @@ done
 
 # do the same as the previous block, but for .config folder
 for folder in $config_folder; do
-	mv ~/.config/$folder ~/dotfiles_old/
+    rm -rf $XDG_CONFIG_HOME/$folder
 	echo "Creating symlink to $folder in .config directory."
-	ln -s $dir/config/$folder ~/.config/$folder
+    mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+    ln -s $dir/config/$folder $XDG_CONFIG_HOME/
 
 done
 
@@ -76,8 +77,6 @@ then
 	tar -xvf ~/dotfiles/certs/inthe.am.tar.gz
 fi
 
-#install some taskwiki stuff
-sudo pip install --upgrade git+git://github.com/tbabej/tasklib@develop
 
 #######################
 # arch specific stuff #
@@ -111,21 +110,8 @@ then
 	#installing files
 	pacaur -S $toInstall --needed --noconfirm
     sudo pip install $pip
-
-fi
-
-#######################
-# arch specific stuff #
-#######################
-
-#if the rust flag is enabled
-if [[ $1 == "rust" ]]
-then
-	sudo pacman -S rustup --noconfirm
-	cargo install racer
-	rustup update stable
-	rustup defualt stable
-	rustup component add rust-src
+    sudo npm install -g tiny-care-terminal
+    sudo npm install -g git-standup
 
 fi
 
@@ -134,3 +120,16 @@ fi
 #######################
 git clone https://github.com/tmux-plugins/tmux-resurrect ~/dotfiles/git/tmux-resurrect
 
+#####################
+#  Set up my shell  #
+#####################
+if [[ -f "/usr/bin/fish" ]]
+then
+    chsh -s /usr/bin/fish
+    curl -L https://get.oh-my.fish | fish
+
+fi
+
+# Lets open this up as the last thing.
+# It makes the whole process more charming
+tiny-care-terminal
