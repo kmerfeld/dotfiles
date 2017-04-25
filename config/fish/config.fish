@@ -4,6 +4,7 @@ alias vim nvim
 
 alias nano /usr/bin/vim
 alias irc "mosh home -- tmux a -t IRC"
+alias r ranger
 
 set -gx PATH $HOME/dotfiles/scripts $PATH
 
@@ -15,3 +16,5 @@ set -gx TTC_WEATHER Fargo
 set -gx TTC_CELSIUS false
 set -gx TTC_APIKEYS false
 set -gx TTC_REPOS $HOME,ndsu-ibm-capstone
+set -gx RANGER_LOAD_DEFAULT_RC FALSE
+
