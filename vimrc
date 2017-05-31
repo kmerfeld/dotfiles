@@ -13,7 +13,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'dodie/vim-disapprove-deep-indentation' " Teaches me to avoid excessive intentation
 Plug 'terryma/vim-expand-region'            " use multiple 'v' to select with visual mode
 Plug 'morhetz/gruvbox'                      " ColorScheme of choice
-Plug 'tpope/vim-sensible'                   " Better vim defaults
 Plug 'vim-airline/vim-airline'              " Nicer bar along the bottum
 Plug 'chrisbra/csv.vim'                     " work with csv files
 Plug 'easymotion/vim-easymotion'            " move through code with less thought
@@ -21,7 +20,7 @@ Plug 'honza/vim-snippets'                   " Sometimes press tab to write a cod
 Plug 'rust-lang/rust.vim'                   " work with rust
 Plug 'racer-rust/vim-racer'                 " work with rust
 Plug 'kablamo/vim-git-log'                  " :GitLog to see git commits
-Plug 'scrooloose/syntastic'                 " Syntax highlighting
+"Plug 'scrooloose/syntastic'                 " Syntax highlighting
 Plug 'ervandew/supertab'                    " Completion with tab
 Plug 'SirVer/ultisnips'                     " more snippets
 Plug 'vimwiki/vimwiki'                      " Personal wiki 
@@ -34,16 +33,19 @@ Plug 'majutsushi/tagbar'                    " <leader>b to see ctags
 Plug 'vim-scripts/DrawIt'                   " drawing graphs 
 Plug 'christoomey/vim-tmux-navigator'       " Work together with tmux
 
+Plug 'roxma/nvim-completion-manager'
+Plug 'roxma/nvim-cm-racer'
+Plug 'w0rp/ale'
 " The following block is for NeoVim plugins or ones that have dependencies 
 " that i cannot assume every machine will have
 if has ('nvim')
     Plug 'davidhalter/jedi-vim'             " Python support
     Plug 'blindFS/vim-taskwarrior'          " Taskwarrior support
-    " Plug 'tbabej/taskwiki'
-    " Plug 'zchee/deoplete-jedi'              " Python support neovim
-    " Plug 'zchee/deoplete-clang'
+    Plug 'tbabej/taskwiki'
+    Plug 'zchee/deoplete-jedi'              " Python support neovim
+    Plug 'zchee/deoplete-clang'             " C deoplete
     " This one updates plugins, keep it last
-    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
+    "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
 endif
 call plug#end()
 
@@ -51,6 +53,10 @@ call plug#end()
 """""""""""""""""""
 "  plugin config  "
 """""""""""""""""""
+
+"ale 
+let ale_enabled = 1
+
 
 " vimwiki
 let g:vimwiki_folding='expr'
@@ -181,6 +187,9 @@ let g:UltiSnipsEditSplit="vertical"
 """""""""""""""""""
 "    Settings	  "
 """""""""""""""""""
+
+set completeopt=longest,menuone
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " give me another option to go to the beginning and end of a line
 nmap <leader>a ^
@@ -320,7 +329,16 @@ if has ('nvim')
     nnoremap <C-j> <C-w>j
     nnoremap <C-k> <C-w>k
     nnoremap <C-l> <C-w>l
+
+    " http://stackoverflow.com/questions/9092982/mapping-c-j-to-something-in-vim
+    " This make ctrl-j work 
+    augroup vimrc
+        au!
+        au VimEnter * unmap <C-j>
+        au VimEnter * noremap <C-j> <C-w>j
+    augroup END
 endif
+
 " lets you use ctl+hjlk for navigation in tmux
 nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
 nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
@@ -328,19 +346,8 @@ nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
 nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
 nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
-" These next two are workarounds to make it all work better
 " This next line is to make sure <C-H> works in tmux
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>       
 
-" http://stackoverflow.com/questions/9092982/mapping-c-j-to-something-in-vim
-" This make ctrl-j work 
-augroup vimrc
-    au!
-    au VimEnter * unmap <C-j>
-    au VimEnter * noremap <C-j> <C-w>j
-augroup END
-
-
-" https://robots.thoughtbot.com/vim-splits-move-faster-and-more-naturally#easier-split-navigations
 set splitbelow
 set splitright
