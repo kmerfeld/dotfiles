@@ -1,13 +1,12 @@
 " Kyle Merfeld's vimrc
-
+" everything is indented 1 spot for folding's sake
+"
 " sets <leader> to space 
 let mapleader = "\<Space>"
-
 
 """""""""""""""""""
 "   Plug plugins  "
 """""""""""""""""""
-
 " Here are the bulk of my pluggins
 call plug#begin('~/.vim/plugged')
 Plug 'dodie/vim-disapprove-deep-indentation' " Teaches me to avoid excessive intentation
@@ -20,7 +19,7 @@ Plug 'honza/vim-snippets'                   " Sometimes press tab to write a cod
 Plug 'rust-lang/rust.vim'                   " work with rust
 Plug 'racer-rust/vim-racer'                 " work with rust
 Plug 'kablamo/vim-git-log'                  " :GitLog to see git commits
-"Plug 'scrooloose/syntastic'                 " Syntax highlighting
+Plug 'scrooloose/syntastic'                 " Syntax highlighting
 Plug 'ervandew/supertab'                    " Completion with tab
 Plug 'SirVer/ultisnips'                     " more snippets
 Plug 'vimwiki/vimwiki'                      " Personal wiki 
@@ -32,10 +31,10 @@ Plug 'ludovicchabant/vim-gutentags'         " ctags
 Plug 'majutsushi/tagbar'                    " <leader>b to see ctags
 Plug 'vim-scripts/DrawIt'                   " drawing graphs 
 Plug 'christoomey/vim-tmux-navigator'       " Work together with tmux
-
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/nvim-cm-racer'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
+Plug 'MattesGroeger/vim-bookmarks'
 " The following block is for NeoVim plugins or ones that have dependencies 
 " that i cannot assume every machine will have
 if has ('nvim')
@@ -49,14 +48,32 @@ if has ('nvim')
 endif
 call plug#end()
 
-
 """""""""""""""""""
 "  plugin config  "
 """""""""""""""""""
+" ctags 
+let g:tagbar_type_rust = {
+            \ 'ctagstype' : 'rust',
+            \ 'kinds' : [
+            \'T:types,type definitions',
+            \'f:functions,function definitions',
+            \'g:enum,enumeration names',
+            \'s:structure names',
+            \'m:modules,module names',
+            \'c:consts,static constants',
+            \'t:traits,traits',
+            \'i:impls,trait implementations',
+            \]
+            \}
+
+"vim bookmarks
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+highlight BookmarkLine ctermbg=194 ctermfg=NONE
+let g:bookmark_sign = '♥'
+let g:bookmark_highlight_lines = 1
 
 "ale 
 let ale_enabled = 1
-
 
 " vimwiki
 let g:vimwiki_folding='expr'
@@ -181,13 +198,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-
-
-
 """""""""""""""""""
 "    Settings	  "
 """""""""""""""""""
-
 set completeopt=longest,menuone
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -298,6 +311,38 @@ map <leader>v :vnew<cr>
 map <leader>h :new<cr>
 map <leader>x :bd<cr>
 
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" This allows buffers to be hidden if you've modified a buffer.
+" This is almost a must if you wish to use buffers in this way.
+set hidden
+
+" To open a new empty buffer
+" This replaces :tabnew which I used to bind to this mapping
+nmap <leader>T :enew<cr>
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+
+"Swap "a" and "i" because "a" is in my muscle memory, but "i" is what I
+"usually want 
+noremap a i
+noremap i a
+
 " Set the current line to be highlighted black
 " Black because it doesnt interfere with my colorscheme,
 " and I have this so that it is easyer to see where I am
@@ -307,8 +352,6 @@ highlight  CursorLine ctermbg=black
 
 " Changes terminal cursor to red. makes sure I know where I am
 highlight TermCursor ctermfg=red guifg=red
-
-
 """""""""""""""""""""""""""
 "    navigating splits	  "
 """""""""""""""""""""""""""
