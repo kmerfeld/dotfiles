@@ -19,7 +19,7 @@ Plug 'honza/vim-snippets'                   " Sometimes press tab to write a cod
 Plug 'rust-lang/rust.vim'                   " work with rust
 Plug 'racer-rust/vim-racer'                 " work with rust
 Plug 'kablamo/vim-git-log'                  " :GitLog to see git commits
-Plug 'scrooloose/syntastic'                 " Syntax highlighting
+"Plug 'scrooloose/syntastic'                 " Syntax highlighting
 Plug 'ervandew/supertab'                    " Completion with tab
 Plug 'SirVer/ultisnips'                     " more snippets
 Plug 'vimwiki/vimwiki'                      " Personal wiki 
@@ -33,8 +33,11 @@ Plug 'vim-scripts/DrawIt'                   " drawing graphs
 Plug 'christoomey/vim-tmux-navigator'       " Work together with tmux
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/nvim-cm-racer'
-"Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 Plug 'MattesGroeger/vim-bookmarks'
+Plug 'tpope/vim-fugitive'
+Plug 'sebastianmarkow/deoplete-rust'
+
 " The following block is for NeoVim plugins or ones that have dependencies 
 " that i cannot assume every machine will have
 if has ('nvim')
@@ -44,13 +47,17 @@ if has ('nvim')
     Plug 'zchee/deoplete-jedi'              " Python support neovim
     Plug 'zchee/deoplete-clang'             " C deoplete
     " This one updates plugins, keep it last
-    "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
 endif
 call plug#end()
 
 """""""""""""""""""
 "  plugin config  "
 """""""""""""""""""
+"latex-preview
+let g:livepreview_previewer = 'okular'
+autocmd Filetype tex setl updatetime=1
+
 " ctags 
 let g:tagbar_type_rust = {
             \ 'ctagstype' : 'rust',
@@ -65,6 +72,11 @@ let g:tagbar_type_rust = {
             \'i:impls,trait implementations',
             \]
             \}
+
+"vim fugitive
+"https://www.reddit.com/r/vim/comments/6kfyae/vimfugitive_workflow/
+nmap <leader>g :Gstatus<cr>gg<C-n>
+
 
 "vim bookmarks
 highlight BookmarkSign ctermbg=NONE ctermfg=160
@@ -90,24 +102,13 @@ let work_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
 let work_wiki.template_default = 'default'
 let work_wiki.template_ext = '.html'
 
-let school_wiki = {}
-let school_wiki.path ='$HOME/Nextcloud/school_wiki' 
-let school_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
-let school_wiki.template_default = 'math'
-let school_wiki.template_ext = '.html'
-let capstone_wiki = {}
-let capstone_wiki.path ='$HOME/Nextcloud/capstone_wiki' 
-let capstone_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
-let capstone_wiki.template_default = 'default'
-let capstone_wiki.template_ext = '.html'
-
 let game_wiki = {}
 let game_wiki.path ='$HOME/Nextcloud/game_wiki' 
 let game_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
 let game_wiki.template_default = 'default'
 let game_wiki.template_ext = '.html'
 
-let g:vimwiki_list = [wiki, work_wiki, school_wiki, capstone_wiki, game_wiki]
+let g:vimwiki_list = [wiki, work_wiki, game_wiki]
 let g:vimwiki_hl_headers = 1
 let g:vimwiki_auto_tags = 1
 let g:vimwiki_auto_toc = 1
@@ -157,6 +158,14 @@ let g:rustfmt_autosave = 1
 set hidden
 let g:racer_cmd ="~/dotiles/vim/plugged/vim-racer"
 let $RUST_SRC_PATH="/usr/share/doc/rust/html/src"
+let g:racer_experimental_completer = 1
+let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
+let g:deoplete#sources#rust#rust_source_path="/home/kyle/.rust/rust/src"
+"let g:deoplete#sources#rust#disable_keymap=1
+let g:deoplete#sources#rust#documentation_max_height=20
+
+nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
+nmap <buffer> K  <plug>DeopleteRustShowDocumentation
 
 
 " easymotion
@@ -198,6 +207,50 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+"""""""""""""""""""""""""""
+"    navigating splits	  "
+"""""""""""""""""""""""""""
+" auto use insert mode when moving to a terminal split
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
+
+if has ('nvim')
+    " let you leave terminal insert mode with escape
+    tnoremap <Esc> <C-\><C-n>
+
+    "bindings for moveing between splits. terminal mode or normal
+    tnoremap <C-h> <C-\><C-n><C-w>h
+    tnoremap <C-j> <C-\><C-n><C-w>j
+    tnoremap <C-k> <C-\><C-n><C-w>k
+    tnoremap <C-l> <C-\><C-n><C-w>l
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
+
+    " http://stackoverflow.com/questions/9092982/mapping-c-j-to-something-in-vim
+    " This make ctrl-j work 
+    augroup vimrc
+        au!
+        au VimEnter * unmap <C-j>
+        au VimEnter * noremap <C-j> <C-w>j
+    augroup END
+endif
+
+" lets you use ctl+hjlk for navigation in tmux
+nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+" This next line is to make sure <C-H> works in tmux
+nnoremap <silent> <BS> :TmuxNavigateLeft<cr>       
+
+set splitbelow
+set splitright
+
 """""""""""""""""""
 "    Settings	  "
 """""""""""""""""""
@@ -248,8 +301,9 @@ inoremap jk <ESC>
 set number
 
 " allows folding based on indent
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevel=99
+
 
 " Set vim to 256 color mode
 set t_Co=256
@@ -338,11 +392,6 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 " Show all open buffers and their status
 nmap <leader>bl :ls<CR>
 
-"Swap "a" and "i" because "a" is in my muscle memory, but "i" is what I
-"usually want 
-noremap a i
-noremap i a
-
 " Set the current line to be highlighted black
 " Black because it doesnt interfere with my colorscheme,
 " and I have this so that it is easyer to see where I am
@@ -352,45 +401,3 @@ highlight  CursorLine ctermbg=black
 
 " Changes terminal cursor to red. makes sure I know where I am
 highlight TermCursor ctermfg=red guifg=red
-"""""""""""""""""""""""""""
-"    navigating splits	  "
-"""""""""""""""""""""""""""
-" auto use insert mode when moving to a terminal split
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-
-
-if has ('nvim')
-    " let you leave terminal insert mode with escape
-    tnoremap <Esc> <C-\><C-n>
-
-    "bindings for moveing between splits. terminal mode or normal
-    tnoremap <C-h> <C-\><C-n><C-w>h
-    tnoremap <C-j> <C-\><C-n><C-w>j
-    tnoremap <C-k> <C-\><C-n><C-w>k
-    tnoremap <C-l> <C-\><C-n><C-w>l
-    nnoremap <C-h> <C-w>h
-    nnoremap <C-j> <C-w>j
-    nnoremap <C-k> <C-w>k
-    nnoremap <C-l> <C-w>l
-
-    " http://stackoverflow.com/questions/9092982/mapping-c-j-to-something-in-vim
-    " This make ctrl-j work 
-    augroup vimrc
-        au!
-        au VimEnter * unmap <C-j>
-        au VimEnter * noremap <C-j> <C-w>j
-    augroup END
-endif
-
-" lets you use ctl+hjlk for navigation in tmux
-nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
-nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
-nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
-nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
-nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
-
-" This next line is to make sure <C-H> works in tmux
-nnoremap <silent> <BS> :TmuxNavigateLeft<cr>       
-
-set splitbelow
-set splitright

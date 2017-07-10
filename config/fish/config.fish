@@ -6,6 +6,7 @@ alias nano /usr/bin/vim
 alias irc "mosh home -- tmux a -t IRC"
 alias r ranger
 alias pacaur /usr/bin/pacaur
+alias emacs "emacs -nw"
 
 set -gx PATH $HOME/dotfiles/scripts $PATH
 
