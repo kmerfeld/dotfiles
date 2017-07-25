@@ -8,6 +8,7 @@
 #set editor
 export EDITOR=vim
 
+
 #this makes it run with 256 colors
 export TERM=screen-256color-bce
 #colorize ls
@@ -31,5 +32,6 @@ then
 	alias pacman-clean=" sudo  pacman -Rns \$(pacman -Qtdq); sudo pacman -Sc"
 	alias vim="nvim"
 	alias vi="/usr/bin/vim"
+    alias wiki="vim -c VimwikiIndex"
 	alias git-shove="git add .;git commit . -m notes; git push"
 fi

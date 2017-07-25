@@ -7,11 +7,12 @@ alias irc "mosh home -- tmux a -t IRC"
 alias r ranger
 alias pacaur /usr/bin/pacaur
 alias emacs "emacs -nw"
+alias wiki "vim -c VimwikiIndex"
 
-set -gx PATH $HOME/dotfiles/scripts $PATH
+set -gx PATH $HOME/dotfiles/scripts $HOME/.cargo/bin $PATH
 
-set VISUAL nvim
-set EDITOR "$VISUAL"
+set EDITOR nvim
+
 
 set -gx key value
 set -gx TTC_WEATHER Fargo

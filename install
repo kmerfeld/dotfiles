@@ -122,6 +122,8 @@ fi
 #######################
 git clone https://github.com/tmux-plugins/tmux-resurrect ~/dotfiles/git/tmux-resurrect
 
+git config --global core.excludesfile '.vim-bookmarks'
+
 #####################
 #  Set up my shell  #
 #####################

@@ -12,14 +12,20 @@ call plug#begin('~/.vim/plugged')
 Plug 'dodie/vim-disapprove-deep-indentation' " Teaches me to avoid excessive intentation
 Plug 'terryma/vim-expand-region'            " use multiple 'v' to select with visual mode
 Plug 'morhetz/gruvbox'                      " ColorScheme of choice
-Plug 'vim-airline/vim-airline'              " Nicer bar along the bottum
+Plug 'itchyny/lightline.vim'
+Plug 'jacoborus/tender.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'mhinz/vim-startify'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'luochen1990/rainbow'
 Plug 'chrisbra/csv.vim'                     " work with csv files
 Plug 'easymotion/vim-easymotion'            " move through code with less thought
 Plug 'honza/vim-snippets'                   " Sometimes press tab to write a code block
 Plug 'rust-lang/rust.vim'                   " work with rust
 Plug 'racer-rust/vim-racer'                 " work with rust
 Plug 'kablamo/vim-git-log'                  " :GitLog to see git commits
-"Plug 'scrooloose/syntastic'                 " Syntax highlighting
 Plug 'ervandew/supertab'                    " Completion with tab
 Plug 'SirVer/ultisnips'                     " more snippets
 Plug 'vimwiki/vimwiki'                      " Personal wiki 
@@ -37,13 +43,15 @@ Plug 'w0rp/ale'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'tpope/vim-fugitive'
 Plug 'sebastianmarkow/deoplete-rust'
+Plug 'cespare/vim-toml'
+Plug 'timonv/vim-cargo'
 
 " The following block is for NeoVim plugins or ones that have dependencies 
 " that i cannot assume every machine will have
 if has ('nvim')
     Plug 'davidhalter/jedi-vim'             " Python support
     Plug 'blindFS/vim-taskwarrior'          " Taskwarrior support
-    Plug 'tbabej/taskwiki'
+    "Plug 'tbabej/taskwiki'
     Plug 'zchee/deoplete-jedi'              " Python support neovim
     Plug 'zchee/deoplete-clang'             " C deoplete
     " This one updates plugins, keep it last
@@ -54,9 +62,21 @@ call plug#end()
 """""""""""""""""""
 "  plugin config  "
 """""""""""""""""""
-"latex-preview
-let g:livepreview_previewer = 'okular'
-autocmd Filetype tex setl updatetime=1
+"rainbow
+let g:rainbow_active = 1
+
+
+"nerdtree
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"lightline
+let g:lightline = {
+      \ 'component_function': {
+      \   'filetype': 'MyFiletype',
+      \   'fileformat': 'MyFileformat',
+      \ }
+      \ }
 
 " ctags 
 let g:tagbar_type_rust = {
@@ -79,10 +99,16 @@ nmap <leader>g :Gstatus<cr>gg<C-n>
 
 
 "vim bookmarks
-highlight BookmarkSign ctermbg=NONE ctermfg=160
-highlight BookmarkLine ctermbg=194 ctermfg=NONE
-let g:bookmark_sign = '♥'
+highlight BookmarkSign ctermbg=red ctermfg=black
+highlight BookmarkAnnotationSign ctermbg=red ctermfg=black
+highlight BookmarkLine ctermbg=red ctermfg=black
+highlight BookmarkAnnotationLine ctermbg=red ctermfg=black
+let g:bookmark_sign ='⌬'
 let g:bookmark_highlight_lines = 1
+nmap <Leader>m <Plug>BookmarkToggle
+
+let g:bookmark_save_per_working_dir = 1
+let g:bookmark_auto_save = 1
 
 "ale 
 let ale_enabled = 1
@@ -102,13 +128,19 @@ let work_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
 let work_wiki.template_default = 'default'
 let work_wiki.template_ext = '.html'
 
+let diplomacy_wiki = {}
+let diplomacy_wiki.path ='$HOME/Nextcloud/diplomacy_wiki' 
+let diplomacy_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
+let diplomacy_wiki.template_default = 'default'
+let diplomacy_wiki.template_ext = '.html'
+
 let game_wiki = {}
 let game_wiki.path ='$HOME/Nextcloud/game_wiki' 
 let game_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
 let game_wiki.template_default = 'default'
 let game_wiki.template_ext = '.html'
 
-let g:vimwiki_list = [wiki, work_wiki, game_wiki]
+let g:vimwiki_list = [wiki, work_wiki, game_wiki, diplomacy_wiki]
 let g:vimwiki_hl_headers = 1
 let g:vimwiki_auto_tags = 1
 let g:vimwiki_auto_toc = 1
@@ -211,6 +243,7 @@ let g:UltiSnipsEditSplit="vertical"
 """""""""""""""""""""""""""
 "    navigating splits	  "
 """""""""""""""""""""""""""
+
 " auto use insert mode when moving to a terminal split
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
@@ -254,12 +287,18 @@ set splitright
 """""""""""""""""""
 "    Settings	  "
 """""""""""""""""""
+"Format json
+com! FormatJSON %!python -m json.tool
+"vew .deck and .json as json files
+autocmd BufNewFile,BufRead *.json set ft=javascript
+autocmd BufNewFile,BufRead *.deck set ft=javascript
+
 set completeopt=longest,menuone
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " give me another option to go to the beginning and end of a line
-nmap <leader>a ^
-nmap <leader>; $
+map <leader>a ^
+map <leader>; $
 
 " Tab stuff
 " For regular expressions turn magic on
