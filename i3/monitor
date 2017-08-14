@@ -1,4 +1,0 @@
-
-xrandr --output VGA-1 --auto --left-of VGA-2
-xrandr --output VGA-0 --auto --left-of VGA-1
-

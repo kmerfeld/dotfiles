@@ -10,9 +10,15 @@ let mapleader = "\<Space>"
 """""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
+Plug 'godlygeek/tabular'
+
+
+Plug 'plasticboy/vim-markdown'
+
+
 Plug 'wikitopian/hardmode'
 "Hard Mode is a plugin which disables the arrow keys, the hjkl keys, the page up/down keys, and a handful of other keys which allow one to rely on character-wise navigation. The philosophy behind Hard Mode is that you'll never master Vim's advanced motion and search functionality if you can fall back on the anti-pattern of fumbling around your code with the arrow keys.
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode() " Start in hardmode
+"autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode() " Start in hardmode
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 
@@ -30,11 +36,11 @@ Plug 'morhetz/gruvbox'                      " ColorScheme of choice
 Plug 'itchyny/lightline.vim'
 "lightline
 let g:lightline = {
-      \ 'component_function': {
-      \   'filetype': 'MyFiletype',
-      \   'fileformat': 'MyFileformat',
-      \ }
-      \ }
+            \ 'component_function': {
+            \   'filetype': 'MyFiletype',
+            \   'fileformat': 'MyFileformat',
+            \ }
+            \ }
 
 
 Plug 'jacoborus/tender.vim' "Vim airline theme
@@ -63,7 +69,7 @@ Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 
 
-Plug 'chrisbra/csv.vim'                     " work with csv files
+"Plug 'chrisbra/csv.vim'                     " work with csv files
 " CSV
 " highlight selected column
 let g:csv_highlight_column = 'y'
@@ -118,44 +124,59 @@ Plug 'ervandew/supertab'                    " Completion with tab
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 
+Plug 'jreybert/vimagit'
+
+
+Plug 'metakirby5/codi.vim'
+
+
 Plug 'vimwiki/vimwiki'                      " Personal wiki 
 " will place a timestamp with f3
 " https://box.matto.nl/systemnotesvimwiki.html
+let g:vimwiki_hl_headers = 1
 map <F3> :r! date +"\%Y-\%m-\%d \%H:\%M:\%S"<ESC>0j    
 " vimwiki
 let g:vimwiki_folding='expr'
+function! OpenSecretCalendar()
+    call vimwiki#base#goto_index(2)
+    execute ':Calendar'
+endfunction
+nnoremap <leader>c :call OpenSecretCalendar()<cr>
 
-let wiki = {}
-let wiki.path ='$HOME/Nextcloud/wiki' 
-let wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
-let wiki.template_default = 'default'
-let wiki.template_ext = '.html'
+let g:vimwiki_folding='expr' "this allows the folding to work for markdown
 
-let work_wiki = {}
-let work_wiki.path ='$HOME/Nextcloud/work_wiki' 
-let work_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
-let work_wiki.template_default = 'default'
-let work_wiki.template_ext = '.html'
+let g:vimwiki_list = [{
+            \ 'path': '~/Nextcloud/vimwiki',
+            \ 'template_path': '~/vimwiki/templates/',
+            \ 'nested_syntaxes': {
+            \   'bash': 'sh'
+            \  },
+            \ 'template_default': 'default',
+            \ 'path_html': '~/Nextcloud/vimwiki/site_html/',
+            \ }]
 
-let diplomacy_wiki = {}
-let diplomacy_wiki.path ='$HOME/Nextcloud/diplomacy_wiki' 
-let diplomacy_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
-let diplomacy_wiki.template_default = 'default'
-let diplomacy_wiki.template_ext = '.html'
+function! VimwikiLinkHandler(link)
+    " Use Vim to open external files with the 'vfile:' scheme.  E.g.:
+    "   1) [[vfile:~/Code/PythonProject/abc123.py]]
+    "   2) [[vfile:./|Wiki Home]]
+    let link = a:link
+    if link =~# '^vfile:'
+        let link = link[1:]
+    else
+        return 0
+    endif
+    let link_infos = vimwiki#base#resolve_link(link)
+    if link_infos.filename == ''
+        echomsg 'Vimwiki Error: Unable to resolve link!'
+        return 0
+    else
+        exe 'tabnew ' . fnameescape(link_infos.filename)
+        return 1
+    endif
+endfunction
 
-let game_wiki = {}
-let game_wiki.path ='$HOME/Nextcloud/game_wiki' 
-let game_wiki.template_path = '$HOME/dotfiles/vimwiki/templates/'
-let game_wiki.template_default = 'default'
-let game_wiki.template_ext = '.html'
 
-let g:vimwiki_list = [wiki, work_wiki, game_wiki, diplomacy_wiki]
-let g:vimwiki_hl_headers = 1
-let g:vimwiki_auto_tags = 1
-let g:vimwiki_auto_toc = 1
-let g:vimwiki_auto_export = 0
-let g:vimwiki_hl_cb_checked = 1
-
+autocmd FileType vimwiki set spell spelllang=en_gb
 
 Plug 'kien/ctrlp.vim'                       " Navigate files
 

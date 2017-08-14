@@ -1,0 +1,5 @@
+session_name: News
+windows:
+  - window_name: IRC
+    panes:
+      - tiny

@@ -1,0 +1,9 @@
+session_name: Dev
+windows:
+    - window_name: Editor
+      panes:
+          - nvim
+    - window_name: terminal
+      panes:
+          - 
+

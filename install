@@ -10,12 +10,12 @@ dir=~/dotfiles                    # dotfiles directory
 olddir=~/old_dotfiles             # old dotfiles backup directory
 
 #these files will be copied to the home directory
-files="taskrc i3 bashrc vimrc vim tmux.conf xinitrc Xdefaults Xresources"     # list of files/folders to symlink in homedir
-config_folder="termite fish ranger"
+files="i3 bashrc vimrc vim tmux.conf xinitrc Xdefaults Xresources tmuxp"     # list of files/folders to symlink in homedir
+config_folder="termite fish ranger tmuxp"
 #These will be installed if you are running arch (with AUR support)
-toInstall="ctags ranger npm fish unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3 task"
+toInstall="ctags ranger fish unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3"
 
-pip="twisted argparse service_identity"
+pip="twisted argparse tmuxp service_identity"
 
 
 ##########################
@@ -59,26 +59,6 @@ ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 
 # run vim first basic configs
 vim +PlugInstall +qa
-#https://github.com/tpope/vim-obsession
-vim -u NONE -c "helptags vim-obsession/doc" -c q
-
-#################
-# task certs	# 
-#################
-
-#unencrypting and extracting task sync items
-#This doesnt work well because of the lack of gpg key, but this will still get me the certs
-#I want. just not usable ones
-
-#I can just rerun this program once i have the certs
-if [[ ! -f ~/dotfiles/certs/*.pem ]]
-then
-	gpg -o ~/dotfiles/certs/inthe.am.tar.gz -d ~/dotfiles/certs/inthe.am.tar.gz.gpg 
-	tar -xvf ~/dotfiles/certs/inthe.am.tar.gz
-fi
-
-sudo pip install --upgrade git+git://github.com/tbabej/tasklib@develop
-
 
 #######################
 # arch specific stuff #
@@ -112,28 +92,20 @@ then
 	#installing files
 	pacaur -S $toInstall --needed --noconfirm
     sudo pip install $pip
-    sudo npm install -g tiny-care-terminal
-    sudo npm install -g git-standup
 
 fi
 
 #######################
 #  get some git stuff #
 #######################
-git clone https://github.com/tmux-plugins/tmux-resurrect ~/dotfiles/git/tmux-resurrect
-
 git config --global core.excludesfile '.vim-bookmarks'
 
 #####################
 #  Set up my shell  #
 #####################
-if [[ -f "/usr/bin/fish" ]]
+if [[ $SHELL != "/usr/bin/fish" ]]
 then
     chsh -s /usr/bin/fish
     curl -L https://get.oh-my.fish | fish
 
 fi
-
-# Lets open this up as the last thing.
-# It makes the whole process more charming
-tiny-care-terminal

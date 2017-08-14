@@ -15,11 +15,11 @@ fi
 #it disables the touchpad while typeing
 #syndaemon -t -k -i 2 &
  
-#exec i3
-exec mate-session
+exec i3
+#exec mate-session
 #exec spectrwm 
-#exec startlxde
-# exec startxfce4
+exec startlxde
+#exec startxfce4
 # ...or the Window Manager of your choice
 #sh ~/.fehbg &
 

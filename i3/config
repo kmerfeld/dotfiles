@@ -14,7 +14,7 @@ exec --no-startup-id nextcloud
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift
 exec --no-startup-id task sync
-exec --no-startup-id twmnd
+exec --no-startup-id dunst
 
 
 #set background
