@@ -10,6 +10,13 @@ let mapleader = "\<Space>"
 """""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
+Plug 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+Plug 'justinmk/vim-sneak'
+
 Plug 'godlygeek/tabular'
 
 
@@ -58,9 +65,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 
-Plug 'mhinz/vim-startify'
-
-
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 
@@ -72,9 +76,9 @@ let g:rainbow_active = 1
 "Plug 'chrisbra/csv.vim'                     " work with csv files
 " CSV
 " highlight selected column
-let g:csv_highlight_column = 'y'
-hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
-hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
+" let g:csv_highlight_column = 'y'
+" hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
+" hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
 
 
 Plug 'easymotion/vim-easymotion'            " move through code with less thought
@@ -94,9 +98,9 @@ Plug 'honza/vim-snippets'                   " Sometimes press tab to write a cod
 Plug 'SirVer/ultisnips'                     " more snippets
 " utilisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -106,23 +110,17 @@ Plug 'rust-lang/rust.vim'                   " work with rust
 " Rust autoformat
 let g:rustfmt_autosave = 1
 
+Plug 'Valloric/YouCompleteMe'
+let g:ycm_rust_src_path = "/home/kyle/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc"
 
 Plug 'racer-rust/vim-racer'                 " work with rust
 " rust-racer
 set hidden
-let g:racer_cmd ="~/dotiles/vim/plugged/vim-racer"
+let g:racer_cmd ="~/.cargo/bin/racer"
 let $RUST_SRC_PATH="/usr/share/doc/rust/html/src"
 let g:racer_experimental_completer = 1
 
-
 Plug 'kablamo/vim-git-log'                  " :GitLog to see git commits
-
-
-Plug 'ervandew/supertab'                    " Completion with tab
-" supertab
-" flips order you go over
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
 
 Plug 'jreybert/vimagit'
 
@@ -210,9 +208,6 @@ Plug 'majutsushi/tagbar'                    " <leader>b to see ctags
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
 
-Plug 'vim-scripts/DrawIt'                   " drawing graphs 
-
-
 Plug 'christoomey/vim-tmux-navigator'       " Work together with tmux
 let g:tmux_navigator_no_mappings = 1
 
@@ -225,11 +220,6 @@ nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
 " This next line is to make sure <C-H> works in tmux
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>       
-
-Plug 'roxma/nvim-completion-manager'
-
-
-Plug 'roxma/nvim-cm-racer'
 
 
 Plug 'w0rp/ale'
@@ -251,19 +241,13 @@ let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
 
 
-Plug 'tpope/vim-fugitive'
-"vim fugitive
-"https://www.reddit.com/r/vim/comments/6kfyae/vimfugitive_workflow/
-nmap <leader>g :Gstatus<cr>gg<C-n>
-
-
-Plug 'sebastianmarkow/deoplete-rust'
-let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
-let g:deoplete#sources#rust#rust_source_path="/home/kyle/.rust/rust/src"
-"let g:deoplete#sources#rust#disable_keymap=1
-let g:deoplete#sources#rust#documentation_max_height=20
-nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
-nmap <buffer> K  <plug>DeopleteRustShowDocumentation
+"Plug 'sebastianmarkow/deoplete-rust'
+" let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
+" let g:deoplete#sources#rust#rust_source_path="/home/kyle/.rust/rust/src"
+" "let g:deoplete#sources#rust#disable_keymap=1
+" let g:deoplete#sources#rust#documentation_max_height=20
+" nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
+" nmap <buffer> K  <plug>DeopleteRustShowDocumentation
 
 
 Plug 'cespare/vim-toml'
@@ -274,17 +258,16 @@ Plug 'timonv/vim-cargo'
 " The following block is for NeoVim plugins
 if has ('nvim')
     Plug 'davidhalter/jedi-vim'             " Python support
-    Plug 'blindFS/vim-taskwarrior'          " Taskwarrior support
-    Plug 'zchee/deoplete-jedi'              " Python support neovim
-    Plug 'zchee/deoplete-clang'             " C deoplete
+    "Plug 'zchee/deoplete-jedi'              " Python support neovim
+    "Plug 'zchee/deoplete-clang'             " C deoplete
     " This one updates plugins, keep it last
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
-    if has ('nvim')
+    "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
+    "if has ('nvim')
         " deoplete.
-        let g:deoplete#enable_at_startup = 1
-        autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
-        autocmd CompleteDone * pclose " To close preview window of deoplete automagically
-    endif
+        "let g:deoplete#enable_at_startup = 1
+        "autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
+        "autocmd CompleteDone * pclose " To close preview window of deoplete automagically
+    "endif
 endif
 call plug#end()
 
@@ -318,6 +301,7 @@ set cindent
 set scrolloff=2
 set list lcs=trail:·,tab:»·
 set si " Smart indent
+set spell spelllang=en_us
 
 " toggle tmux bar when entering vim
 " autocmd VimEnter,VimLeave * silent !tmux set status

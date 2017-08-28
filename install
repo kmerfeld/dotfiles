@@ -60,6 +60,8 @@ ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 # run vim first basic configs
 vim +PlugInstall +qa
 
+bash ~/.vim/bundle/YouCompleteMe/install.py --all
+
 #######################
 # arch specific stuff #
 #######################
