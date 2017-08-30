@@ -13,6 +13,7 @@ set -gx RANGER_LOAD_DEFAULT_RC FALSE
 set -gx TMUXP_CONFIGDIR $HOME/.config/tmuxp
 
 
+set fish_greeting
 
 function sudo
     if test "$argv" = !!
