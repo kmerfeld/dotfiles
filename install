@@ -3,64 +3,25 @@
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
 # Kyle Merfeld's dotfiles setup
 
-###################
-# Setup Variables #
-###################
-dir=~/dotfiles                    # dotfiles directory
-olddir=~/old_dotfiles             # old dotfiles backup directory
 
-#these files will be copied to the home directory
-files="i3 bashrc vimrc vim tmux.conf xinitrc Xdefaults Xresources tmuxp"     # list of files/folders to symlink in homedir
-config_folder="termite fish ranger tmuxp"
-#These will be installed if you are running arch (with AUR support)
-toInstall="ctags ranger fish unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3"
+# Install stow
+if [[ -f /usr/bin/pacman ]]
+then
+sudo pacman -S stow
+fi
 
-pip="twisted argparse tmuxp service_identity"
-
-
-##########################
-# linking config scripts #
-##########################
-
-# create dotfiles_old in homedir
-echo "Creating $olddir for backup of any existing dotfiles in ~"
-mkdir -p $olddir
-mkdir -p $olddir/config
-echo "...done"
-
-# change to the dotfiles directory
-echo "Changing to the $dir directory"
-cd $dir
-echo "...done"
-
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
-for file in $files; do
-	mv ~/.$file ~/dotfiles_old/
-	echo "Creating symlink to $file in home directory."
-	ln -s $dir/$file ~/.$file
-done
-
-# do the same as the previous block, but for .config folder
-for folder in $config_folder; do
-    rm -rf $XDG_CONFIG_HOME/$folder
-	echo "Creating symlink to $folder in .config directory."
-    mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-    ln -s $dir/config/$folder $XDG_CONFIG_HOME/
-
-done
-
-
-#map nvim files to vim's
-mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-ln -s ~/.vim $XDG_CONFIG_HOME/nvim
-rm $XDG_CONFIG_HOME/nvim/init.vim
-ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
-
+# Symlink the main stuff
+stow common
 
 # run vim first basic configs
 vim +PlugInstall +qa
 
 bash ~/.vim/bundle/YouCompleteMe/install.py --all
+
+#These will be installed if you are running arch
+toInstall="ctags ranger fish unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3"
+
+pip="twisted argparse tmuxp service_identity"
 
 #######################
 # arch specific stuff #

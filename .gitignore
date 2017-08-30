@@ -1,9 +1,8 @@
 *.sw*
 scripts/note/notifi-pass
 vim/bundle/*
-certs/*
 vim/plugged/*
-fish/fish_history
+fish_history
 vim/init.vim
 
 vim/backup/*
@@ -11,3 +10,5 @@ vim/swap/*
 vim/undo/*
 
 git/*
+
+common/vim/plugged/*
