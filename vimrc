@@ -1,5 +1,4 @@
 " Kyle Merfeld's vimrc
-" everything is indented 1 spot for folding's sake
 "
 " sets <leader> to space 
 let mapleader = "\<Space>"
@@ -15,6 +14,9 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
+Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 Plug 'https://github.com/dag/vim-fish'
 Plug 'justinmk/vim-sneak'
 Plug 'godlygeek/tabular'
@@ -25,13 +27,6 @@ Plug 'jacoborus/tender.vim' "Vim airline theme
 Plug 'airblade/vim-gitgutter'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
-
-Plug 'wikitopian/hardmode'
-"Hard Mode is a plugin which disables the arrow keys, the hjkl keys, the page up/down keys, and a handful of other keys which allow one to rely on character-wise navigation. The philosophy behind Hard Mode is that you'll never master Vim's advanced motion and search functionality if you can fall back on the anti-pattern of fumbling around your code with the arrow keys.
-"autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode() " Start in hardmode
-nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-
 
 " use multiple 'v' to select with visual mode
 Plug 'terryma/vim-expand-region'   
@@ -47,12 +42,6 @@ let g:lightline = {
             \ }
 
 
-Plug 'scrooloose/nerdtree'
-"nerdtree
-map <C-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
 Plug 'luochen1990/rainbow'
 "rainbow
 let g:rainbow_active = 1
@@ -65,7 +54,6 @@ let g:rainbow_active = 1
 " hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
 " hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
 
-
 Plug 'easymotion/vim-easymotion'            " move through code with less thought
 " easymotion
 let g:EasyMotion_leader_key = '<Leader>' 
@@ -76,33 +64,22 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
-
-Plug 'honza/vim-snippets'                   " Sometimes press tab to write a code block
-
-
-Plug 'SirVer/ultisnips'                     " more snippets
-" utilisnips
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-
 Plug 'rust-lang/rust.vim'                   " work with rust
 " Rust autoformat
 let g:rustfmt_autosave = 1
 
-Plug 'Valloric/YouCompleteMe'
-let g:ycm_rust_src_path = "/home/kyle/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc"
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
+
+Plug 'sebastianmarkow/deoplete-rust'
+let g:deoplete#sources#rust#racer_binary='/home/kyle/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path="/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
 
 Plug 'racer-rust/vim-racer'                 " work with rust
 " rust-racer
 set hidden
 let g:racer_cmd ="~/.cargo/bin/racer"
-let $RUST_SRC_PATH="/usr/share/doc/rust/html/src" 
+let $RUST_SRC_PATH="/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src" 
 let g:racer_experimental_completer = 1
 
 Plug 'kablamo/vim-git-log'                  " :GitLog to see git commits
@@ -319,6 +296,7 @@ set foldlevel=99
 syntax enable
 
 " Turns on autoComplete
+filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
 " Line wrap type stuff
