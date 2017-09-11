@@ -1,0 +1,8 @@
+[user]
+	email = kmerfeld1@gmail.com
+	name = kyle merfeld
+[push]
+	default = simple
+[core]
+	editor = nvim
+	excludesfile = .vim-bookmarks

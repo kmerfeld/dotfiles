@@ -1,0 +1,53 @@
+#!/bin/bash
+
+vim +PlugInstall +qa
+
+#These will be installed if you are running arch
+toInstall="ctags ranger fish unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3"
+
+pip="twisted argparse tmuxp service_identity"
+
+#######################
+# arch specific stuff #
+#######################
+if [[ -f /etc/pacman.conf ]] 
+then
+	# install neovim python interface
+	#install pacaur
+	w="$(which pacaur)"
+	if [[ $w != /usr/bin/pacaur  ]]  
+
+	then 
+		#install cower (a dependancy of pacaur)
+		echo "installing cower" 
+        sudo pacman -S wget --needed base-devel --noconfirm
+		cd /tmp
+		wget https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
+		tar -xvf cower.tar.gz
+		cd cower 
+		makepkg -sri --skippgpcheck #i should probably fix this to not just skip
+
+		#install pacaur
+		echo "installing pacuar"
+		cd /tmp
+		wget https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
+		tar -xvf pacaur.tar.gz
+		cd pacaur
+		makepkg -sri
+	fi
+
+	#installing files
+	pacaur -S $toInstall --needed --noconfirm
+    sudo pip install $pip
+
+fi
+
+#####################
+#  Set up my shell  #
+#####################
+if [[ $SHELL != "/usr/bin/fish" ]]
+then
+    chsh -s /usr/bin/fish
+    curl -L https://get.oh-my.fish | fish
+
+fi

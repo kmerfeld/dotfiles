@@ -1,74 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
-# Kyle Merfeld's dotfiles setup
+set -e
 
+CONFIG="install.conf.yaml"
+DOTBOT_DIR="dotbot"
 
-# Install stow
-if [[ -f /usr/bin/pacman ]]
-then
-sudo pacman -S stow
-fi
+DOTBOT_BIN="bin/dotbot"
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Symlink the main stuff
-stow common
+cd "${BASEDIR}"
+git submodule update --init --recursive "${DOTBOT_DIR}"
 
-# run vim first basic configs
-vim +PlugInstall +qa
-
-bash ~/.vim/bundle/YouCompleteMe/install.py --all
-
-#These will be installed if you are running arch
-toInstall="ctags ranger fish unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3"
-
-pip="twisted argparse tmuxp service_identity"
-
-#######################
-# arch specific stuff #
-#######################
-if [[ -f /etc/pacman.conf ]] 
-then
-	# install neovim python interface
-	#install pacaur
-	w="$(which pacaur)"
-	if [[ $w != /usr/bin/pacaur  ]]  
-
-	then 
-		#install cower (a dependancy of pacaur)
-		echo "installing cower" 
-        sudo pacman -S wget --needed base-devel --noconfirm
-		cd /tmp
-		wget https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
-		tar -xvf cower.tar.gz
-		cd cower 
-		makepkg -sri --skippgpcheck #i should probably fix this to not just skip
-
-		#install pacaur
-		echo "installing pacuar"
-		cd /tmp
-		wget https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
-		tar -xvf pacaur.tar.gz
-		cd pacaur
-		makepkg -sri
-	fi
-
-	#installing files
-	pacaur -S $toInstall --needed --noconfirm
-    sudo pip install $pip
-
-fi
-
-#######################
-#  get some git stuff #
-#######################
-git config --global core.excludesfile '.vim-bookmarks'
-
-#####################
-#  Set up my shell  #
-#####################
-if [[ $SHELL != "/usr/bin/fish" ]]
-then
-    chsh -s /usr/bin/fish
-    curl -L https://get.oh-my.fish | fish
-
-fi
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"

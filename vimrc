@@ -16,13 +16,15 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
 Plug 'https://github.com/dag/vim-fish'
-
 Plug 'justinmk/vim-sneak'
-
 Plug 'godlygeek/tabular'
-
-
 Plug 'plasticboy/vim-markdown'
+Plug 'morhetz/gruvbox'                      " ColorScheme of choice
+Plug 'dodie/vim-disapprove-deep-indentation' " I love this plugin, but it doesnt work well with my rust code
+Plug 'jacoborus/tender.vim' "Vim airline theme
+Plug 'airblade/vim-gitgutter'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 
 Plug 'wikitopian/hardmode'
@@ -31,16 +33,9 @@ Plug 'wikitopian/hardmode'
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 
-"Plug 'dodie/vim-disapprove-deep-indentation' " I love this plugin, but it doesnt work well with my rust code
-
-
 " use multiple 'v' to select with visual mode
 Plug 'terryma/vim-expand-region'   
 vmap v <Plug>(expand_region_expand)
-
-
-Plug 'morhetz/gruvbox'                      " ColorScheme of choice
-
 
 Plug 'itchyny/lightline.vim'
 "lightline
@@ -52,22 +47,10 @@ let g:lightline = {
             \ }
 
 
-Plug 'jacoborus/tender.vim' "Vim airline theme
-
-
-Plug 'airblade/vim-gitgutter'
-
-
 Plug 'scrooloose/nerdtree'
 "nerdtree
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-
-Plug 'Xuyuanp/nerdtree-git-plugin'
 
 
 Plug 'luochen1990/rainbow'
@@ -119,7 +102,7 @@ Plug 'racer-rust/vim-racer'                 " work with rust
 " rust-racer
 set hidden
 let g:racer_cmd ="~/.cargo/bin/racer"
-let $RUST_SRC_PATH="/usr/share/doc/rust/html/src"
+let $RUST_SRC_PATH="/usr/share/doc/rust/html/src" 
 let g:racer_experimental_completer = 1
 
 Plug 'kablamo/vim-git-log'                  " :GitLog to see git commits

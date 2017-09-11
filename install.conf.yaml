@@ -1,0 +1,35 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~', '~/.config']
+
+- link:
+    ~/.bashrc:
+    ~/.i3:
+    ~/.Xdefaults:
+    ~/.Xresources:
+    ~/.xinitrc:
+    ~/.gitconfig:
+    ~/.tmux.conf:
+    ~/.vim:
+    ~/.vimrc:
+    ~/.config/fish:
+      create: true
+      path: config/fish
+    ~/.config/ranger:
+      create: true
+      path: config/ranger
+    ~/.config/termite:
+      create: true
+      path: config/termite
+    ~/.config/tmuxp:
+      create: true
+      path: config/tmuxp
+
+
+- shell:
+    - git update-submodules
+    - vim +PlugInstall +qa
+    - ~/dotfiles/install_more
