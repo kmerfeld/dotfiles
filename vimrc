@@ -293,7 +293,9 @@ set foldlevel=99
 
 
 " set syntax highlighting
-syntax enable
+if !exists("g:syntax_on")
+    syntax enable
+endif
 
 " Turns on autoComplete
 filetype plugin on
