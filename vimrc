@@ -18,16 +18,9 @@ Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 Plug 'https://github.com/dag/vim-fish'
-Plug 'justinmk/vim-sneak'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
 Plug 'morhetz/gruvbox'                      " ColorScheme of choice
 Plug 'dodie/vim-disapprove-deep-indentation' " I love this plugin, but it doesnt work well with my rust code
-Plug 'jacoborus/tender.vim' "Vim airline theme
 Plug 'airblade/vim-gitgutter'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
 " use multiple 'v' to select with visual mode
 Plug 'terryma/vim-expand-region'   
 vmap v <Plug>(expand_region_expand)
@@ -54,16 +47,6 @@ let g:rainbow_active = 1
 " hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
 " hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
 
-Plug 'easymotion/vim-easymotion'            " move through code with less thought
-" easymotion
-let g:EasyMotion_leader_key = '<Leader>' 
-map <Leader> <Plug>(easymotion-prefix)
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-
 Plug 'rust-lang/rust.vim'                   " work with rust
 " Rust autoformat
 let g:rustfmt_autosave = 1
@@ -77,18 +60,9 @@ let g:deoplete#sources#rust#rust_source_path="/home/kyle/.rustup/toolchains/nigh
 
 Plug 'racer-rust/vim-racer'                 " work with rust
 " rust-racer
-set hidden
 let g:racer_cmd ="~/.cargo/bin/racer"
 let $RUST_SRC_PATH="/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src" 
 let g:racer_experimental_completer = 1
-
-Plug 'kablamo/vim-git-log'                  " :GitLog to see git commits
-
-Plug 'jreybert/vimagit'
-
-
-Plug 'metakirby5/codi.vim'
-
 
 Plug 'vimwiki/vimwiki'                      " Personal wiki 
 " will place a timestamp with f3
@@ -140,12 +114,7 @@ autocmd FileType vimwiki set spell spelllang=en_gb
 
 Plug 'kien/ctrlp.vim'                       " Navigate files
 
-
 Plug 'nvie/vim-flake8'                      " Python formatting
-
-
-Plug 'tpope/vim-obsession'                  " save layout?
-
 
 Plug 'ludovicchabant/vim-gutentags'         " ctags
 let g:tagbar_type_rust = {
@@ -169,21 +138,6 @@ let g:gutentags_cache_dir = "~/.tags"
 Plug 'majutsushi/tagbar'                    " <leader>b to see ctags
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
-
-Plug 'christoomey/vim-tmux-navigator'       " Work together with tmux
-let g:tmux_navigator_no_mappings = 1
-
-" lets you use ctl+hjlk for navigation in tmux
-nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
-nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
-nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
-nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
-nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
-
-" This next line is to make sure <C-H> works in tmux
-nnoremap <silent> <BS> :TmuxNavigateLeft<cr>       
-
-
 Plug 'w0rp/ale'
 "ale 
 let ale_enabled = 1
@@ -202,35 +156,6 @@ nmap <Leader>m <Plug>BookmarkToggle
 let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
 
-
-"Plug 'sebastianmarkow/deoplete-rust'
-" let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
-" let g:deoplete#sources#rust#rust_source_path="/home/kyle/.rust/rust/src"
-" "let g:deoplete#sources#rust#disable_keymap=1
-" let g:deoplete#sources#rust#documentation_max_height=20
-" nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
-" nmap <buffer> K  <plug>DeopleteRustShowDocumentation
-
-
-Plug 'cespare/vim-toml'
-
-
-Plug 'timonv/vim-cargo'
-
-" The following block is for NeoVim plugins
-if has ('nvim')
-    Plug 'davidhalter/jedi-vim'             " Python support
-    "Plug 'zchee/deoplete-jedi'              " Python support neovim
-    "Plug 'zchee/deoplete-clang'             " C deoplete
-    " This one updates plugins, keep it last
-    "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
-    "if has ('nvim')
-        " deoplete.
-        "let g:deoplete#enable_at_startup = 1
-        "autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
-        "autocmd CompleteDone * pclose " To close preview window of deoplete automagically
-    "endif
-endif
 call plug#end()
 
 
@@ -254,7 +179,6 @@ map <leader>; $
 " For regular expressions turn magic on
 set magic
 set smarttab
-set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
@@ -273,9 +197,9 @@ set spell spelllang=en_us
 cmap w!! w !sudo tee % > /dev/null
 
 " make swap files less anoying
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
+set undodir=~/.vim/undo
 
 filetype plugin indent on
 set encoding=utf-8
@@ -299,7 +223,6 @@ endif
 
 " Turns on autoComplete
 filetype plugin on
-set omnifunc=syntaxcomplete#Complete
 
 " Line wrap type stuff
 set wrap
@@ -324,7 +247,7 @@ set novisualbell
 
 set tm=500
 
-" show when leader is pressed
+" Shows partial commands
 set showcmd 				
 
 " Return to last edit position when opening files
@@ -335,7 +258,7 @@ autocmd BufReadPost *
 
 " Set 81st column to be highlighted
 highlight ColorColumn ctermbg=magenta ctermfg=black
-call matchadd('ColorColumn', '\%81v', 100)
+let &colorcolumn=join(range(81,335), ',')
 
 " http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 " Smart copy and paste
@@ -352,11 +275,6 @@ map <leader>v :vnew<cr>
 map <leader>h :new<cr>
 map <leader>x :bd<cr>
 
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
 
 " This allows buffers to be hidden if you've modified a buffer.
 " This is almost a must if you wish to use buffers in this way.
@@ -428,5 +346,4 @@ endif
 
 set splitbelow
 set splitright
-
 
