@@ -52,7 +52,7 @@ Plug 'rust-lang/rust.vim'                   " work with rust
 let g:rustfmt_autosave = 1
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_at_startup = 1
 
 Plug 'sebastianmarkow/deoplete-rust'
 let g:deoplete#sources#rust#racer_binary='/home/kyle/.cargo/bin/racer'
@@ -63,6 +63,17 @@ Plug 'racer-rust/vim-racer'                 " work with rust
 let g:racer_cmd ="~/.cargo/bin/racer"
 let $RUST_SRC_PATH="/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src" 
 let g:racer_experimental_completer = 1
+
+Plug 'pangloss/vim-javascript' 
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+
+
+Plug 'chrisbra/Recover.vim'
+"Auto delete unedited swap files
+let g:RecoverPlugin_Delete_Unmodified_Swapfile = 1
+
+Plug 'botandrose/vim-testkey'
 
 Plug 'vimwiki/vimwiki'                      " Personal wiki 
 " will place a timestamp with f3
@@ -347,3 +358,6 @@ endif
 set splitbelow
 set splitright
 
+"Swap a and i because Im stubborn
+nnoremap a i
+nnoremap i a
