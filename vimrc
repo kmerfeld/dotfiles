@@ -349,5 +349,17 @@ nnoremap a i
 nnoremap i a
 
 "Tmux bindings
-"
-nmap \r :!tmux send-keys -t 0:1.2 C-p C-j <CR><CR>
+function! Test()
+    let panes = system('tmux list-panes | wc -l')
+    if panes < 2
+        call system('tmux split-window') 
+    endif
+    call system('tmux send-keys -t .+ C-p C-j')
+endfunction
+
+command! Test call Test()
+nmap \t :Test<CR><CR>
+
+
+
+nmap \r :!tmux send-keys -t 1.2 C-p C-j <CR><CR>
