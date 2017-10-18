@@ -19,34 +19,32 @@ Plug 'itchyny/lightline.vim'                    "Statusbar
 Plug 'luochen1990/rainbow'                      "Shows matching paren
 Plug 'morhetz/gruvbox'                          "ColorScheme of choice
 
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-let g:rainbow_active = 1
-let g:lightline = {
-            \ 'component_function': {
-            \   'filetype': 'MyFiletype',
-            \   'fileformat': 'MyFileformat',
-            \ }
-            \ }
-
 
 "More Functionallity
 """"""""""""""""""""
 " use multiple 'v' to select with visual mode
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'sebastianmarkow/deoplete-rust'        " Rust autocomplete
 Plug 'ludovicchabant/vim-gutentags'         " ctags
 Plug 'MattesGroeger/vim-bookmarks'          "<leader>m to bookmark
 Plug 'terryma/vim-expand-region'            "lazily select region 
 Plug 'racer-rust/vim-racer'                 " work with rust
+Plug 'chrisbra/Recover.vim'                 " Makes swap files better
+Plug 'sheerun/vim-polyglot'                 " Acts like a language pack
 Plug 'rust-lang/rust.vim'                   " work with rust
+Plug 'tpope/vim-surround'                   " <>()[] ect.
 Plug 'ervandew/supertab'                    " tab but better
+Plug 'junegunn/goyo.vim'                    " Distraction free writing
 Plug 'majutsushi/tagbar'                    " <leader>b to see ctags
+Plug 'junegunn/fzf.vim'                     " search files
 Plug 'vimwiki/vimwiki'                      " Personal wiki 
-Plug 'nvie/vim-flake8'                      " Python formatting
-Plug 'kien/ctrlp.vim'                       " Navigate files
 Plug 'w0rp/ale'                             " Syntax
 
+
+
+
+
+call plug#end()
 
 "Under Consideration
 """"""""""""""""""""
@@ -57,6 +55,22 @@ Plug 'w0rp/ale'                             " Syntax
 """"""""""""""""""""
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
+
+
+"Plugin Config
+""""""""""""""
+
+"Looks config
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:rainbow_active = 1
+let g:lightline = {
+            \ 'component_function': {
+            \   'filetype': 'MyFiletype',
+            \   'fileformat': 'MyFileformat',
+            \ }
+            \ }
 
 
 vmap v <Plug>(expand_region_expand)
@@ -72,16 +86,22 @@ let g:racer_cmd ='~/.cargo/bin/racer'
 let $RUST_SRC_PATH='/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src' 
 let g:racer_experimental_completer = 1
 
-Plug 'pangloss/vim-javascript' 
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_ngdoc = 1
+
+"Distraction free editing
+function! ProseMode()
+  call goyo#execute(0, [])
+  set spell noci nosi noai nolist noshowmode noshowcmd
+  set complete+=s
+endfunction
+
+command! ProseMode call ProseMode()
+nmap \p :ProseMode<CR>
 
 
-Plug 'chrisbra/Recover.vim'
 "Auto delete unedited swap files
 let g:RecoverPlugin_Delete_Unmodified_Swapfile = 1
 
-Plug 'vimwiki/vimwiki'                      " Personal wiki 
+
 
 
 " will place a timestamp with f3
@@ -89,11 +109,6 @@ Plug 'vimwiki/vimwiki'                      " Personal wiki
 let g:vimwiki_hl_headers = 1
 map <F3> :r! date +"\%Y-\%m-\%d \%H:\%M:\%S"<ESC>0j    
 let g:vimwiki_folding='expr'
-function! OpenSecretCalendar()
-    call vimwiki#base#goto_index(2)
-    execute ':Calendar'
-endfunction
-nnoremap <leader>c :call OpenSecretCalendar()<cr>
 
 let g:vimwiki_folding='expr' "this allows the folding to work for markdown
 
@@ -164,7 +179,7 @@ nmap <Leader>m <Plug>BookmarkToggle
 let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
 
-call plug#end()
+
 
 
 """""""""""""""""""
@@ -269,7 +284,6 @@ vmap <Leader>p "+p
 vmap <Leader>P "+P
 
 " some nice bindings
-map <leader>t :terminal<cr>
 map <leader>v :vnew<cr>
 map <leader>h :new<cr>
 map <leader>x :bd<cr>
@@ -333,3 +347,7 @@ set splitright
 "Swap a and i because Im stubborn
 nnoremap a i
 nnoremap i a
+
+"Tmux bindings
+"
+nmap \r :!tmux send-keys -t 0:1.2 C-p C-j <CR><CR>
