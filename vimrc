@@ -1,7 +1,7 @@
 " Kyle Merfeld's vimrc
 "
 " sets <leader> to space 
-let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
 
 
 """""""""""""""""""
@@ -9,24 +9,20 @@ let mapleader = "\<Space>"
 """""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
-Plug 'nathanaelkane/vim-indent-guides'
+                            
+"Looks
+""""""
+Plug 'dodie/vim-disapprove-deep-indentation'    "ಠ_ಠ
+Plug 'nathanaelkane/vim-indent-guides'          "shows indents more
+Plug 'airblade/vim-gitgutter'                   "shows changed lines
+Plug 'itchyny/lightline.vim'                    "Statusbar
+Plug 'luochen1990/rainbow'                      "Shows matching paren
+Plug 'morhetz/gruvbox'                          "ColorScheme of choice
+
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
-
-Plug 'ervandew/supertab'
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
-Plug 'https://github.com/dag/vim-fish'
-Plug 'morhetz/gruvbox'                      " ColorScheme of choice
-Plug 'dodie/vim-disapprove-deep-indentation' " I love this plugin, but it doesnt work well with my rust code
-Plug 'airblade/vim-gitgutter'
-" use multiple 'v' to select with visual mode
-Plug 'terryma/vim-expand-region'   
-vmap v <Plug>(expand_region_expand)
-
-Plug 'itchyny/lightline.vim'
-"lightline
+let g:rainbow_active = 1
 let g:lightline = {
             \ 'component_function': {
             \   'filetype': 'MyFiletype',
@@ -35,41 +31,51 @@ let g:lightline = {
             \ }
 
 
-Plug 'luochen1990/rainbow'
-"rainbow
-let g:rainbow_active = 1
-
-
-"Plug 'chrisbra/csv.vim'                     " work with csv files
-" CSV
-" highlight selected column
-" let g:csv_highlight_column = 'y'
-" hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
-" hi CSVColumnOdd  term=bold ctermbg=5 guibg=DarkMagenta
-
+"More Functionallity
+""""""""""""""""""""
+" use multiple 'v' to select with visual mode
+Plug 'sebastianmarkow/deoplete-rust'        " Rust autocomplete
+Plug 'ludovicchabant/vim-gutentags'         " ctags
+Plug 'MattesGroeger/vim-bookmarks'          "<leader>m to bookmark
+Plug 'terryma/vim-expand-region'            "lazily select region 
+Plug 'racer-rust/vim-racer'                 " work with rust
 Plug 'rust-lang/rust.vim'                   " work with rust
+Plug 'ervandew/supertab'                    " tab but better
+Plug 'majutsushi/tagbar'                    " <leader>b to see ctags
+Plug 'vimwiki/vimwiki'                      " Personal wiki 
+Plug 'nvie/vim-flake8'                      " Python formatting
+Plug 'kien/ctrlp.vim'                       " Navigate files
+Plug 'w0rp/ale'                             " Syntax
+
+
+"Under Consideration
+""""""""""""""""""""
+"   These plugins are in a trial period of whether or not to keep
+
+
+"This one is intentionally last
+""""""""""""""""""""
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+
+vmap v <Plug>(expand_region_expand)
+let g:SuperTabDefaultCompletionType = '<c-n>'
 " Rust autoformat
 let g:rustfmt_autosave = 1
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
-
-Plug 'sebastianmarkow/deoplete-rust'
 let g:deoplete#sources#rust#racer_binary='/home/kyle/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path="/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+let g:deoplete#sources#rust#rust_source_path='/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 
-Plug 'racer-rust/vim-racer'                 " work with rust
 " rust-racer
-let g:racer_cmd ="~/.cargo/bin/racer"
-let $RUST_SRC_PATH="/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src" 
+let g:racer_cmd ='~/.cargo/bin/racer'
+let $RUST_SRC_PATH='/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src' 
 let g:racer_experimental_completer = 1
 
-Plug 'vimwiki/vimwiki'                      " Personal wiki 
+
 " will place a timestamp with f3
 " https://box.matto.nl/systemnotesvimwiki.html
 let g:vimwiki_hl_headers = 1
 map <F3> :r! date +"\%Y-\%m-\%d \%H:\%M:\%S"<ESC>0j    
-" vimwiki
 let g:vimwiki_folding='expr'
 function! OpenSecretCalendar()
     call vimwiki#base#goto_index(2)
@@ -93,18 +99,18 @@ function! VimwikiLinkHandler(link)
     " Use Vim to open external files with the 'vfile:' scheme.  E.g.:
     "   1) [[vfile:~/Code/PythonProject/abc123.py]]
     "   2) [[vfile:./|Wiki Home]]
-    let link = a:link
-    if link =~# '^vfile:'
-        let link = link[1:]
+    let l:link = a:link
+    if l:link =~# '^vfile:'
+        let l:link = l:link[1:]
     else
         return 0
     endif
-    let link_infos = vimwiki#base#resolve_link(link)
-    if link_infos.filename == ''
+    let l:link_infos = vimwiki#base#resolve_link(l:link)
+    if l:link_infos.filename ==# ''
         echomsg 'Vimwiki Error: Unable to resolve link!'
         return 0
     else
-        exe 'tabnew ' . fnameescape(link_infos.filename)
+        exe 'tabnew ' . fnameescape(l:link_infos.filename)
         return 1
     endif
 endfunction
@@ -112,11 +118,6 @@ endfunction
 
 autocmd FileType vimwiki set spell spelllang=en_gb
 
-Plug 'kien/ctrlp.vim'                       " Navigate files
-
-Plug 'nvie/vim-flake8'                      " Python formatting
-
-Plug 'ludovicchabant/vim-gutentags'         " ctags
 let g:tagbar_type_rust = {
             \ 'ctagstype' : 'rust',
             \ 'kinds' : [
@@ -132,18 +133,13 @@ let g:tagbar_type_rust = {
             \}
 
 set statusline+=%{gutentags#statusline()}
-let g:gutentags_cache_dir = "~/.tags"
+let g:gutentags_cache_dir = '~/.tags'
 
-
-Plug 'majutsushi/tagbar'                    " <leader>b to see ctags
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
-Plug 'w0rp/ale'
 "ale 
-let ale_enabled = 1
+let g:ale_enabled = 1
 
-
-Plug 'MattesGroeger/vim-bookmarks'
 "vim bookmarks
 highlight BookmarkSign ctermbg=red ctermfg=black
 highlight BookmarkAnnotationSign ctermbg=red ctermfg=black
@@ -162,12 +158,6 @@ call plug#end()
 """""""""""""""""""
 "    Settings	  "
 """""""""""""""""""
-"Format json
-com! FormatJSON %!python -m json.tool
-"vew .deck and .json as json files
-autocmd BufNewFile,BufRead *.json set ft=javascript
-autocmd BufNewFile,BufRead *.deck set ft=javascript
-
 set completeopt=longest,menuone
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -186,11 +176,8 @@ set autoindent
 set cindent
 set scrolloff=2
 set list lcs=trail:·,tab:»·
-set si " Smart indent
+set smartindent
 set spell spelllang=en_us
-
-" toggle tmux bar when entering vim
-" autocmd VimEnter,VimLeave * silent !tmux set status
 
 " :w!! 
 " write the file when you accidentally opened it without the right (root) privileges
@@ -199,7 +186,7 @@ cmap w!! w !sudo tee % > /dev/null
 " make swap files less anoying
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
-set undodir=~/.vim/undo
+set undofile
 
 filetype plugin indent on
 set encoding=utf-8
@@ -217,7 +204,7 @@ set foldlevel=99
 
 
 " set syntax highlighting
-if !exists("g:syntax_on")
+if !exists('g:syntax_on')
     syntax enable
 endif
 
@@ -245,7 +232,7 @@ set hlsearch
 set noerrorbells 			
 set novisualbell
 
-set tm=500
+set timeoutlen=500
 
 " Shows partial commands
 set showcmd 				
@@ -280,35 +267,19 @@ map <leader>x :bd<cr>
 " This is almost a must if you wish to use buffers in this way.
 set hidden
 
-" To open a new empty buffer
-" This replaces :tabnew which I used to bind to this mapping
-nmap <leader>T :enew<cr>
-
-" Move to the next buffer
-nmap <leader>l :bnext<CR>
-
-" Move to the previous buffer
-nmap <leader>h :bprevious<CR>
-
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd #<CR>
-
-" Show all open buffers and their status
-nmap <leader>bl :ls<CR>
-
 " Set the current line to be highlighted black
-" Black because it doesnt interfere with my colorscheme,
-" and I have this so that it is easyer to see where I am
+" Black because it doesn't interfere with my color scheme,
+" and I have this so that it is easier to see where I am
 set cursorline
 highlight  CursorLine ctermbg=black
 
-" Changes terminal cursor to red. makes sure I know where I am
+" Changes terminal cursor to red. Makes sure I know where I am
 highlight TermCursor ctermfg=red guifg=red
 
 " Set vim to 256 color mode
 set t_Co=256
 " set colorscheme
+"
 set background=dark
 colorscheme gruvbox
 
