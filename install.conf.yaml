@@ -33,3 +33,4 @@
     - git update-submodules
     - vim +PlugInstall +qa
     - ~/dotfiles/install_more
+    - pip install --user tmuxp
