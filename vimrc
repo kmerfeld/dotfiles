@@ -56,6 +56,7 @@ Plug 'w0rp/ale'                             " Syntax
 "This one is intentionally last
 """"""""""""""""""""
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
 
 
 vmap v <Plug>(expand_region_expand)
@@ -70,6 +71,17 @@ let g:deoplete#sources#rust#rust_source_path='/home/kyle/.rustup/toolchains/nigh
 let g:racer_cmd ='~/.cargo/bin/racer'
 let $RUST_SRC_PATH='/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src' 
 let g:racer_experimental_completer = 1
+
+Plug 'pangloss/vim-javascript' 
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+
+
+Plug 'chrisbra/Recover.vim'
+"Auto delete unedited swap files
+let g:RecoverPlugin_Delete_Unmodified_Swapfile = 1
+
+Plug 'vimwiki/vimwiki'                      " Personal wiki 
 
 
 " will place a timestamp with f3
@@ -318,3 +330,6 @@ endif
 set splitbelow
 set splitright
 
+"Swap a and i because Im stubborn
+nnoremap a i
+nnoremap i a
