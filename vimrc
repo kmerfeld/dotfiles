@@ -378,4 +378,3 @@ function! RemoteSendCommand()
         echo 'This needs to be run in tmux'
     endif
 endfunction
-
