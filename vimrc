@@ -352,21 +352,38 @@ nnoremap i a
 "
 " when triggering this command, vim will grab your path and line location and pass it along
 map <Leader>t :call RemoteSendCommand()<CR><CR>
+map <Leader>r :call RemoteSendCommand()<CR><CR>
+map <Leader>e :call RemoteSendCommand()<CR><CR>
 
 "bool whether command window open
 let g:pane_open = 0
-function! RemoteSendCommand()
 
+let g:rtmux = {'rust': 'cargo run',
+            \ 'vim': 'ls',
+            \} 
+let g:ttmux = {'rust': 'cargo test',
+            \ 'vim': 'pwd',
+            \}
+let g:ctmux = {'rust': 'cargo check',
+            \ 'vim': 'pwd',
+            \}
+
+function! RemoteSendCommand()
     if exists('$TMUX')
         let a:cmd = 'clear'
-        if &filetype ==# 'rust' 
-            let a:cmd = 'cargo run'
+        "if what ==# 'run'
+        if 1 ==# 1
+            let a:cmd = g:rtmux[&filetype]
+        elseif what ==# 'test'
+            let a:cmd = g:ttmux[&filetype]
+        elseif what ==# 'check'
+            let a:cmd = g:ctmux[&filetype]
         endif
 
         if g:pane_open == 0
             execute '! tmux splitw -h -d'
             execute "! tmux send-keys -t .2 \"" . a:cmd . "\" C-m"
-            execute '! tmux last pane'
+            execute '! tmux last pane' 
             let g:pane_open = 1
 
         else  
@@ -378,3 +395,4 @@ function! RemoteSendCommand()
         echo 'This needs to be run in tmux'
     endif
 endfunction
+
