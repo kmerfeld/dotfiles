@@ -27,7 +27,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'sebastianmarkow/deoplete-rust'        " Rust autocomplete
 Plug 'ludovicchabant/vim-gutentags'         " ctags
 Plug 'MattesGroeger/vim-bookmarks'          "<leader>m to bookmark
+Plug 'alcesleo/vim-uppercase-sql'           " Auto type sql uppercase
 Plug 'terryma/vim-expand-region'            "lazily select region 
+Plug 'mechatroner/rainbow_csv'              " Colors csvs
 Plug 'racer-rust/vim-racer'                 " work with rust
 Plug 'chrisbra/Recover.vim'                 " Makes swap files better
 Plug 'sheerun/vim-polyglot'                 " Acts like a language pack
@@ -359,7 +361,7 @@ map <Leader>e :call RemoteSendCommand()<CR><CR>
 let g:pane_open = 0
 
 let g:rtmux = {'rust': 'cargo run',
-            \ 'vim': 'ls',
+            \ 'vim': 'pwd',
             \} 
 let g:ttmux = {'rust': 'cargo test',
             \ 'vim': 'pwd',
@@ -373,11 +375,11 @@ function! RemoteSendCommand()
         let a:cmd = 'clear'
         "if what ==# 'run'
         if 1 ==# 1
-            let a:cmd = g:rtmux[&filetype]
+            let a:cmd = get(g:rtmux, &filetype, 'ls')
         elseif what ==# 'test'
-            let a:cmd = g:ttmux[&filetype]
+            let a:cmd = get(g:ttmux, &filetype, 'ls')
         elseif what ==# 'check'
-            let a:cmd = g:ctmux[&filetype]
+            let a:cmd = get(g:ctmux, &filetype, 'ls')
         endif
 
         if g:pane_open == 0
@@ -394,5 +396,7 @@ function! RemoteSendCommand()
     else
         echo 'This needs to be run in tmux'
     endif
+
+    echo a:cmd
 endfunction
 
