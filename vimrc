@@ -42,6 +42,7 @@ Plug 'junegunn/fzf.vim'                     " search files
 Plug 'vimwiki/vimwiki'                      " Personal wiki 
 Plug 'w0rp/ale'                             " Syntax
 
+Plug 'kmerfeld/tmux_test'
 
 
 
@@ -100,10 +101,19 @@ command! ProseMode call ProseMode()
 nmap \p :ProseMode<CR>
 
 
+"tmux_test
+let g:rtmux = {'rust': 'cargo run',
+            \ 'vim': 'pwd',
+            \} 
+let g:ttmux = {'rust': 'cargo test',
+            \ 'vim': 'pwd',
+            \}
+let g:ctmux = {'rust': 'cargo check',
+            \ 'vim': 'pwd',
+            \}
+
 "Auto delete unedited swap files
 let g:RecoverPlugin_Delete_Unmodified_Swapfile = 1
-
-
 
 
 " will place a timestamp with f3
@@ -215,7 +225,7 @@ cmap w!! w !sudo tee % > /dev/null
 " make swap files less anoying
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
-set undofile
+set undodir=~/.vim/undo
 
 filetype plugin indent on
 set encoding=utf-8
@@ -350,53 +360,5 @@ set splitright
 nnoremap a i
 nnoremap i a
 
-"Tmux bindings
-"
-" when triggering this command, vim will grab your path and line location and pass it along
-map <Leader>t :call RemoteSendCommand()<CR><CR>
-map <Leader>r :call RemoteSendCommand()<CR><CR>
-map <Leader>e :call RemoteSendCommand()<CR><CR>
 
-"bool whether command window open
-let g:pane_open = 0
-
-let g:rtmux = {'rust': 'cargo run',
-            \ 'vim': 'pwd',
-            \} 
-let g:ttmux = {'rust': 'cargo test',
-            \ 'vim': 'pwd',
-            \}
-let g:ctmux = {'rust': 'cargo check',
-            \ 'vim': 'pwd',
-            \}
-
-function! RemoteSendCommand()
-    if exists('$TMUX')
-        let a:cmd = 'clear'
-        "if what ==# 'run'
-        if 1 ==# 1
-            let a:cmd = get(g:rtmux, &filetype, 'ls')
-        elseif what ==# 'test'
-            let a:cmd = get(g:ttmux, &filetype, 'ls')
-        elseif what ==# 'check'
-            let a:cmd = get(g:ctmux, &filetype, 'ls')
-        endif
-
-        if g:pane_open == 0
-            execute '! tmux splitw -h -d'
-            execute "! tmux send-keys -t .2 \"" . a:cmd . "\" C-m"
-            execute '! tmux last pane' 
-            let g:pane_open = 1
-
-        else  
-            echo 'Closing pane'
-            execute '! tmux kill-pane -t .2'
-            let g:pane_open = 0
-        endif
-    else
-        echo 'This needs to be run in tmux'
-    endif
-
-    echo a:cmd
-endfunction
 
