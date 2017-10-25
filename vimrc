@@ -26,23 +26,27 @@ Plug 'morhetz/gruvbox'                          "ColorScheme of choice
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'sebastianmarkow/deoplete-rust'        " Rust autocomplete
 Plug 'ludovicchabant/vim-gutentags'         " ctags
-Plug 'MattesGroeger/vim-bookmarks'          "<leader>m to bookmark
+Plug 'MattesGroeger/vim-bookmarks'          " <leader>m to bookmark
 Plug 'alcesleo/vim-uppercase-sql'           " Auto type sql uppercase
-Plug 'terryma/vim-expand-region'            "lazily select region 
+Plug 'terryma/vim-expand-region'            " lazily select region 
 Plug 'mechatroner/rainbow_csv'              " Colors csvs
+Plug 'ivalkeen/vim-simpledb'                " Allows you to connect to db 
 Plug 'racer-rust/vim-racer'                 " work with rust
 Plug 'chrisbra/Recover.vim'                 " Makes swap files better
 Plug 'sheerun/vim-polyglot'                 " Acts like a language pack
 Plug 'rust-lang/rust.vim'                   " work with rust
-Plug 'tpope/vim-surround'                   " <>()[] ect.
+Plug 'kmerfeld/tmux_test'                   " run tests
 Plug 'ervandew/supertab'                    " tab but better
 Plug 'junegunn/goyo.vim'                    " Distraction free writing
 Plug 'majutsushi/tagbar'                    " <leader>b to see ctags
 Plug 'junegunn/fzf.vim'                     " search files
 Plug 'vimwiki/vimwiki'                      " Personal wiki 
+Plug 'kien/ctrlp.vim'                       " Should move to fzf, but im lazy
+Plug 'exu/pgsql.vim'                        " Postgresql syntax
 Plug 'w0rp/ale'                             " Syntax
 
-Plug 'kmerfeld/tmux_test'
+
+
 
 
 
@@ -89,6 +93,9 @@ let g:racer_cmd ='~/.cargo/bin/racer'
 let $RUST_SRC_PATH='/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src' 
 let g:racer_experimental_completer = 1
 
+
+"Set default sql syntax
+let g:sql_type_default = 'pgsql'
 
 "Distraction free editing
 function! ProseMode()
