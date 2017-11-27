@@ -14,7 +14,7 @@ exec --no-startup-id nextcloud
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift
 exec --no-startup-id task sync
-exec --no-startup-id dunst
+exec --no-startup-id twmn
 
 #set mod key
 set $mod Mod1
@@ -78,7 +78,8 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+#bindsym $mod+Return exec termite
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+q kill
