@@ -46,6 +46,9 @@ Plug 'exu/pgsql.vim'                        " Postgresql syntax
 Plug 'w0rp/ale'                             " Syntax
 
 
+"Nvim
+Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/denite.nvim'
 
 
 
@@ -61,6 +64,7 @@ call plug#end()
 "This one is intentionally last
 """"""""""""""""""""
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 
 
@@ -96,6 +100,23 @@ let g:racer_experimental_completer = 1
 
 "Set default sql syntax
 let g:sql_type_default = 'pgsql'
+
+"rls
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ }
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
 
 "Distraction free editing
 function! ProseMode()
