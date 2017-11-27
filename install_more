@@ -3,7 +3,7 @@
 vim +PlugInstall +qa
 
 #These will be installed if you are running arch
-toInstall="ctags ranger fish unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3"
+toInstall="alacritty-git ctags ranger fish unclutter python-pip python2-neovim python-neovim ttf-hack termite pass tmux dmenu vim neovim i3"
 
 pip="twisted argparse tmuxp service_identity"
 

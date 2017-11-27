@@ -15,6 +15,9 @@
     ~/.tmux.conf:
     ~/.vim:
     ~/.vimrc:
+    ~/.config/nvim:
+      create: true
+      path: config/nvim
     ~/.config/fish:
       create: true
       path: config/fish
@@ -27,6 +30,9 @@
     ~/.config/tmuxp:
       create: true
       path: config/tmuxp
+    ~/.config/alacritty:
+      create: true
+      path: config/alacritty
 
 
 - shell:
