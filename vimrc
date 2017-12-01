@@ -29,13 +29,12 @@ Plug 'ludovicchabant/vim-gutentags'         " ctags
 Plug 'MattesGroeger/vim-bookmarks'          " <leader>m to bookmark
 Plug 'alcesleo/vim-uppercase-sql'           " Auto type sql uppercase
 Plug 'terryma/vim-expand-region'            " lazily select region 
-Plug 'mechatroner/rainbow_csv'              " Colors csvs
 Plug 'ivalkeen/vim-simpledb'                " Allows you to connect to db 
 Plug 'racer-rust/vim-racer'                 " work with rust
 Plug 'chrisbra/Recover.vim'                 " Makes swap files better
 Plug 'sheerun/vim-polyglot'                 " Acts like a language pack
 Plug 'rust-lang/rust.vim'                   " work with rust
-Plug 'kmerfeld/tmux_test'                   " run tests
+Plug 'kmerfeld/term_test'                   " run tests
 Plug 'ervandew/supertab'                    " tab but better
 Plug 'junegunn/goyo.vim'                    " Distraction free writing
 Plug 'majutsushi/tagbar'                    " <leader>b to see ctags
@@ -318,14 +317,11 @@ let &colorcolumn=join(range(81,335), ',')
 " Smart copy and paste
 vmap <Leader>y "+y
 vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
 vmap <Leader>p "+p
-vmap <Leader>P "+P
 
 " some nice bindings
 map <leader>v :vnew<cr>
-map <leader>h :new<cr>
+map <leader>V :new<cr>
 map <leader>x :bd<cr>
 
 
@@ -367,11 +363,14 @@ if has ('nvim')
     tnoremap <C-j> <C-\><C-n><C-w>j
     tnoremap <C-k> <C-\><C-n><C-w>k
     tnoremap <C-l> <C-\><C-n><C-w>l
-    nnoremap <C-h> <C-w>h
-    nnoremap <C-j> <C-w>j
-    nnoremap <C-k> <C-w>k
-    nnoremap <C-l> <C-w>l
-
+    noremap <C-h> <C-w>h
+    noremap <C-j> <C-w>j
+    noremap <C-k> <C-w>k
+    noremap <C-l> <C-w>l
+    inoremap <C-h> <Esc><C-w>h
+    inoremap <C-j> <Esc><C-w>j
+    inoremap <C-k> <Esc><C-w>k
+    inoremap <C-l> <Esc><C-w>l
     " http://stackoverflow.com/questions/9092982/mapping-c-j-to-something-in-vim
     " This make ctrl-j work 
     augroup vimrc
@@ -387,6 +386,3 @@ set splitright
 "Swap a and i because Im stubborn
 nnoremap a i
 nnoremap i a
-
-
-
