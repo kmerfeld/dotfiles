@@ -1,7 +1,5 @@
-alias vim nvim
 alias r ranger
 alias wiki "vim -c VimwikiIndex"
-
 set -gx PATH $HOME/dotfiles/scripts $HOME/.cargo/bin $PATH
 
 set EDITOR nvim

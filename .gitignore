@@ -10,5 +10,7 @@ vim/swap/*
 vim/undo/*
 
 git/*
+emacs.d/elpa
+emacs.d/network*
 
 common/vim/plugged/*

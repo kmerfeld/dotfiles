@@ -15,6 +15,8 @@
     ~/.tmux.conf:
     ~/.vim:
     ~/.vimrc:
+    ~/.emacs:
+    ~/.emacs.d:
     ~/.config/nvim:
       create: true
       path: config/nvim
