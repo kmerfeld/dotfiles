@@ -2,41 +2,71 @@
 (require 'package)
 (package-initialize)
 
+
+(add-to-list 'load-path "~/.emacs.d/plugins/evil-org")
+(require 'evil-org)
+;(require 'evil-org-agenda)
+
+
+(setf evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
+(setf org-special-ctrl-a/e t)
+
+(add-hook 'org-mode-hook
+ (lambda ()
+(evil-org-mode)))
+
+(setq org-todo-keywords
+      '((sequence "TODO" "WORKING" "PENDING" "DONE" "CANCELED")))
+(setq org-agenda-files '("~/Nextcloud/org/"))
+
+(add-to-list 'load-path "~/.emacs.d/plugins/evil-org")
+(require 'evil-org)
+(add-hook 'org-mode-hook 'evil-org-mode)
+(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+;;(require 'evil-org-agenda)
+    (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
+(evil-define-key 'normal evil-org-mode-map
+                 (kbd ">") 'org-meta-right
+                 (kbd "<") 'org-meta-left)
+
+(find-file "~/todo.org")
+
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
-;; === SETUP ===
-(require 'package) ;; You might already have this line
-(package-initialize)
+;;Auto install packages
+(require 'cl-lib)
+(defvar my-packages
+  '(
+    helm
+    projectile
+    helm-projectile
+    swiper
+    gruvbox-theme
+    evil
+    evil-leader
+    magit
+    gnus
+    rust-mode
+    evil-org
+    )
+  "A list of packages to ensure are installed at launch.")
 
-;; === CUSTOM CHECK FUNCTION ===
-(defun ensure-package-installed (&rest packages)
-  "Assure every package is installed, ask for installation if it’s not.
-   Return a list of installed packages or nil for every skipped package."
-  (mapcar
-   (lambda (package)
-     (unless (package-installed-p package)
-       (package-install package)))
-     packages)
-)
+(defun my-packages-installed-p ()
+  (cl-loop for p in my-packages
+           when (not (package-installed-p p)) do (cl-return nil)
+           finally (cl-return t)))
 
-;; === List my packages ===
-(ensure-package-installed
- 'helm
- 'projectile
- 'helm-projectile
- 'swiper
- 'gruvbox-theme
- 'evil
- 'evil-leader
- 'magit
- 'gnus
- 'rust-mode
- 'evil-org
- 'elfeed
- )
+(unless (my-packages-installed-p)
+  ;; check for new packages (package versions)
+  (package-refresh-contents)
+  ;; install the missing packages
+  (dolist (p my-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
+
 
 ;; Load the colorscheme
 (load-theme 'gruvbox t)
@@ -59,13 +89,6 @@
   (require 'use-package))
 
 
-;;Org-mode config
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-cb" 'org-iswitchb)
-
-  
 ;;switch windows
 (global-set-key (kbd "C-x <up>") 'windmove-up)
 (global-set-key (kbd "C-x <down>") 'windmove-down)
@@ -84,7 +107,16 @@
   "j" 'windmove-down
   "k" 'windmove-up
   "l" 'windmove-right
+  "f" 'org-agenda
+  "s" 'org-schedule
   )
+
+;; Fix org-agenda keybindings a bit
+(require 'org-agenda)
+(define-key org-agenda-mode-map "j" 'next-line)
+(define-key org-agenda-mode-map "k" 'previous-line)
+(define-key org-agenda-mode-map "l" 'right-char)
+(define-key org-agenda-mode-map "h" 'left-char)
 
 ;;disable all the menu crud
 (menu-bar-mode -1)
@@ -96,6 +128,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-todo-keywords
+   (quote
+    ((sequence "TODO(@)" "IN PROGRESS(@)" "Someday(@)" "\"|\"" "PENDING(@)" "DONE(@)"))))
  '(package-selected-packages
    (quote
     (magit use-package swiper helm-projectile gruvbox-theme evil-visual-mark-mode evil-leader))))
@@ -105,3 +140,25 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+
+;; Enable Evil mode as defuault
+(evil-mode 1)
+;;; esc quits
+(defun minibuffer-keyboard-quit ()
+  "Abort recursive edit.
+In Delete Selection mode, if the mark is active, just deactivate it;
+then it takes a second \\[keyboard-quit] to abort the minibuffer."
+  (interactive)
+  (if (and delete-selection-mode transient-mark-mode mark-active)
+      (setq deactivate-mark  t)
+    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+    (abort-recursive-edit)))
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
