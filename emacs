@@ -15,8 +15,6 @@
  (lambda ()
 (evil-org-mode)))
 
-(setq org-todo-keywords
-      '((sequence "TODO" "WORKING" "PENDING" "DONE" "CANCELED")))
 (setq org-agenda-files '("~/Nextcloud/org/"))
 
 (add-to-list 'load-path "~/.emacs.d/plugins/evil-org")
@@ -29,7 +27,7 @@
                  (kbd ">") 'org-meta-right
                  (kbd "<") 'org-meta-left)
 
-(find-file "~/todo.org")
+;(find-file "~/todo.org")
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
@@ -130,7 +128,7 @@
  ;; If there is more than one, they won't work right.
  '(org-todo-keywords
    (quote
-    ((sequence "TODO(@)" "IN PROGRESS(@)" "Someday(@)" "\"|\"" "PENDING(@)" "DONE(@)"))))
+    ((sequence "TODO(!)" "IN PROGRESS(!)" "PENDING(!)" "|" "DONE(!)"))))
  '(package-selected-packages
    (quote
     (magit use-package swiper helm-projectile gruvbox-theme evil-visual-mark-mode evil-leader))))
