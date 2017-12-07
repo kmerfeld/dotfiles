@@ -45,9 +45,19 @@
     evil
     evil-leader
     magit
+    evil-magit
     gnus
     rust-mode
     evil-org
+    git-gutter
+    spaceline
+    ;;a-list
+    pdf-tools
+    company 
+    ;;company-racer
+    racer 
+    flycheck 
+    ;;flycheck-rust
     )
   "A list of packages to ensure are installed at launch.")
 
@@ -65,6 +75,18 @@
       (package-install p))))
 
 
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+;;(require 'company-racer)
+;;
+;;    (with-eval-after-load 'company
+;;           (add-to-list 'company-backends 'company-racer))
+;;      (unless (getenv "RUST_SRC_PATH")
+;;             (setenv "RUST_SRC_PATH" (expand-file-name "/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src")))
+
+;;Git-gutter
+(global-git-gutter-mode +1)
+
+(require 'evil-magit)
 
 ;; Load the colorscheme
 (load-theme 'gruvbox t)
@@ -98,7 +120,7 @@
 (evil-leader/set-leader "<SPC>")
 (setq evil-leader/no-prefix-mode-rx '("magit-.*-mode" "gnus-.*-mode"))
 (evil-leader/set-key
-  "b" 'switch-to-buffer
+  "b" 'buffer-menu
   "a" 'back-to-indentation
   ";" 'move-end-of-line
   "h" 'windmove-left
