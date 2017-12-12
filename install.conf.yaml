@@ -15,8 +15,7 @@
     ~/.tmux.conf:
     ~/.vim:
     ~/.vimrc:
-    ~/.emacs:
-    ~/.emacs.d:
+    ~/.spacemacs:
     ~/.config/nvim:
       create: true
       path: config/nvim
@@ -41,4 +40,4 @@
     - git update-submodules
     - vim +PlugInstall +qa
     - ~/dotfiles/install_more
-    - pip install --user tmuxp
+    - git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
