@@ -31,6 +31,18 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     ruby
+     selectric
+     restclient
+     csharp
+     csv
+     javascript
+     orgwiki
+     python
+     csv
+     speed-reading
+     sql
+     html
      rust
      vimscript
      rcirc
@@ -62,14 +74,14 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(smartparens)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
    ;; unused packages as well as their unused dependencies.
    ;; `used-but-keep-unused' installs only the used packages but won't uninstall
    ;; them if they become unused. `all' installs *all* packages supported by
-   ;; Spacemacs and never uninstall them. (default is `used-only')
+   ;; Spacemacs and never uninstall them. (default is `used-but-keep-unused')
    dotspacemacs-install-packages 'used-only))
 
 (defun dotspacemacs/init ()
@@ -138,7 +150,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -264,7 +276,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -295,7 +307,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup t
    ))
 
 (defun dotspacemacs/user-init ()
@@ -316,13 +328,83 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;;switch windows
   (global-set-key (kbd "C-h") 'windmove-left)
-  (global-set-key (kbd "C-j") 'windmove-down)
   (global-set-key (kbd "C-k") 'windmove-up)
   (global-set-key (kbd "C-l") 'windmove-right)
-  (spacemacs/load-theme 'gruvbox)
-  
-  )
 
+  
+  (defvar my-keys-minor-mode-map
+    (let ((map (make-sparse-keymap)))
+      (define-key map (kbd "C-j") 'windmove-down)
+      ;;move to end of line a little faster
+      (define-key map (kbd "C-;") 'move-end-of-line)
+      map)
+    "my-keys-minor-mode keymap.")
+
+  (define-minor-mode my-keys-minor-mode
+    "A minor mode so that my key settings override annoying major modes."
+    :init-value t
+    :lighter " my-keys")
+
+  (my-keys-minor-mode 1)
+
+
+  ;;Set theme
+  (spacemacs/load-theme 'gruvbox)
+
+  (defun server-ensure-safe-dir (dir) "Noop" t)
+
+  ;;Org-mode settings
+  (setq org-agenda-files (quote ("~/org/wiki")))
+  (require 'org-wiki)
+  (setq org-wiki-location "~/org/wiki")
+  (setq org-export-with-sub-superscripts nil)
+  ;;Disable validation link
+  (setq org-html-validation-link nil)
+
+  (require 'op-python3)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python3 . t)))
+
+  
+  (add-hook 'sql-interactive-mode-hook
+            (lambda ()
+              (setq sql-prompt-regexp "^[_[:alpha:]]*[=][#>] ")
+              (setq sql-prompt-cont-regexp "^[_[:alpha:]]*[-][#>] ")))
+ 
+  ;;Tries to make sql buffers easier to work with
+  (defun sql-make-alternate-buffer-name ()
+    (concat (concat (prin1-to-string sql-interactive-product) "://")
+            (if (string= "" sql-user)
+                (if (string= "" (user-login-name))
+                    ()
+                  (concat (user-login-name) "/"))
+              (concat sql-user "@"))
+            (concat sql-server "/")
+            (if (string= "" sql-database)
+                (if (string= "" sql-server)
+                    (system-name)
+                  sql-server)
+              sql-database)))
+  (add-hook 'sql-interactive-mode-hook
+            (lambda () (sql-rename-buffer)))
+
+  
+  ;;Fix ispell for windows
+  ;;(setq org-wiki-emacs-path "C:/Users/kyle.merfeld/Documents/Tools/emacs/bin/emacs.exe")
+  ;;(add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
+  ;;(setq ispell-program-name "aspell")
+  (require 'ispell)
+  
+  
+  (eval-after-load "sql"
+    (load-library "sql-indent"))
+  
+  (global-company-mode)
+  (spacemacs/toggle-golden-ratio-on)
+
+  )
+  
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
@@ -336,9 +418,19 @@ you should place your code here."
    (quote
     ("c63a789fa2c6597da31f73d62b8e7fad52c9420784e6ec34701ae8e8f00071f6" "8e4efc4bed89c4e67167fdabff77102abeb0b1c203953de1e6ab4d2e3a02939a" default)))
  '(evil-want-Y-yank-to-eol nil)
+ '(org-export-with-sub-superscripts (quote {}))
+ '(org-link-frame-setup
+   (quote
+    ((vm . vm-visit-folder-other-window)
+     (vm-imap . vm-visit-imap-folder-other-window)
+     (gnus . org-gnus-no-new-news)
+     (file . find-file-other-window)
+     (wl . wl-other-frame))))
+ '(org-todo-keywords (quote ((sequence "TODO(!)" "PENDING(!)" "DONE(!)"))))
  '(package-selected-packages
    (quote
-    (rcirc-notify rcirc-color edbi gruvbox-dark-medium-theme gruvbox-dark-medium-theme-theme toml-mode racer flycheck-rust seq cargo rust-mode vimrc-mode dactyl-mode unfill smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download mwim magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub let-alist with-editor diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (sql-indent melpa-upstream-visit bm origami highlight-indentation highlight-indent-guides org-mime js-comint rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby org-wiki company-restclient selectric-mode restclient-helm ob-restclient restclient ob-http know-your-http-well shut-up csharp-mode omnisharp ac-anaconda therapy toc-org inf-mongo web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode org-outlook password-store yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic csv-mode spray spotify company-edbi web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data gruvbox-theme autothemer rcirc-notify rcirc-color edbi gruvbox-dark-medium-theme gruvbox-dark-medium-theme-theme toml-mode racer flycheck-rust seq cargo rust-mode vimrc-mode dactyl-mode unfill smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download mwim magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub let-alist with-editor diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+ '(sql-postgres-options (quote ("-P" "pager=off" "-w"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
