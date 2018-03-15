@@ -421,6 +421,11 @@ you should place your code here."
    (quote
     ("c63a789fa2c6597da31f73d62b8e7fad52c9420784e6ec34701ae8e8f00071f6" "8e4efc4bed89c4e67167fdabff77102abeb0b1c203953de1e6ab4d2e3a02939a" default)))
  '(evil-want-Y-yank-to-eol nil)
+ '(org-capture-templates
+   (quote
+    (("Working tasks" "Things I am currently working on" entry
+      (file "~/org/wiki/todo.org")
+      "" :prepend t nil nil))))
  '(org-export-with-sub-superscripts (quote {}))
  '(org-link-frame-setup
    (quote
