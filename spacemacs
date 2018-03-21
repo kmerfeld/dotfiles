@@ -70,7 +70,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(gruvbox-theme org-sticky-header-mode org-web-tools helm-org-rifle ob-rust)
+   dotspacemacs-additional-packages '(gruvbox-theme ob-rust simpleclip)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -195,7 +195,7 @@ values."
    dotspacemacs-display-default-layout nil
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
-   dotspacemacs-auto-resume-layouts nil
+   dotspacemacs-auto-resume-layouts t
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
@@ -307,7 +307,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup t
+   dotspacemacs-whitespace-cleanup nil
    ))
 
 (defun dotspacemacs/user-init ()
@@ -326,17 +326,27 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  ;; Fix copy-paste
+  (require 'simpleclip)
+  (simpleclip-mode 1)
+  (global-set-key (kbd "C-S-c") 'simpleclip-copy)
+  (global-set-key (kbd "C-S-v") 'simpleclip-paste)
+
   ;;switch windows
   (global-set-key (kbd "C-h") 'windmove-left)
   (global-set-key (kbd "C-k") 'windmove-up)
   (global-set-key (kbd "C-l") 'windmove-right)
+    ;;Reset keybindings the way I want them.
+  (setq-default evil-escape-key-sequence "jk")
 
-  
+  ;;For some reason or another these don't normally work. this should fix them
   (defvar my-keys-minor-mode-map
     (let ((map (make-sparse-keymap)))
       (define-key map (kbd "C-j") 'windmove-down)
       ;;move to end of line a little faster
       (define-key map (kbd "C-;") 'move-end-of-line)
+      
       map)
     "my-keys-minor-mode keymap.")
 
@@ -347,6 +357,11 @@ you should place your code here."
 
   (my-keys-minor-mode 1)
 
+  ;;Fix copy-paste
+  
+  ;;Make it so I don't constantly clobber the keyboard.
+  (setq x-select-enable-clipboard nil)
+  
 
   ;;Set theme
   (spacemacs/load-theme 'gruvbox)
@@ -361,7 +376,6 @@ you should place your code here."
   ;;Disable validation link
   (setq org-html-validation-link nil)
 
-  ;(require 'op-python3)
 
   ;;https://emacs.stackexchange.com/questions/20577/org-babel-load-all-languages-on-demand#20618
   (defadvice org-babel-execute-src-block (around load-language nil activate)
@@ -375,7 +389,6 @@ you should place your code here."
   ;;(add-hook 'org-mode-hook
   ;;          (require 'org-sticky-header))
   
-  (require 'org-web-tools)
 
   (add-hook 'sql-interactive-mode-hook
             (lambda ()
@@ -405,9 +418,9 @@ you should place your code here."
   ;;(add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
   ;;(setq ispell-program-name "aspell")
   (require 'ispell)
-  (require 'helm-org-rifle)
 
   (global-company-mode)
+
 
   )
   
@@ -435,7 +448,7 @@ you should place your code here."
  '(org-todo-keywords (quote ((sequence "TODO(!)" "PENDING(!)" "DONE(!)"))))
  '(package-selected-packages
    (quote
-    (ob-rust search-web pandoc-mode xpm pandoc helm-org-rifle ob-ipython plantuml-mode org-web-tools esxml sql-indent melpa-upstream-visit bm origami highlight-indentation highlight-indent-guides org-mime js-comint rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby org-wiki company-restclient selectric-mode restclient-helm ob-restclient restclient ob-http know-your-http-well shut-up csharp-mode omnisharp ac-anaconda therapy toc-org inf-mongo web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode org-outlook password-store yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic csv-mode spray spotify company-edbi web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data gruvbox-theme autothemer rcirc-notify rcirc-color edbi gruvbox-dark-medium-theme gruvbox-dark-medium-theme-theme toml-mode racer flycheck-rust seq cargo rust-mode vimrc-mode dactyl-mode unfill smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download mwim magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub let-alist with-editor diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+    (simpleclip ob-rust search-web pandoc-mode xpm pandoc helm-org-rifle ob-ipython plantuml-mode org-web-tools esxml sql-indent melpa-upstream-visit bm origami highlight-indentation highlight-indent-guides org-mime js-comint rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby org-wiki company-restclient selectric-mode restclient-helm ob-restclient restclient ob-http know-your-http-well shut-up csharp-mode omnisharp ac-anaconda therapy toc-org inf-mongo web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode org-outlook password-store yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic csv-mode spray spotify company-edbi web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data gruvbox-theme autothemer rcirc-notify rcirc-color edbi gruvbox-dark-medium-theme gruvbox-dark-medium-theme-theme toml-mode racer flycheck-rust seq cargo rust-mode vimrc-mode dactyl-mode unfill smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download mwim magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub let-alist with-editor diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
  '(sql-postgres-options (quote ("-P" "pager=off" "-w"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
