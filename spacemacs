@@ -70,7 +70,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(gruvbox-theme ob-rust)
+   dotspacemacs-additional-packages '(gruvbox-theme ob-rust simpleclip)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -195,7 +195,7 @@ values."
    dotspacemacs-display-default-layout nil
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
-   dotspacemacs-auto-resume-layouts nil
+   dotspacemacs-auto-resume-layouts t
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
@@ -307,7 +307,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup t
+   dotspacemacs-whitespace-cleanup nil
    ))
 
 (defun dotspacemacs/user-init ()
@@ -326,10 +326,19 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  ;; Fix copy-paste
+  (require 'simpleclip)
+  (simpleclip-mode 1)
+  (global-set-key (kbd "C-S-c") 'simpleclip-copy)
+  (global-set-key (kbd "C-S-v") 'simpleclip-paste)
+
   ;;switch windows
   (global-set-key (kbd "C-h") 'windmove-left)
   (global-set-key (kbd "C-k") 'windmove-up)
   (global-set-key (kbd "C-l") 'windmove-right)
+    ;;Reset keybindings the way I want them.
+  (setq-default evil-escape-key-sequence "jk")
 
   (spacemacs/set-leader-keys "d" 'ace-window)
   
@@ -338,6 +347,7 @@ you should place your code here."
       (define-key map (kbd "C-j") 'windmove-down)
       ;;move to end of line a little faster
       (define-key map (kbd "C-;") 'move-end-of-line)
+      
       map)
     "my-keys-minor-mode keymap.")
 
@@ -348,6 +358,11 @@ you should place your code here."
 
   (my-keys-minor-mode 1)
 
+  ;;Fix copy-paste
+  
+  ;;Make it so I don't constantly clobber the keyboard.
+  (setq x-select-enable-clipboard nil)
+  
 
   ;;Set theme
   (spacemacs/load-theme 'gruvbox)
@@ -399,12 +414,13 @@ you should place your code here."
 
   
   ;;Fix ispell for windows
-  (setq org-wiki-emacs-path "C:/Users/kyle.merfeld/Documents/Tools/emacs/bin/emacs.exe")
-  (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
-  (setq ispell-program-name "aspell")
+  ;;(setq org-wiki-emacs-path "C:/Users/kyle.merfeld/Documents/Tools/emacs/bin/emacs.exe")
+  ;;(add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
+  ;;(setq ispell-program-name "aspell")
   (require 'ispell)
 
   (global-company-mode)
+
 
   )
   
