@@ -63,7 +63,7 @@ values."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      spell-checking
-     syntax-checkinerv
+     syntax-checking
      version-control
      )
    ;; List of additional packages that will be installed without being
@@ -340,7 +340,8 @@ you should place your code here."
     ;;Reset keybindings the way I want them.
   (setq-default evil-escape-key-sequence "jk")
 
-  ;;For some reason or another these don't normally work. this should fix them
+  (spacemacs/set-leader-keys "d" 'ace-window)
+  
   (defvar my-keys-minor-mode-map
     (let ((map (make-sparse-keymap)))
       (define-key map (kbd "C-j") 'windmove-down)
@@ -379,7 +380,6 @@ you should place your code here."
   (setq org-export-with-sub-superscripts nil)
   ;;Disable validation link
   (setq org-html-validation-link nil)
-
 
   ;;https://emacs.stackexchange.com/questions/20577/org-babel-load-all-languages-on-demand#20618
   (defadvice org-babel-execute-src-block (around load-language nil activate)
@@ -441,7 +441,12 @@ you should place your code here."
    (quote
     ("c63a789fa2c6597da31f73d62b8e7fad52c9420784e6ec34701ae8e8f00071f6" "8e4efc4bed89c4e67167fdabff77102abeb0b1c203953de1e6ab4d2e3a02939a" default)))
  '(evil-want-Y-yank-to-eol nil)
- '(org-export-with-sub-superscripts (quote {}) t)
+ '(org-capture-templates
+   (quote
+    (("Working tasks" "Things I am currently working on" entry
+      (file "~/org/wiki/todo.org")
+      "" :prepend t nil nil))))
+ '(org-export-with-sub-superscripts (quote {}))
  '(org-link-frame-setup
    (quote
     ((vm . vm-visit-folder-other-window)
@@ -450,6 +455,19 @@ you should place your code here."
      (file . find-file-other-window)
      (wl . wl-other-frame))))
  '(org-todo-keywords (quote ((sequence "TODO(!)" "PENDING(!)" "DONE(!)"))))
+ '(org-wiki-template
+   "#+TITLE: %n
+#+DESCRIPTION:
+#+KEYWORDS:
+#+STARTUP:  content
+
+
+- [[wiki:index][Index]]
+- [[wiki:todo][Todo]] 
+- [[wiki:notes][Notes]] 
+
+* %n
+")
  '(package-selected-packages
    (quote
     (shackle simpleclip ob-rust search-web pandoc-mode xpm pandoc helm-org-rifle ob-ipython plantuml-mode org-web-tools esxml sql-indent melpa-upstream-visit bm origami highlight-indentation highlight-indent-guides org-mime js-comint rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby org-wiki company-restclient selectric-mode restclient-helm ob-restclient restclient ob-http know-your-http-well shut-up csharp-mode omnisharp ac-anaconda therapy toc-org inf-mongo web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode org-outlook password-store yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic csv-mode spray spotify company-edbi web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data gruvbox-theme autothemer rcirc-notify rcirc-color edbi gruvbox-dark-medium-theme gruvbox-dark-medium-theme-theme toml-mode racer flycheck-rust seq cargo rust-mode vimrc-mode dactyl-mode unfill smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download mwim magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub let-alist with-editor diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
