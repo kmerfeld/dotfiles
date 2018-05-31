@@ -486,6 +486,30 @@ See `eshell-prompt-regexp'."
 
   (require 'ob-async)
 
+  (setq org-directory "~/org")
+(setq org-default-notes-file "~/org/refile.org")
+
+;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
+(setq org-capture-templates
+      (quote (("t" "todo" entry (file "~/org/refile.org")
+               "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+              ("r" "respond" entry (file "~/org/refile.org")
+               "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+              ("n" "note" entry (file "~/org/refile.org")
+               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+              ("j" "Journal" entry (file+datetree "~/org/diary.org")
+               "* %?\n%U\n" :clock-in t :clock-resume t)
+              ("w" "org-protocol" entry (file "~/org/refile.org")
+               "* TODO Review %c\n%U\n" :immediate-finish t)
+              ("m" "Meeting" entry (file "~/org/refile.org")
+               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+              ("p" "Phone call" entry (file "~/org/refile.org")
+               "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+              ("h" "Habit" entry (file "~/org/refile.org")
+               "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
+
+
+
   ;;Python dev stuff
   ;2.4 Automatic buffer formatting on save
   ;;(setq-default dotspacemacs-configuration-layers '(
@@ -511,12 +535,8 @@ See `eshell-prompt-regexp'."
    (quote
     ("c63a789fa2c6597da31f73d62b8e7fad52c9420784e6ec34701ae8e8f00071f6" "8e4efc4bed89c4e67167fdabff77102abeb0b1c203953de1e6ab4d2e3a02939a" default)))
  '(evil-want-Y-yank-to-eol nil)
- '(org-capture-templates
-   (quote
-    (("Working tasks" "Things I am currently working on" entry
-      (file "~/org/wiki/todo.org")
-      "" :prepend t nil nil))))
- '(org-export-with-sub-superscripts (quote {}))
+ '(org-agenda-files nil)
+ '(org-export-with-sub-superscripts (quote {}) t)
  '(org-html-checkbox-type (quote html))
  '(org-html-html5-fancy t)
  '(org-html-table-default-attributes
