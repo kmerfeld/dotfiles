@@ -70,7 +70,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(gruvbox-theme ob-rust ob-async simpleclip shackle)
+   dotspacemacs-additional-packages '(gruvbox-theme ob-rust ob-async simpleclip shackle org-wiki)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -481,10 +481,9 @@ See `eshell-prompt-regexp'."
             (upcase-word 1)
             (forward-char))))))
 
-  ;;Leave my compilation windows alone!
-  (shackle-mode)
 
   (require 'ob-async)
+  (require 'org-wiki)
 
   (setq org-directory "~/org")
 (setq org-default-notes-file "~/org/refile.org")
@@ -509,9 +508,14 @@ See `eshell-prompt-regexp'."
                "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 
 
+  ;; scroll one line at a time (less "jumpy" than defaults)
+  (setq mouse-wheel-scroll-amount '(3 ((shift) . 1)))
+  (setq mouse-wheel-progressive-speed nil)
+  (setq mouse-wheel-follow-mouse 't)
+
 
   ;;Python dev stuff
-  ;2.4 Automatic buffer formatting on save
+  ;;2.4 Automatic buffer formatting on save
   ;;(setq-default dotspacemacs-configuration-layers '(
   ;;(python :variables python-enable-yapf-format-on-save t))
 

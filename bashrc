@@ -10,7 +10,6 @@ export EDITOR=vim
 
 
 #this makes it run with 256 colors
-export TERM=screen-256color-bce
 #colorize ls
 alias ls='ls --color=auto'
 
