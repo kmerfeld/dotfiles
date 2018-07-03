@@ -103,6 +103,37 @@
 (setq org-refile-target-verify-function 'bh/verify-refile-target)
 
 
+(setq org-wiki-template
+ "#+TITLE: %n
+#+DESCRIPTION:
+#+KEYWORDS:
+#+STARTUP:  content
+
+
+- [[wiki:index][Index]]
+- [[wiki:todo][Todo]] 
+- [[wiki:notes][Notes]] 
+- [[./raw_queries.sql][SQL for this case]]
+
+* %n
+")
+
+
+(org-agenda-files nil)
+(org-export-with-sub-superscripts (quote {}) t)
+(org-html-checkbox-type (quote html))
+(org-html-html5-fancy t)
+(org-html-table-default-attributes
+  (quote
+   (:border "2" :cellspacing "0" :cellpadding "2" :rules "all" :frame "border")))
+(org-link-frame-setup
+  (quote
+   ((vm . vm-visit-folder-other-window)
+    (vm-imap . vm-visit-imap-folder-other-window)
+    (gnus . org-gnus-no-new-news)
+    (file . find-file-other-window)
+    (wl . wl-other-frame))))
+
 ;; Do not dim blocked tasks
 (setq org-agenda-dim-blocked-tasks nil)
 
@@ -181,35 +212,4 @@
                       ((org-agenda-overriding-header "Tasks to Archive")
                        (org-agenda-skip-function 'bh/skip-non-archivable-tasks)
                        (org-tags-match-list-sublevels nil))))
-               nill))))
-
-
-(org-wiki-template
- "#+TITLE: %n
-#+DESCRIPTION:
-#+KEYWORDS:
-#+STARTUP:  content
-
-
-- [[wiki:index][Index]]
-- [[wiki:todo][Todo]] 
-- [[wiki:notes][Notes]] 
-- [[./raw_queries.sql][SQL for this case]]
-
-* %n
-")
-
-(org-agenda-files nil)
-(org-export-with-sub-superscripts (quote {}) t)
-(org-html-checkbox-type (quote html))
-(org-html-html5-fancy t)
-(org-html-table-default-attributes
-  (quote
-   (:border "2" :cellspacing "0" :cellpadding "2" :rules "all" :frame "border")))
-(org-link-frame-setup
-  (quote
-   ((vm . vm-visit-folder-other-window)
-    (vm-imap . vm-visit-imap-folder-other-window)
-    (gnus . org-gnus-no-new-news)
-    (file . find-file-other-window)
-    (wl . wl-other-frame))))
+               nil))))
