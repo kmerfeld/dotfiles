@@ -16,7 +16,7 @@
     ~/.vim:
     ~/.vimrc:
     ~/.spacemacs:
-    ./org-settings.el:
+    ~/.org-settings.el:
     ~/.config/nvim:
       create: true
       path: config/nvim

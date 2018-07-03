@@ -22,7 +22,7 @@
 (setq org-latex-packages-alist '(("margin=2cm" "geometry" nil)))
 
   (require 'ob-async)
-  (require 'org-wiki)
+  ;;(require 'org-wiki)
 
 (setq org-directory "~/org")
 (setq org-default-notes-file "~/org/refile.org")

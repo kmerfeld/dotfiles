@@ -31,10 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     ruby
-     selectric
-     restclient
-     csharp
+     exwm 
+     erc
      csv
      javascript
      orgwiki
@@ -70,7 +68,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(gruvbox-theme ob-rust ob-async simpleclip shackle org-wiki)
+   dotspacemacs-additional-packages '(gruvbox-theme ob-rust ob-async simpleclip org-wiki )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -327,6 +325,7 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+
   ;; Fix copy-paste
   (require 'simpleclip)
   (simpleclip-mode 1)
@@ -358,12 +357,7 @@ you should place your code here."
 
   (my-keys-minor-mode 1)
 
-  (defun my-compile ()
-    (interactive)
-    (switch-to-frame)
-    (call-interactively 'compile))
   ;;Fix copy-paste
-  
   ;;Make it so I don't constantly clobber the clipboard.
   (setq x-select-enable-clipboard nil)
   
@@ -452,8 +446,7 @@ you should place your code here."
                                         ; Reported at https://debbugs.gnu.org/cgi/bugreport.cgi?bug=27405.
   (with-eval-after-load 'em-prompt
     (defun eshell-next-prompt (n)
-      "Move to end of Nth next prompt in the buffer.
-See `eshell-prompt-regexp'."
+      "Move to end of Nth next prompt in the buffer. See `eshell-prompt-regexp'."
       (interactive "p")
       (re-search-forward eshell-prompt-regexp nil t n)
       (when eshell-highlight-prompt
@@ -482,50 +475,33 @@ See `eshell-prompt-regexp'."
             (forward-char))))))
 
 
-  (require 'ob-async)
-  (require 'org-wiki)
-
-  (setq org-directory "~/org")
-(setq org-default-notes-file "~/org/refile.org")
-
-;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
-(setq org-capture-templates
-      (quote (("t" "todo" entry (file "~/org/refile.org")
-               "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-              ("r" "respond" entry (file "~/org/refile.org")
-               "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-              ("n" "note" entry (file "~/org/refile.org")
-               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-              ("j" "Journal" entry (file+datetree "~/org/diary.org")
-               "* %?\n%U\n" :clock-in t :clock-resume t)
-              ("w" "org-protocol" entry (file "~/org/refile.org")
-               "* TODO Review %c\n%U\n" :immediate-finish t)
-              ("m" "Meeting" entry (file "~/org/refile.org")
-               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-              ("p" "Phone call" entry (file "~/org/refile.org")
-               "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
-              ("h" "Habit" entry (file "~/org/refile.org")
-               "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
-
-
   ;; scroll one line at a time (less "jumpy" than defaults)
   (setq mouse-wheel-scroll-amount '(3 ((shift) . 1)))
   (setq mouse-wheel-progressive-speed nil)
   (setq mouse-wheel-follow-mouse 't)
 
 
-  ;;Python dev stuff
-  ;;2.4 Automatic buffer formatting on save
-  ;;(setq-default dotspacemacs-configuration-layers '(
-  ;;(python :variables python-enable-yapf-format-on-save t))
-
-  ;;Set test runner
-  ;;(setq-default dotspacemacs-configuration-layers
-  ;;'((python :variables python-test-runner 'pytest)))
 
 
 
-)
+
+
+  (setq racer-cmd "~/.cargo/bin/racer")
+  (setq racer-rust-src-path "/home/kyle/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src")
+
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  (add-hook 'racer-mode-hook #'company-mode)
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+
+
+
+
+
+
+
+
+  )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
@@ -570,7 +546,7 @@ See `eshell-prompt-regexp'."
 ")
  '(package-selected-packages
    (quote
-    (powershell logview ob-async stripe-buffer pg shackle simpleclip ob-rust search-web pandoc-mode xpm pandoc helm-org-rifle ob-ipython plantuml-mode org-web-tools esxml sql-indent melpa-upstream-visit bm origami highlight-indentation highlight-indent-guides org-mime js-comint rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby org-wiki company-restclient selectric-mode restclient-helm ob-restclient restclient ob-http know-your-http-well shut-up csharp-mode omnisharp ac-anaconda therapy toc-org inf-mongo web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode org-outlook password-store yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic csv-mode spray spotify company-edbi web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data gruvbox-theme autothemer rcirc-notify rcirc-color edbi gruvbox-dark-medium-theme gruvbox-dark-medium-theme-theme toml-mode racer flycheck-rust seq cargo rust-mode vimrc-mode dactyl-mode unfill smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download mwim magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub let-alist with-editor diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+    (erc-yt erc-view-log erc-social-graph erc-image erc-hl-nicks elfeed elfeed-web elfeed-goodies ace-jump-mode noflet elfeed-org powershell logview ob-async stripe-buffer pg shackle simpleclip ob-rust search-web pandoc-mode xpm pandoc helm-org-rifle ob-ipython plantuml-mode org-web-tools esxml sql-indent melpa-upstream-visit bm origami highlight-indentation highlight-indent-guides org-mime js-comint rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby org-wiki company-restclient selectric-mode restclient-helm ob-restclient restclient ob-http know-your-http-well shut-up csharp-mode omnisharp ac-anaconda therapy toc-org inf-mongo web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode org-outlook password-store yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic csv-mode spray spotify company-edbi web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data gruvbox-theme autothemer rcirc-notify rcirc-color edbi gruvbox-dark-medium-theme gruvbox-dark-medium-theme-theme toml-mode racer flycheck-rust seq cargo rust-mode vimrc-mode dactyl-mode unfill smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download mwim magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub let-alist with-editor diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
  '(shackle-default-rule (quote (:other t :frame t)))
  '(shackle-mode nil)
  '(shackle-rules nil)
